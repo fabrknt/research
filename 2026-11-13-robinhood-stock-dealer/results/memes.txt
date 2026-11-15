@@ -1,0 +1,69 @@
+期間 7.0 日  swap 547728  合計 $119.9M ($17.23M/日)
+  stock×stock  $   52.7M  43.9%  $7.57M/日
+  stock×USDG   $   33.2M  27.7%  $4.78M/日
+  他の株×株        $   30.5M  25.4%  $4.38M/日
+  meme×stock   $    3.6M   3.0%  $0.51M/日
+
+日ごと
+  11-05 Thu meme×stock $0.0M  stock×USDG $0.4M  stock×stock $0.6M  他の株×株 $0.5M
+  11-06 Fri meme×stock $0.8M  stock×USDG $6.2M  stock×stock $8.9M  他の株×株 $5.1M
+  11-07 Sat meme×stock $0.4M  stock×USDG $1.5M  stock×stock $3.0M  他の株×株 $1.0M
+  11-08 Sun meme×stock $0.4M  stock×USDG $4.2M  stock×stock $6.3M  他の株×株 $2.7M
+  11-09 Mon meme×stock $0.5M  stock×USDG $5.2M  stock×stock $8.2M  他の株×株 $5.1M
+  11-10 Tue meme×stock $0.5M  stock×USDG $5.3M  stock×stock $7.5M  他の株×株 $4.2M
+  11-11 Wed meme×stock $0.7M  stock×USDG $5.3M  stock×stock $8.7M  他の株×株 $5.6M
+  11-12 Thu meme×stock $0.3M  stock×USDG $5.1M  stock×stock $9.5M  他の株×株 $6.1M
+
+ミーム・他の株×株・ETH: 相手側の株(9 銘柄)
+  SPY   $  31.6M  正味で払われた株 $+0.30M
+  NVDA  $   1.1M  正味で払われた株 $-0.05M
+  TSLA  $   0.6M  正味で払われた株 $-0.03M
+  GOOGL $   0.4M  正味で払われた株 $-0.04M
+  AMZN  $   0.2M  正味で払われた株 $-0.04M
+  AAPL  $   0.1M  正味で払われた株 $-0.01M
+  META  $   0.0M  正味で払われた株 $+0.00M
+  QQQ   $   0.0M  正味で払われた株 $+0.00M
+  MSFT  $   0.0M  正味で払われた株 $-0.00M
+
+他の株×株(9 銘柄以外の株を相手にした組)の上位
+  AMD    $  9.59M
+  MU     $  8.11M
+  HIMS   $  3.85M
+  TSM    $  3.66M
+  INTC   $  2.53M
+  PLTR   $  2.02M
+  SPCX   $  0.53M
+  COIN   $  0.10M
+  GLD    $  0.02M
+  CRWV   $  0.02M
+  MSTR   $  0.01M
+  LLY    $  0.00M
+
+プールの年齢ごと(ミーム×株)
+  <1h     2.9%
+  1-24h  11.0%
+  1-7d    2.6%
+  >7d    83.5%
+
+取引のあったプール 655  上位 10 76.0%  上位 100 99.7%  $10K 超 27  $100K 超 9
+期間中に作られたミーム×株プール 320(1 日 46)
+
+hook(launchpad)ごと
+  0xe5e702641ea86f4ae6cc3cdaed2b886f976be044 57.8% $2.1M
+  0x97240e95756c7b70db1ffaeee85a6c091c33a4ce 10.2% $0.4M
+  0x4e3468951d49f2eea976ed0d6e75ffcb44a9a544  6.3% $0.2M
+  0x33e924fb8663871bab61d6844e79cdea159c60c0  5.2% $0.2M
+  0x992118de23b4ebe9f527dacbbb7d8d4bbbf8e044  4.4% $0.2M
+  0x16d1560630ce74af4478d9b8ad46548a092a2000  3.8% $0.1M
+  0x4eb2dd759f4d6524e66057d1adc10c26e40142cc  3.4% $0.1M
+  0x0af57f62982d03066ef917acad87f771c06528ec  2.4% $0.1M
+
+router(Swap の sender)ごと
+  0xe8852602f84e04e284286d8db01a41edd0ccefb0 13.5%
+  0x0005ea38eb0a69d1253508ebdbdb9ea8cb26b5ef 13.3%
+  0x65050a9b7e5075a2ba5ced7b1b64ee66262c40dc 10.9%
+  0x36dc95f1f088e11c0066dc19173f745655002bc2 10.8%
+  0x8f10b468b06c6fd214b65f87778827f7d113f996  6.9%
+  0x8876789976decbfcbbbe364623c63652db8c0904  6.4%
+  0x92475293e578c7d88651d160d2b0e45e04e4528b  4.9%
+  0x204faca1764b154221e35c0d20abb3c525710498  3.9%

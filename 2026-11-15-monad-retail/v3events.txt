@@ -1,0 +1,7 @@
+CurveBuy(address,address,uint256,uint256) [('sender', True), ('token', True), ('amountIn', False), ('amountOut', False)]
+CurveCreate(address,address,address,string,string,string,uint256,uint256,uint256) [('creator', True), ('token', True), ('pool', True), ('name', False), ('symbol', False), ('tokenURI', False), ('virtualMon', False), ('virtualToken', False), ('targetTokenAmount', False)]
+CurveGraduate(address,address) [('token', True), ('pool', True)]
+CurveSell(address,address,uint256,uint256) [('sender', True), ('token', True), ('amountIn', False), ('amountOut', False)]
+CurveSync(address,uint256,uint256,uint256,uint256) [('token', True), ('realMonReserve', False), ('realTokenReserve', False), ('virtualMonReserve', False), ('virtualTokenReserve', False)]
+CurveTokenLocked(address) [('token', True)]
+SetConfig(tuple) [('params', False)]

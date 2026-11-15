@@ -1,0 +1,4 @@
+window: blocks 122066786..122352113 = 24.0 h, failed ranges: 0
+created: 5 tokens by 2 creators; graduated: 0
+trades: 179 buys, 150 sells, by 60 addresses
+MON through the curve: 22,872
