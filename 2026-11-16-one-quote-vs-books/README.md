@@ -29,7 +29,8 @@ the busiest one per name), in `data/markets.json`.
 python3 collect.py 1                 # one round -> data/snap-YYYYMMDD.jsonl, data/markets.json
 python3 collect.py 2880 300          # 10 days, every 5 minutes
 cd walk && cargo build --release && cd ..
-cat data/snap-*.jsonl | walk/target/release/walk > data/walks.jsonl
+sh fetch_actions.sh                  # the hourly Actions runs (needs the private key)
+cat data/snap-*.jsonl data/actions/*/data/snap-*.jsonl | walk/target/release/walk > data/walks.jsonl
 python3 summary.py
 python3 check_coarse.py              # is Hyperliquid's coarser book an upper bound?
 ```

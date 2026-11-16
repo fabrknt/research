@@ -5,7 +5,7 @@ Cost of a size = half the round trip, in bp of a reference mid, plus the taker f
 ref = median of the three venues' mids in that round; a venue more than 1% from it is a different
 instrument (US500-PERP is an ETF-sized contract, not the index) and is dropped for that round.
 
-    python3 summary.py              # reads data/snap-*.jsonl and data/walks.jsonl
+    python3 summary.py              # reads data/snap-*.jsonl, data/actions/*/data/snap-*.jsonl, data/walks.jsonl
 """
 import glob
 import json
@@ -53,9 +53,16 @@ def session(t):
 def main():
     hlcoin = {m["var"]: m["hl"] for m in json.load(open(os.path.join(D, "markets.json")))}
     snaps = {}
-    for f in sorted(glob.glob(os.path.join(D, "snap-*.jsonl"))):
+    slots = set()  # (5-minute slot, market): the laptop and the Actions runs overlap at the hand-over
+    files = sorted(glob.glob(os.path.join(D, "snap-*.jsonl"))) + \
+        sorted(glob.glob(os.path.join(D, "actions", "*", "data", "snap-*.jsonl")))
+    for f in files:
         for line in open(f):
             r = json.loads(line)
+            slot = (int(r["t"] // 300), r["var"])
+            if slot in slots:
+                continue
+            slots.add(slot)
             snaps[(r["t"], r["var"])] = r
     walks = defaultdict(dict)
     for line in open(os.path.join(D, "walks.jsonl")):
