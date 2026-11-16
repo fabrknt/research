@@ -100,6 +100,7 @@ def main():
                 if v not in live:
                     continue
                 # HL shows 20 levels; when they run out, walk the 4-significant-figure book instead
+                # (never cheaper than the full book where both fill: an upper bound, ~1 bp dearer)
                 books = [w[v]] + ([w["hl_coarse"]] if v == "hl" and "hl_coarse" in w else [])
                 sz = None
                 for bk in books:

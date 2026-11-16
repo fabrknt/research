@@ -49,8 +49,10 @@ orders with `Book::quote_market` (pinned by git rev; rdk is not on crates.io yet
 
 - Lighter's 250 orders and Hyperliquid's 20 levels may not reach $1M; such rounds are counted and
   left out of the medians, which favours the deeper moments.
-- Walking Hyperliquid's coarser book approximates the price inside each aggregated level; not yet
-  checked against the full-precision walk.
+- Hyperliquid's 4-significant-figure book is an upper bound: on the 1,026 size-rounds that both books
+  filled (2026-11-16, first 14 rounds), it was never cheaper than the full-precision walk, and dearer
+  by a median of 1.0 bp (max 8.8 bp; `check_coarse.py`, `results/coarse-check-20261116.txt`).
+  Rounds that fall back to it overstate Hyperliquid's cost.
 - A quote is not a fill: Variational can re-quote (last look), and Lighter's standard accounts have
   a taker delay. Neither is modelled.
 - Snapshots of the three venues are taken a few seconds apart.

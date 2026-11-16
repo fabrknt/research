@@ -1,0 +1,4 @@
+14 rounds
+$    1,000 n= 532  coarse - full, bp: min 0.00  median 0.97  max 8.77  coarse cheaper: 0
+$  100,000 n= 384  coarse - full, bp: min 0.08  median 1.02  max 7.12  coarse cheaper: 0
+$1,000,000 n= 110  coarse - full, bp: min 0.22  median 1.02  max 4.04  coarse cheaper: 0
