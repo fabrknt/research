@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 NY = ZoneInfo("America/New_York")
 SIZES = {1e3: "size_1k", 1e5: "size_100k", 1e6: "size_1m"}
+LABEL = {1e3: "$1k", 1e5: "$100k", 1e6: "$1M"}
 STALE_S = 120  # Variational caches quotes for up to 600 s; older than this is not a live price
 
 # Taker fees in bp (checked 2026-11-16).
@@ -138,7 +139,7 @@ def main():
                 if not tot:
                     continue
                 share = "/".join(f"{100 * ch.get(v, 0) / tot:.0f}%" for v in ("var", "lighter", "hl"))
-                print(f"{g:16} {s:10} {usd:>6.0e}  {cells[0]:>12} {cells[1]:>10} {cells[2]:>12}  {share}")
+                print(f"{g:16} {s:10} {LABEL[usd]:>6}  {cells[0]:>12} {cells[1]:>10} {cells[2]:>12}  {share}")
     print("\nbook too thin in the saved levels to fill the size (Lighter 250 orders a side, HL 20 levels):")
     for (v, usd), (a, b) in sorted(missing.items()):
         print(f"  {v:8} ${usd:>9,.0f}: {a}/{b}")
