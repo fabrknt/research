@@ -4,7 +4,11 @@ Variational's Omni has one market maker (OLP) quoting every trade, with no fee: 
 Lighter and Hyperliquid are order books. This study asks what a market order of $1k, $100k and $1M
 costs on each, for the same markets, in US market hours, outside them and at weekends.
 
-**Status: collecting since 2026-11-16 08:48 UTC (every 5 minutes, 10 days). No results yet.** The
+**Status: collecting since 2026-11-16 08:48 UTC (every 5 minutes, 10 days). No results yet.** From
+2026-11-16 13:00 UTC the collection runs hourly on GitHub Actions (`.github/workflows/one-quote-collect.yml`),
+so a laptop going to sleep doesn't stop it. The snapshots are third-party API data, so each hour's are
+encrypted to `.github/one-quote-data.pub.pem` before they are kept as a workflow artifact;
+`fetch_actions.sh` downloads and decrypts them with the private key, which is kept off GitHub. The
 answer goes here and on [fabrknt.com/research](https://fabrknt.com/research) once the window covers
 US market hours and a weekend.
 
