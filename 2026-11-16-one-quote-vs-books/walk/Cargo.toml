@@ -1,0 +1,10 @@
+[package]
+name = "walk"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# rdk-clob is not on crates.io yet; pinned to a public commit.
+[dependencies]
+rdk-clob = { git = "https://github.com/psyto/rdk", rev = "f263f0882e937f324519201b09fd0995bbcbda1a" }
+serde_json = "1"

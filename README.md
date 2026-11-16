@@ -6,6 +6,7 @@ this repo holds what produced it. Newest first.
 
 | date | study | write-up | answer |
 |---|---|---|---|
+| 2026-11-16 | [One quote vs books](2026-11-16-one-quote-vs-books/) | (after collection) | Collecting: Variational's single dealer vs Lighter and Hyperliquid books, $1k–$1M |
 | 2026-11-15 | [Monad retail](2026-11-15-monad-retail/) | [Is there retail speculation on Monad?](https://fabrknt.com/research/monad-retail) | 60 traders and $360 a day on nad.fun's curve: not yet |
 | 2026-11-13 | [Robinhood Chain stock dealer](2026-11-13-robinhood-stock-dealer/) | [Can a dealer quote Robinhood Chain's stocks?](https://fabrknt.com/research/robinhood-stock-dealer) | No: −10 to −18 bp an hour after each fill on single-stock/SPY pools |
 | 2026-11-11 | [SPY-quoted pools](2026-11-11-spy-quoted-pools/) | [Do LPs win when a stock is quoted in SPY?](https://fabrknt.com/research/spy-quoted-pools) | No for single stocks (fees 0.29–0.71 of LVR); yes for QQQ/SPY |
