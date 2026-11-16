@@ -27,7 +27,10 @@ python3 collect.py 2880 300          # 10 days, every 5 minutes
 cd walk && cargo build --release && cd ..
 cat data/snap-*.jsonl | walk/target/release/walk > data/walks.jsonl
 python3 summary.py
+python3 check_coarse.py              # is Hyperliquid's coarser book an upper bound?
 ```
+
+From a fresh clone, one round, the build and both reports take about a minute (2026-11-16).
 
 `walk` loads each saved book into [`rdk-clob`](https://github.com/psyto/rdk) and prices the market
 orders with `Book::quote_market` (pinned by git rev; rdk is not on crates.io yet).
