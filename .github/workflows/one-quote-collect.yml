@@ -1,6 +1,7 @@
 # Collects 2026-11-16-one-quote-vs-books on GitHub's machines, so a laptop going to sleep doesn't stop it.
-# Every hour a job saves a round every 5 minutes (12 rounds). Jobs queue one behind the other, so a late
-# start only shifts the next hour.
+# A job saves a round every 5 minutes for an hour (12 rounds), then starts the next job itself: GitHub's
+# hourly schedule fired once in the first ten hours (2026-11-16), so it is only the backup. Jobs queue one
+# behind the other.
 #
 # The snapshots are third-party API data, which this repo does not publish (see the README). Each hour's
 # are encrypted to .github/one-quote-data.pub.pem (AES-256 with a random key, the key wrapped with RSA-OAEP)
@@ -24,6 +25,9 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    permissions:
+      contents: read
+      actions: write   # to start the next hour
     steps:
       - name: Stop after the study window
         run: |
@@ -48,3 +52,8 @@ jobs:
           name: one-quote-${{ github.run_id }}
           path: out/
           retention-days: 90
+      - name: Start the next hour
+        if: success() && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run one-quote-collect -R "${{ github.repository }}" --ref main
