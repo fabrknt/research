@@ -1,0 +1,58 @@
+# Collects 2026-11-18-anthropic-listing-quotes on GitHub's machines through Anthropic's listing, so a
+# laptop going to sleep doesn't stop it. A job saves a round every minute for an hour, then starts the
+# next job itself; the hourly schedule is only the backup. Same pattern and key as one-quote-collect.
+#
+# The quotes are third-party API data, which this repo does not publish (see the README). Each hour's are
+# encrypted to .github/one-quote-data.pub.pem (AES-256 with a random key, the key wrapped with RSA-OAEP)
+# and kept as a workflow artifact; only the holder of the private key, kept off GitHub, can read them.
+name: anthropic-listing-collect
+
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: anthropic-listing-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    permissions:
+      contents: read
+      actions: write   # to start the next hour
+    steps:
+      - name: Stop after the listing week
+        id: window
+        run: |
+          if [ "$(date -u +%Y%m%d)" -gt 20261121 ]; then echo "window over"; exit 1; fi
+      - uses: actions/checkout@v4
+      - name: Collect
+        id: collect
+        working-directory: 2026-11-18-anthropic-listing-quotes
+        continue-on-error: true
+        run: python3 -I collect.py 60 60
+      - name: Encrypt
+        if: always() && hashFiles('2026-11-18-anthropic-listing-quotes/data/quotes-*.jsonl') != ''
+        working-directory: 2026-11-18-anthropic-listing-quotes
+        run: |
+          mkdir -p ../out
+          tar czf data.tgz data
+          openssl rand -out key.bin 32
+          openssl enc -aes-256-cbc -pbkdf2 -salt -in data.tgz -out ../out/data.tgz.enc -pass file:key.bin
+          openssl pkeyutl -encrypt -pubin -inkey ../.github/one-quote-data.pub.pem \
+            -pkeyopt rsa_padding_mode:oaep -in key.bin -out ../out/key.bin.enc
+          rm -f key.bin data.tgz
+      - uses: actions/upload-artifact@v4
+        if: always() && hashFiles('out/data.tgz.enc') != ''
+        with:
+          name: anthropic-listing-${{ github.run_id }}
+          path: out/
+          retention-days: 90
+      - name: Start the next hour
+        if: always() && steps.window.outcome == 'success' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run anthropic-listing-collect -R "${{ github.repository }}" --ref main
