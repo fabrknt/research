@@ -1,7 +1,7 @@
 # Carries Lighter's full state forward from the batch-166859 snapshot, one Ethereum blob at a time
 # (2026-11-18-lighter-state-replay), on GitHub's machines: about 52 hours to catch up, then it follows
 # new batches. Each job resumes from the last successful job's state, replays for 55 minutes, saves the
-# state and starts the next job.
+# state and starts the next job (10 minutes later after a failure).
 #
 # The state is seeded from Lighter's snapshot (elliottech/lighter-prover, BUSL-1.1), so it is kept as an
 # encrypted artifact (AES-256, key in the LIGHTER_STATE_KEY secret and off GitHub), not published.
@@ -68,9 +68,13 @@ jobs:
           name: lighter-state
           path: out/
           retention-days: 7
-      # Only after a good job: a failure waits for the 3-hourly schedule instead of looping.
+      # Also after a failure (GitHub's schedule fires hours late, so it is no fallback), 10 minutes later
+      # so a lasting error does not loop fast. A failed job uploads nothing: the next one resumes from
+      # the last good state.
       - name: Start the next job
-        if: success() && github.ref == 'refs/heads/main'
+        if: always() && steps.window.outcome == 'success' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run lighter-state-replay.yml -R "${{ github.repository }}" --ref main
+        run: |
+          if [ "${{ job.status }}" != "success" ]; then sleep 600; fi
+          gh workflow run lighter-state-replay.yml -R "${{ github.repository }}" --ref main

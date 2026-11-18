@@ -144,8 +144,21 @@ def main(state_in: str, state_out: str, minutes: float) -> None:
     print(f"loaded batch {meta['batch']}, {len(accounts)} accounts in {time.time() - t0:.0f} s", flush=True)
     work = Path(state_out).parent / "blobs"
     start = meta["batch"]
+    replay(meta, accounts, work, deadline, t0, start)
+    if meta["batch"] == start:
+        # Nothing applied: fail, so a lasting RPC or Blobscan error waits for the schedule instead of looping.
+        raise SystemExit(f"no batch applied after {start}")
+    save(state_out, meta, accounts)
+    print(f"saved batch {meta['batch']} -> {state_out}")
+
+
+def replay(meta: dict, accounts: dict, work: Path, deadline: float, t0: float, start: int) -> None:
     while time.time() < deadline - 480:  # a round of 200 blobs takes about 6 min
-        commits = next_commits(meta["l1_block"], 200)
+        try:
+            commits = next_commits(meta["l1_block"], 200)
+        except Exception as e:  # a public RPC error: keep what was applied, the next job resumes from it
+            print(f"listing commits failed at batch {meta['batch']}: {e!r}", flush=True)
+            return
         if not commits:
             print("caught up")
             break
@@ -167,7 +180,6 @@ def main(state_in: str, state_out: str, minutes: float) -> None:
             f = work / f"blob_{b}.bin"
             if not f.exists():
                 print(f"blob for batch {b} missing; stopping here")
-                save(state_out, meta, accounts)
                 return
             blob = f.read_bytes()
             apply(meta, accounts, decode(blob), market_header(blob))
@@ -175,8 +187,6 @@ def main(state_in: str, state_out: str, minutes: float) -> None:
             f.unlink()
         print(f"at batch {meta['batch']} (+{meta['batch'] - start}), {len(accounts)} accounts, "
               f"{(time.time() - t0) / 60:.1f} min", flush=True)
-    save(state_out, meta, accounts)
-    print(f"saved batch {meta['batch']} -> {state_out}")
 
 
 if __name__ == "__main__":
