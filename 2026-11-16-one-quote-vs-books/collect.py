@@ -31,10 +31,16 @@ def get(url, body=None, tries=4):
                                                   "user-agent": "fabrknt-research"})
             with urllib.request.urlopen(req, timeout=30) as r:
                 return json.load(r)
-        except Exception as e:  # 429s and timeouts: wait and retry
+        except Exception as e:  # 429s and timeouts: wait (as long as a 429 asks, at least) and retry
             if i == tries - 1:
                 raise
-            time.sleep(2 + 3 * i)
+            wait = 2 + 3 * i
+            if getattr(e, "code", None) == 429:
+                try:
+                    wait = max(wait, float(json.load(e).get("retry_after_seconds", 0)) + 1)
+                except Exception:
+                    pass
+            time.sleep(wait)
 
 
 def hl(body):
@@ -108,7 +114,7 @@ def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     every = int(sys.argv[2]) if len(sys.argv) > 2 else 300
     os.makedirs(OUT, exist_ok=True)
-    markets = build_map(var_stats())
+    markets = build_map(get(VAR, tries=12))  # a 429 here used to end the run (2026-11-17)
     with open(os.path.join(OUT, "markets.json"), "w") as f:
         json.dump(markets, f, indent=1)
     print(len(markets), "markets", flush=True)

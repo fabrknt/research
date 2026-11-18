@@ -30,13 +30,19 @@ jobs:
       actions: write   # to start the next hour
     steps:
       - name: Stop after the study window
+        id: window
         run: |
           if [ "$(date -u +%Y%m%d)" -gt 20261126 ]; then echo "window over"; exit 1; fi
+      # From here on the next hour starts even if this one fails: a 429 at start-up broke the chain
+      # for 5.5 hours on 2026-11-17.
       - uses: actions/checkout@v4
       - name: Collect
+        id: collect
         working-directory: 2026-11-16-one-quote-vs-books
+        continue-on-error: true
         run: python3 -I collect.py "${{ inputs.rounds || '12' }}" 300
       - name: Encrypt
+        if: always() && hashFiles('2026-11-16-one-quote-vs-books/data/snap-*.jsonl') != ''
         working-directory: 2026-11-16-one-quote-vs-books
         run: |
           mkdir -p ../out
@@ -48,12 +54,16 @@ jobs:
           rm -f key.bin data.tgz
           ls -l ../out
       - uses: actions/upload-artifact@v4
+        if: always() && hashFiles('out/data.tgz.enc') != ''
         with:
           name: one-quote-${{ github.run_id }}
           path: out/
           retention-days: 90
+      - name: Back off after a failed hour
+        if: always() && steps.collect.outcome == 'failure'
+        run: sleep 300
       - name: Start the next hour
-        if: success() && github.ref == 'refs/heads/main'
+        if: always() && steps.window.outcome == 'success' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run one-quote-collect -R "${{ github.repository }}" --ref main
