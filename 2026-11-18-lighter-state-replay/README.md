@@ -7,6 +7,8 @@ whose decoder and state-root code it reuses.
 
 - `replay_state.py`: snapshot export or a saved state in; applies the next batches for N minutes; state out.
   Blobs come from Blobscan (2 at a time, about 33 batches a minute).
+- `roots.py`: the state root and validium root committed for the batch a state file stopped at (or any
+  batch), to check the state with `../2026-11-17-lighter-nov-16/stateroot`.
 - `.github/workflows/lighter-state-replay.yml`: runs it on GitHub's machines, an hour per job, each job
   resuming from the last one's state. About 100,000 batches to catch up (about 52 hours). The state is
   seeded from a BUSL-1.1 file, so it is kept as an encrypted artifact and not published.
@@ -25,10 +27,9 @@ on-chain state root                      0x0b747f77da1efd80ee42bae59c398cdcac32b
 
 ## Open
 
-- Since 2026-09-20 (batch 236132) the state root is `H(account root, market details hash, market data
-  tree root, validium root)`, and each account leaf carries the root of its binary options positions.
-  The blob schema says each market delta carries the slot's full state, so both trees should be
-  rebuildable from the replayed state; the tree shapes are still to be read.
+- Since 2026-09-20 (batch 236132) the state root also hashes in a market data tree, and each account
+  leaf carries the root of its binary options positions. Both trees are now read and written
+  (`-layout 2026-09` in the stateroot README); they are checked once the replay passes 236132.
 - 7 state-root replacements happened after the snapshot (179913 to 257643). If any changed account
   state that is not in the blobs, the replayed root will stop matching there.
 

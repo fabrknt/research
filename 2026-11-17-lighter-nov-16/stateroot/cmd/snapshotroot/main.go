@@ -1,22 +1,34 @@
 // snapshotroot: hash Lighter's batch-166859 snapshot into a state root and compare it with the root
 // committed on Ethereum.
 //
-//	go run ./cmd/snapshotroot ACCOUNTS.jsonl STATE_ROOT VALIDIUM_ROOT
+//	go run ./cmd/snapshotroot [-layout 2026-09] ACCOUNTS.jsonl STATE_ROOT VALIDIUM_ROOT
 //
-// ACCOUNTS.jsonl comes from export_snapshot.py. STATE_ROOT and VALIDIUM_ROOT are the bytes32 values
+// ACCOUNTS.jsonl comes from export_snapshot.py, or is a state file of replay_state.py (.gz). STATE_ROOT and VALIDIUM_ROOT are the bytes32 values
 // of commitBatch for that batch (newStateRoot, newValidiumRoot). The validium root covers state that
 // is not in the blobs (order books and the like), so it is taken as given.
 //
 // The layout below follows lighter-prover at 2bbc3089 (BUSL-1.1), read and re-written, not copied:
 // desertexit/circuits/src/pubdata_account.rs (account leaf), circuit/src/types/market_details.rs
 // (all_public_market_details_hash), desertexit/circuits/src/inner_circuit.rs (verify_state_root).
+//
+// -layout 2026-09 is the layout since binary options (lighter-prover 28ae613d, 2026-09-20; read at
+// fa85b33): each account leaf also carries the root of its binary options positions, and the state
+// root hashes in a market data tree as well,
+// H(H(H(account root, market details hash), market data tree root), validium root). Both trees have
+// 12 levels keyed by market slot (desertexit/circuits/src/pubdata_binary_options_position.rs).
+//
+// In either layout the market details hash is tried both flat and in 16 buckets of 16 (38bea38,
+// 2026-09-07), since the batch the bucketed form took effect from has not been checked.
 package main
 
 import (
 	"bufio"
+	"compress/gzip"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	"fmt"
+	"io"
 	"math/big"
 	"os"
 	"strings"
@@ -31,10 +43,23 @@ const (
 	bucketSize     = 16  // POSITION_HASH_BUCKET_SIZE; 256 slots (255 markets + one empty) in 16 buckets
 	assetLevels    = 6   // 64 asset slots
 	sharesListSize = 16
-	u16LimbsFor64  = 4 // BIGU16_U64_LIMBS
-	u32LimbsFor96  = 3 // BIG_U96_LIMBS
-	u32LimbsFor160 = 5 // BIG_U160_LIMBS
+	u16LimbsFor64  = 4  // BIGU16_U64_LIMBS
+	u32LimbsFor96  = 3  // BIG_U96_LIMBS
+	u32LimbsFor160 = 5  // BIG_U160_LIMBS
+	marketLevels   = 12 // MARKET_MERKLE_LEVELS, binary options trees
+	binaryOptions  = 2  // MARKET_TYPE_BINARY_OPTIONS
 )
+
+// The state's last delta of each market slot (replay_state.py), the market data tree's leaves.
+type slot struct {
+	Index  uint64 `json:"market_index"`
+	Status uint64 `json:"status"`
+	Price  uint64 `json:"price"`
+	Cap    uint64 `json:"settlement_cap"`
+	QEM    uint64 `json:"quote_extension_multiplier"`
+}
+
+var binaryLayout bool
 
 type market struct {
 	Mark    uint64 `json:"mark"`
@@ -49,6 +74,7 @@ type account struct {
 	Positions [][3]int64       `json:"p"` // market, position, funding prefix sum
 	Assets    [][2]json.Number `json:"a"` // asset index, balance (up to 96 bits)
 	Shares    [][2]int64       `json:"s"` // pool index, share amount; sorted by pool index
+	Binary    [][2]int64       `json:"b"` // market slot, size (negative = NO)
 	PoolInfo  *struct {
 		Total    int64 `json:"total_shares"`
 		Operator int64 `json:"operator_shares"`
@@ -181,6 +207,10 @@ func leaf(a *account) p2.HashOut {
 	}
 	elems = append(elems, limbs(addr, 32, u32LimbsFor160)...)
 	elems = append(elems, g.FromUint64(a.Type))
+	if binaryLayout {
+		mr := binaryPositionsRoot(a.Binary)
+		elems = append(elems, mr[:]...)
+	}
 	ar := assetRoot(a.Assets)
 	elems = append(elems, ar[:]...)
 	return p2.HashNToHashNoPad(elems)
@@ -194,6 +224,79 @@ func marketsHash(ms []market) p2.HashOut {
 		elems = append(elems, sign(m.Funding < 0, m.Funding == 0), g.FromUint64(m.Mark), g.FromUint64(m.Quote))
 	}
 	return p2.HashNToHashNoPad(elems)
+}
+
+// Since 38bea38: 255 markets and one empty, hashed in 16 buckets of 16, then the 16 bucket hashes.
+func marketsHashBucketed(ms []market) p2.HashOut {
+	ext := append(append([]market{}, ms...), market{})
+	var out []g.Element
+	for b := 0; b < len(ext); b += bucketSize {
+		h := marketsHash(ext[b : b+bucketSize])
+		out = append(out, h[:]...)
+	}
+	return p2.HashNToHashNoPad(out)
+}
+
+// A sparse tree of marketLevels levels, bit i of the key picking the side at level i, empty
+// subtrees hashing up from the zero hash.
+func sparseRoot(leaves map[uint64]p2.HashOut, levels int) p2.HashOut {
+	empty := p2.EmptyHashOut()
+	level := leaves
+	for l := 0; l < levels; l++ {
+		next := make(map[uint64]p2.HashOut, len(level)/2+1)
+		for k := range level {
+			parent := k >> 1
+			if _, done := next[parent]; done {
+				continue
+			}
+			left, ok := level[parent<<1]
+			if !ok {
+				left = empty
+			}
+			right, ok := level[parent<<1|1]
+			if !ok {
+				right = empty
+			}
+			next[parent] = p2.HashTwoToOne(left, right)
+		}
+		level = next
+		empty = p2.HashTwoToOne(empty, empty)
+	}
+	if r, ok := level[0]; ok {
+		return r
+	}
+	return empty
+}
+
+var emptyMarketDataRoot = sparseRoot(nil, marketLevels)
+
+// An account's binary options positions: leaf H(market type, |size| as four 16-bit limbs, sign).
+func binaryPositionsRoot(ps [][2]int64) p2.HashOut {
+	if len(ps) == 0 {
+		return emptyMarketDataRoot
+	}
+	leaves := map[uint64]p2.HashOut{}
+	for _, p := range ps {
+		if p[1] == 0 {
+			continue
+		}
+		leaves[uint64(p[0])] = p2.HashNToHashNoPad(append([]g.Element{g.FromUint64(binaryOptions)}, i64u16(p[1])...))
+	}
+	return sparseRoot(leaves, marketLevels)
+}
+
+// The market data tree: leaf H(market type, status, price, settlement cap, quote extension
+// multiplier) for a slot with any of them non-zero, else the zero hash.
+func marketDataRoot(slots map[string]slot) p2.HashOut {
+	leaves := map[uint64]p2.HashOut{}
+	for _, s := range slots {
+		if s.Status+s.Price+s.Cap+s.QEM == 0 {
+			continue
+		}
+		leaves[s.Index] = p2.HashNToHashNoPad([]g.Element{g.FromUint64(binaryOptions),
+			g.FromUint64(s.Status), g.FromUint64(s.Price), g.FromUint64(s.Cap), g.FromUint64(s.QEM)})
+	}
+	return sparseRoot(leaves, marketLevels)
 }
 
 func accountRoot(leaves map[uint64]p2.HashOut) p2.HashOut {
@@ -285,16 +388,34 @@ func mustHex(s string) []byte {
 }
 
 func main() {
-	f, err := os.Open(os.Args[1])
+	layout := flag.String("layout", "2026-05", "root layout: 2026-05 (the snapshot's) or 2026-09 (binary options)")
+	flag.Parse()
+	binaryLayout = *layout == "2026-09"
+	// The prover's EMPTY_MARKET_DATA_TREE_ROOT: checks the binary options tree shape before hashing.
+	if binaryLayout && emptyMarketDataRoot.ToUint64Array() != [4]uint64{5094422418556072775, 472024594924382182,
+		11064781981674099049, 14079628902931319245} {
+		panic(fmt.Sprintf("empty market data tree root %v, not the prover's", emptyMarketDataRoot.ToUint64Array()))
+	}
+	args := flag.Args()
+	f, err := os.Open(args[0])
 	if err != nil {
 		panic(err)
 	}
-	stateRoot, validiumRoot := mustHex(os.Args[2]), mustHex(os.Args[3])
+	stateRoot, validiumRoot := mustHex(args[1]), mustHex(args[2])
 
-	sc := bufio.NewScanner(f)
+	var r io.Reader = f
+	if strings.HasSuffix(args[0], ".gz") { // a replay_state.py state file
+		if r, err = gzip.NewReader(f); err != nil {
+			panic(err)
+		}
+	}
+	sc := bufio.NewScanner(r)
 	sc.Buffer(make([]byte, 1<<20), 1<<26)
 	sc.Scan()
-	var header struct{ Markets []market }
+	var header struct {
+		Markets []market
+		Slots   map[string]slot
+	}
 	if err := json.Unmarshal(sc.Bytes(), &header); err != nil {
 		panic(err)
 	}
@@ -312,18 +433,31 @@ func main() {
 		panic(err)
 	}
 	acc := accountRoot(leaves)
-	mh := marketsHash(header.Markets)
-	fmt.Printf("accounts %d\naccount root %v\nmarket details hash %v\n", len(leaves), acc.ToUint64Array(), mh.ToUint64Array())
+	fmt.Printf("accounts %d\naccount root %v\n", len(leaves), acc.ToUint64Array())
 
-	matched := false
-	for _, e := range encodings() {
-		root := p2.HashNToOne([]p2.HashOut{acc, mh, e.decode(validiumRoot)})
-		got := e.encode(root)
-		ok := hex.EncodeToString(got) == hex.EncodeToString(stateRoot)
-		matched = matched || ok
-		fmt.Printf("%-40s 0x%x match=%v\n", e.name, got, ok)
+	type variant struct {
+		name string
+		hash p2.HashOut
 	}
-	fmt.Printf("on-chain state root                      0x%x\n", stateRoot)
+	variants := []variant{
+		{"", marketsHash(header.Markets)},
+		{"market details in buckets, ", marketsHashBucketed(header.Markets)},
+	}
+	matched := false
+	for _, v := range variants {
+		inputs := []p2.HashOut{acc, v.hash}
+		if binaryLayout {
+			inputs = append(inputs, marketDataRoot(header.Slots))
+		}
+		for _, e := range encodings() {
+			root := p2.HashNToOne(append(append([]p2.HashOut{}, inputs...), e.decode(validiumRoot)))
+			got := e.encode(root)
+			ok := hex.EncodeToString(got) == hex.EncodeToString(stateRoot)
+			matched = matched || ok
+			fmt.Printf("%-67s 0x%x match=%v\n", v.name+e.name, got, ok)
+		}
+	}
+	fmt.Printf("%-67s 0x%x\n", "on-chain state root", stateRoot)
 	if !matched {
 		os.Exit(1)
 	}

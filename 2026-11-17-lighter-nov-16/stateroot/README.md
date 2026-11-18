@@ -48,6 +48,27 @@ Poseidon2: `github.com/elliottech/poseidon_crypto` v0.0.19, `hash/poseidon2_gold
 (Apache-2.0). Both of its Poseidon2 packages reproduce the empty-tree constants in the prover
 (`cmd/variant`).
 
+## The layout since binary options (`-layout 2026-09`)
+
+Read from lighter-prover at fa85b33 (2026-11-02), the same way. Since 28ae613d (2026-09-20):
+
+- `state root = H2(H2(H2(account root, market details hash), market data tree root), validium root)`
+  (`verify_state_root` in `desertexit/circuits/src/inner_circuit.rs`).
+- Account leaf: the root of the account's binary options positions goes between the account type and
+  the asset root. That tree has 12 levels keyed by market slot (binary options use slots 1000 to
+  2000); a leaf is `H(2, |size| as four 16-bit limbs, sign)`, a negative size being a NO position. An
+  account with none has the prover's `EMPTY_MARKET_DATA_TREE_ROOT`, which the program recomputes
+  and checks before hashing anything.
+- Market data tree: 12 levels keyed by market slot; a leaf is `H(2, status, price, settlement cap,
+  quote extension multiplier)`, or the zero hash when all four are zero (every perp and spot slot).
+  Each blob's market delta carries a slot's full state, so the last one per slot is its leaf.
+- The market details hash went into 16 buckets of 16 (255 markets and one empty), then one hash of
+  the bucket hashes, in 38bea38 (2026-09-07). Which batch that took effect from is not checked, so
+  the program tries both forms in either layout.
+
+None of this is checked against a committed root yet: it needs the replayed state past batch 236132
+([2026-11-18-lighter-state-replay](../../2026-11-18-lighter-state-replay/)).
+
 ## Run
 
 ```sh
@@ -56,6 +77,9 @@ go run ./cmd/snapshotroot accounts.jsonl \
   0x43af97459fc0ea7420c4039201a9f36a8d3e2ca30a5d10300070bc9d5c46de4e \
   0x867d1b1d60f530c3ea8f5ea921763ead3f1d105ae91554dcbc879054903fe6de
 go run ./cmd/variant                                       # which Poseidon2 package matches
+
+# a state saved by replay_state.py, against the roots committed for its batch
+go run ./cmd/snapshotroot [-layout 2026-09] state.jsonl.gz $(python3 ../../2026-11-18-lighter-state-replay/roots.py state.jsonl.gz | cut -d' ' -f1,2)
 ```
 
 On an M-series laptop: 12 min 13 s for the first version, 9 min 41 s with empty position buckets and
