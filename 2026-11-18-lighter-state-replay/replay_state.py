@@ -38,18 +38,23 @@ PARALLEL = 2  # Blobscan rate-limits; 2 at a time is what fetch.sh found to work
 
 
 def fetch_blob(tx: str, out: Path) -> bool:
-    """One blob per commit transaction: its versioned hash -> Blobscan's first storage reference with a URL."""
+    """One blob per commit transaction: its versioned hash -> each of Blobscan's storage references in turn."""
     for attempt in range(4):
         try:
             vh = call("eth_getTransactionByHash", [tx])["blobVersionedHashes"][0]
             req = urllib.request.Request(f"https://api.blobscan.com/blobs/{vh}", headers={"User-Agent": "curl/8"})
             with urllib.request.urlopen(req, timeout=30) as r:
-                url = next(x["url"] for x in json.load(r)["dataStorageReferences"] if x.get("url"))
-            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "curl/8"}), timeout=60) as r:
-                data = r.read()
-            if len(data) == BLOB_BYTES:
-                out.write_bytes(data)
-                return True
+                urls = [x["url"] for x in json.load(r)["dataStorageReferences"] if x.get("url")]
+            for url in urls:
+                try:
+                    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "curl/8"}),
+                                                timeout=60) as r:
+                        data = r.read()
+                except Exception:
+                    continue
+                if len(data) == BLOB_BYTES:
+                    out.write_bytes(data)
+                    return True
         except Exception:
             pass
         time.sleep(2 * (attempt + 1))
@@ -147,6 +152,15 @@ def main(state_in: str, state_out: str, minutes: float) -> None:
         work.mkdir(exist_ok=True)
         with ThreadPoolExecutor(PARALLEL) as pool:
             list(pool.map(lambda c: fetch_blob(c[1], work / f"blob_{c[0]}.bin"), commits))
+        # Blobscan rate-limits GitHub's machines now and then: go back for the misses, slower.
+        for wait in (20, 60, 120):
+            missing = [c for c in commits if not (work / f"blob_{c[0]}.bin").exists()]
+            if not missing:
+                break
+            print(f"{len(missing)} blobs missing, retrying in {wait} s", flush=True)
+            time.sleep(wait)
+            for b, tx, _blk in missing:
+                fetch_blob(tx, work / f"blob_{b}.bin")
         for b, _tx, blk in commits:
             if b != meta["batch"] + 1:
                 raise SystemExit(f"expected batch {meta['batch'] + 1}, next commit is {b}")
