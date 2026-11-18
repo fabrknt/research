@@ -1,0 +1,76 @@
+# Carries Lighter's full state forward from the batch-166859 snapshot, one Ethereum blob at a time
+# (2026-11-18-lighter-state-replay), on GitHub's machines: about 52 hours to catch up, then it follows
+# new batches. Each job resumes from the last successful job's state, replays for 55 minutes, saves the
+# state and starts the next job.
+#
+# The state is seeded from Lighter's snapshot (elliottech/lighter-prover, BUSL-1.1), so it is kept as an
+# encrypted artifact (AES-256, key in the LIGHTER_STATE_KEY secret and off GitHub), not published.
+name: lighter-state-replay
+
+on:
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: lighter-state-replay
+  cancel-in-progress: false
+
+env:
+  SNAPSHOT_URL: https://github.com/elliottech/lighter-prover/raw/2bbc3089/desertexit/blobs.zip
+  SNAPSHOT_SHA256: fd1d20cdcb263a52fc0ff49b52188b993fe78a3402e7716b2608aa32a9b1f045
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    permissions:
+      contents: read
+      actions: write   # to read the last state and start the next job
+    steps:
+      - name: Stop after the window
+        id: window
+        run: |
+          if [ "$(date -u +%Y%m%d)" -gt 20261130 ]; then echo "window over"; exit 1; fi
+      - uses: actions/checkout@v4
+      - name: Last state, or the snapshot
+        id: input
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEY: ${{ secrets.LIGHTER_STATE_KEY }}
+        run: |
+          mkdir -p work
+          last=$(gh run list -R "${{ github.repository }}" -w lighter-state-replay.yml -s success -L 1 \
+            --json databaseId -q '.[0].databaseId // empty')
+          if [ -n "$last" ] && gh run download "$last" -R "${{ github.repository }}" -n lighter-state -D work/prev; then
+            openssl enc -d -aes-256-cbc -pbkdf2 -in work/prev/state.jsonl.gz.enc -out work/in.jsonl.gz -pass env:KEY
+            echo "in=work/in.jsonl.gz" >> "$GITHUB_OUTPUT"
+          else
+            curl -sL -o work/blobs.zip "$SNAPSHOT_URL"
+            echo "$SNAPSHOT_SHA256  work/blobs.zip" | sha256sum -c
+            unzip -q work/blobs.zip -d work/snapshot
+            dir=$(dirname "$(find work/snapshot -name 'blob_0.bin' | head -1)")
+            python3 -I 2026-11-17-lighter-nov-16/stateroot/export_snapshot.py "$dir" work/accounts.jsonl
+            echo "in=snapshot:work/accounts.jsonl" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Replay
+        id: replay
+        run: python3 -I 2026-11-18-lighter-state-replay/replay_state.py "${{ steps.input.outputs.in }}" work/state.jsonl.gz 55
+      - name: Encrypt
+        env:
+          KEY: ${{ secrets.LIGHTER_STATE_KEY }}
+        run: |
+          mkdir -p out
+          openssl enc -aes-256-cbc -pbkdf2 -salt -in work/state.jsonl.gz -out out/state.jsonl.gz.enc -pass env:KEY
+          ls -l out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighter-state
+          path: out/
+          retention-days: 7
+      # Only after a good job: a failure waits for the 3-hourly schedule instead of looping.
+      - name: Start the next job
+        if: success() && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run lighter-state-replay.yml -R "${{ github.repository }}" --ref main
