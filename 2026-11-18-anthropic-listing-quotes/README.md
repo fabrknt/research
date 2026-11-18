@@ -3,14 +3,25 @@
 The reference prices for HL Price Guard's Anthropic IPO case
 ([fabrknt/hl-price-guard, cases/anthropic-ipo-2026](https://github.com/fabrknt/hl-price-guard/tree/main/cases/anthropic-ipo-2026)).
 Its Cloudflare recorder reads the Hyperliquid markets and OKX every minute; Binance and Bitget answer
-403 to Cloudflare, so they are recorded here, on GitHub's machines, through the reported pricing
-(11-18) and first trade (11-19).
+403 to Cloudflare, so they are recorded here through the reported pricing (11-18) and first trade (11-19).
+
+Where each venue answers from (measured 2026-11-18):
+
+| venue | GitHub's machines | a laptop outside the US |
+|---|---|---|
+| Binance | HTTP 451 on every round (US) | yes |
+| Bitget | yes | yes |
+| OKX | yes | yes |
+
+So the workflow records Bitget and OKX (and the Binance errors), and Binance is recorded by running
+`collect.py` on a laptop (`caffeinate -i python3 -I collect.py 5600 60`, about four days; it stops
+while the lid is closed).
 
 - `collect.py`: one round a minute; each venue's response stored as quoted (no share-count basis
   applied), errors included. Both of Binance's and Bitget's symbols are read (`ANTHROPICUSDT`, and
   `ANTUSDT` after the move to about 13.1B shares).
 - `.github/workflows/anthropic-listing-collect.yml`: an hour of rounds per job, each job starting the
-  next, until 2026-11-21.
+  next, until 2026-11-21. Bitget answers `ANTUSDT` to either symbol.
 - `fetch_actions.sh`: downloads and decrypts the hourly artifacts (the quotes are third-party API
   data and are not published).
 

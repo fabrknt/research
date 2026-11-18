@@ -161,7 +161,9 @@ python3 check_snapshot.py SNAPSHOT_DIR 1794824520
   pauses and proof delay.
 - `replay.py`, `check_snapshot.py`: decoded positions against Lighter's API.
 - `stateroot/`: the snapshot hashed into the committed state root, with
-  `github.com/elliottech/poseidon_crypto` v0.0.19 (Apache-2.0).
+  `github.com/elliottech/poseidon_crypto` v0.0.19 (Apache-2.0). Also hashes states replayed by
+  [2026-11-18-lighter-state-replay](../2026-11-18-lighter-state-replay/), and has the layout used
+  since binary options (`-layout 2026-09`, not yet checked against a committed root).
 
 Addresses are shortened in the text and given in full where they are inputs to the scripts; all are
 public on Ethereum. Account numbers are Lighter's. Blobs and the snapshot are not committed: the
