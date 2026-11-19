@@ -85,6 +85,23 @@ go run ./cmd/snapshotroot [-layout 2026-09] state.jsonl.gz $(python3 ../../2026-
 On an M-series laptop: 12 min 13 s for the first version, 9 min 41 s with empty position buckets and
 empty asset subtrees reused (same root). One Poseidon2 two-to-one takes about 9 µs here.
 
+## One account's proof (`cmd/accountproof`)
+
+`prove` hashes a whole state once and, if it reaches the committed root, writes one account's proof:
+the account as the state file has it, the 48 siblings from its leaf to the account root, every
+market's public details and (since 2026-09) every market slot, and the validium root. `verify` needs
+only that file and the committed state root: it recomputes the leaf, folds the path, rehashes the
+markets and checks the root, then prints what the account holds. Nothing in the proof is trusted
+except the validium root, which covers state that is not published.
+
+```sh
+R=$(python3 ../../2026-11-18-lighter-state-replay/roots.py state.jsonl.gz)   # state root, validium root, batch
+go run ./cmd/accountproof prove state.jsonl.gz ACCOUNT $(echo $R | cut -d' ' -f1,2) > proof.json
+go run ./cmd/accountproof verify proof.json $(echo $R | cut -d' ' -f1)
+```
+
+The hashing is in `lighter/` (package `lighter`), shared by `snapshotroot` and `accountproof`.
+
 ## Not covered
 
 - The root format changed after this batch: `StateRootUpdate` was emitted at 19 batches between

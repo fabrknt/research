@@ -34,6 +34,11 @@ cd ../2026-11-17-lighter-nov-16/stateroot
 go run ./cmd/snapshotroot state.jsonl.gz $(python3 ../../2026-11-18-lighter-state-replay/roots.py state.jsonl.gz | cut -d' ' -f1,2)
 ```
 
+One account proved from the replayed state (`../2026-11-17-lighter-nov-16/stateroot/cmd/accountproof`):
+account 4 at batch 167459, a 22 KB proof that `verify` takes to the committed root
+`0xb8c5…76cd`; changing its balance, index, a position, a sibling, a mark price or the market-details
+form, or giving another batch's root, each fails.
+
 On GitHub: the first hour-long job replayed 1,600 batches (167335 to 168935) in 53 min.
 
 ## Open
