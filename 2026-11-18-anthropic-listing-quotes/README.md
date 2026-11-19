@@ -7,11 +7,11 @@ Its Cloudflare recorder reads the Hyperliquid markets and OKX every minute; Bina
 
 Where each venue answers from (measured 2026-11-18):
 
-| venue | GitHub's machines | a laptop outside the US |
-|---|---|---|
-| Binance | HTTP 451 on every round (US) | yes |
-| Bitget | yes | yes |
-| OKX | yes | yes |
+| venue | GitHub's machines | Cloudflare | a laptop outside the US |
+|---|---|---|---|
+| Binance | HTTP 451 on every round (US) | HTTP 403, also from Osaka (KIX) | yes |
+| Bitget | yes | HTTP 403 | yes |
+| OKX | yes | yes | yes |
 
 So the workflow records Bitget and OKX (and the Binance errors), and Binance is recorded by running
 `collect.py` on a laptop (`caffeinate -i python3 -I collect.py 5600 60`, about four days; it stops
@@ -22,6 +22,10 @@ while the lid is closed).
   `ANTUSDT` after the move to about 13.1B shares).
 - `.github/workflows/anthropic-listing-collect.yml`: an hour of rounds per job, each job starting the
   next, until 2026-11-21. Bitget answers `ANTUSDT` to either symbol.
+- `worker/`: the Cloudflare test (2026-11-19), a Durable Object placed in Asia-Pacific reading Binance once
+  a minute. Every round was 403, so Binance blocks Cloudflare by address rather than by location;
+  it stopped after three rounds. CoinGecko's derivatives list carries Binance's `ANTUSDT`, but about
+  13 minutes old, too late for the minutes around the first trade.
 - `fetch_actions.sh`: downloads and decrypts the hourly artifacts (the quotes are third-party API
   data and are not published).
 
