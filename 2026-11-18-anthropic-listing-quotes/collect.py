@@ -21,6 +21,11 @@ SOURCES = {
                for s in ("ANTHROPICUSDT", "ANTUSDT")],
     "okx": ["https://www.okx.com/api/v5/market/ticker?instId=ANTHROPIC-USDT-SWAP"],
 }
+# Binance refuses GitHub's machines (451) and Cloudflare (403). CoinGecko's derivatives list carries its
+# ANTUSDT, about 13 minutes late: a coarse backup for minutes the laptop recorder misses, every 5 rounds.
+COINGECKO = "https://api.coingecko.com/api/v3/derivatives"
+COINGECKO_EVERY = 5
+ANTHROPIC = {"ANTUSDT", "ANTHROPICUSDT", "ANTUSDT_UMCBL", "ANTHROPICUSDT_UMCBL", "ANTHROPIC-USDT-SWAP"}
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 
@@ -41,6 +46,11 @@ def main(rounds: int, every: int) -> None:
                     row[url] = get(url)
                 except Exception as e:  # an unlisted symbol or a block is part of the record
                     row[url] = {"error": f"{getattr(e, 'code', '')} {e}"[:200]}
+        if i % COINGECKO_EVERY == 0:
+            try:  # about 12 MB for every listed perp; keep the Anthropic ones only
+                row[COINGECKO] = [x for x in get(COINGECKO) if x.get("symbol") in ANTHROPIC]
+            except Exception as e:
+                row[COINGECKO] = {"error": f"{getattr(e, 'code', '')} {e}"[:200]}
         with open(os.path.join(OUT, time.strftime("quotes-%Y%m%d.jsonl", time.gmtime(start))), "a") as f:
             f.write(json.dumps(row) + "\n")
         if i < rounds - 1:

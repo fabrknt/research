@@ -24,8 +24,10 @@ while the lid is closed).
   next, until 2026-11-21. Bitget answers `ANTUSDT` to either symbol.
 - `worker/`: the Cloudflare test (2026-11-19), a Durable Object placed in Asia-Pacific reading Binance once
   a minute. Every round was 403, so Binance blocks Cloudflare by address rather than by location;
-  it stopped after three rounds. CoinGecko's derivatives list carries Binance's `ANTUSDT`, but about
-  13 minutes old, too late for the minutes around the first trade.
+  it stopped after three rounds.
+- CoinGecko's derivatives list carries Binance's `ANTUSDT` (11 to 13 minutes old when read), so
+  `collect.py` also stores its Anthropic rows every 5 rounds (from 2026-11-19): a coarse backup for
+  minutes the laptop recorder misses, not a substitute for it around the first trade.
 - `fetch_actions.sh`: downloads and decrypts the hourly artifacts (the quotes are third-party API
   data and are not published).
 
