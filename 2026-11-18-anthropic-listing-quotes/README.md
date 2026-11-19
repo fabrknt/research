@@ -31,6 +31,9 @@ while the lid is closed).
 - `fetch_actions.sh`: downloads and decrypts the hourly artifacts (the quotes are third-party API
   data and are not published).
 
-Results go into the hl-price-guard case after the listing.
+Results (2026-11-20): ["What happened" in the hl-price-guard case](https://github.com/fabrknt/hl-price-guard/tree/main/cases/anthropic-ipo-2026#what-happened-replayed-2026-11-20).
+In short: nothing moved toward the $83 offering price, the perps were 0.3% under the $111.50
+first trade a minute before it, and the largest by-rule step was Paragon's switch to an external
+feed 15 minutes later (−5.4%).
 
 Measured with an AI (Claude), which wrote the scripts and ran them. Not financial advice.
