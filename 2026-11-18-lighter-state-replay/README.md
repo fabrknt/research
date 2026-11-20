@@ -27,6 +27,14 @@ batch 167059  accounts 878443  0x0b747f77da1efd80ee42bae59c398cdcac32b0f5341a851
 batch 167259  accounts 878787  0x2783abf9346315aa395ed6626018ced5f79432359b2f608a64eac4fad3642f87 match=true
 ```
 
+2026-11-20, from GitHub's job (63,276 batches after 167059, still before the binary options layout of
+2026-09-20 at about 236132): the old layout again, now with the market details hash in 16 buckets
+(prover 38bea38), so that form was live by then; the flat form and the 2026-09 layout do not match.
+
+```
+batch 230335  accounts 964608  0x2620e079e721a6cca9e5161d4f0bcb957a8d149e21ebe9e757440ff8e2377768 match=true
+```
+
 Check a saved state the same way:
 
 ```sh
