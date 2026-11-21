@@ -1,0 +1,32 @@
+# Adds each weekend to 2026-11-21-weekend-gaps/results/weekends.csv after the US open, and commits it.
+# Hyperliquid only serves the latest 5,000 candles (about 52 days at 15 minutes), so the file is the
+# record; it holds derived numbers in bp, no prices. It runs every weekday (a weekend that ends on a
+# holiday Monday is added on Tuesday) and commits only when a row was added.
+name: weekend-gaps
+
+on:
+  schedule:
+    - cron: "0 16 * * 1-5"
+  workflow_dispatch:
+
+concurrency:
+  group: weekend-gaps
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record
+        run: python3 -I 2026-11-21-weekend-gaps/weekend.py
+      - name: Commit
+        run: |
+          git add 2026-11-21-weekend-gaps/results/weekends.csv
+          git diff --cached --quiet && { echo "no new weekend"; exit 0; }
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "weekend-gaps: add $(date -u +%Y-%m-%d)'s weekend"
+          git push

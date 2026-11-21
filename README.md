@@ -6,6 +6,7 @@ this repo holds what produced it. Newest first.
 
 | date | study | write-up | answer |
 |---|---|---|---|
+| 2026-11-21 | [Weekend gaps](2026-11-21-weekend-gaps/) | (after more weekends) | Recording every weekend: 22 US names, Friday close to Monday open. First seven: median 129 bp; Hyperliquid's xyz an hour before the open still 91 bp away |
 | 2026-11-18 | [Lighter state replay](2026-11-18-lighter-state-replay/) | (after catch-up) | Running: Lighter's full state carried from the May snapshot to today, one Ethereum blob at a time; matches the committed root at batches 167059 and 167259 |
 | 2026-11-18 | [Anthropic listing quotes](2026-11-18-anthropic-listing-quotes/) | (after the listing) | Collecting: Binance, Bitget and OKX quotes through the pricing and first trade, until 11-21 |
 | 2026-11-17 | [Lighter's November 16](2026-11-17-lighter-nov-16/) | [What does Ethereum show about Lighter's November 16?](https://fabrknt.com/research/lighter-nov-16) | First drain to the cent (10,393,056.79 USDC to the attacker); the second was posted after a 7 h 22 min pause and paid to another address |
