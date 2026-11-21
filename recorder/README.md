@@ -11,7 +11,7 @@ in one place: one job chain, one list of what is kept, one storage format, one r
 | `one_quote` | 5 min | Variational's listing rows (quotes, funding, open interest, volume) with the Lighter and Hyperliquid books for the same 40 markets ([one quote vs books](../2026-11-16-one-quote-vs-books/)) | Variational keeps no public history of its quotes |
 | `lighter_blobs` | 10 min | every Lighter batch blob committed to Ethereum | rebuilding Lighter's state ([state replay](../2026-11-18-lighter-state-replay/)) needs every blob; Ethereum drops them after about 18 days |
 | `solana_quotes` | 1 min | Jupiter's free quote (api.jup.ag, lite-api as fallback; no key) for SOL/USDC at 10, 1,000 and 10,000 SOL and $1k, $100k and $1M, from each Solana prop AMM alone (BisonFi, GoonFi V2, SolFi V2, ZeroFi, Kipseli, Scorch) and Jupiter's best route | prop AMM quotes are in no order book, and Solana keeps no past account state to price them against later; HumidiFi and TesseraV had no route through this API on 2026-11-21 and are asked once a run to see when that changes |
-| `events` | 10 s | Hyperliquid mids for every perp; for 72 h after a name (24h volume ≥ $2M) moves 1.5% within a minute, or first lists, its Hyperliquid l2Book every 10 s and its Lighter book every 30 s (at most 8 names) | the book around a move or a listing is what is wanted afterwards, and nobody keeps it across venues at the same instant |
+| `events` | 10 s | Hyperliquid mids for every perp; for 72 h after a name (24h volume ≥ $2M) is 1.5% from its last-minute high or low, or first lists, its Hyperliquid l2Book every 10 s and its Lighter book every 30 s (at most 8 names) | the book around a move or a listing is what is wanted afterwards, and nobody keeps it across venues at the same instant |
 | `rules` | daily | Hyperliquid perpDexs, meta (margin tables) per dex, spotMeta; Lighter orderBookDetails; every page of the Hyperliquid, Lighter and Variational docs | what the rules were when something happened; each row says whether the item changed since the day before |
 
 The list, with the question each source is kept for, is [`sources.toml`](sources.toml). A source is one
@@ -35,8 +35,9 @@ minutes, each source in its own thread at its own interval, then starts the next
 
 [`health.py`](health.py) runs daily ([`recorder-health.yml`](../.github/workflows/recorder-health.yml)):
 from the last 24 hours' `count.json` it flags a source whose complete calls fall under 80% of what its
-interval allows, one more than an hour behind (Lighter's blobs), rules items that failed all day, or a
-chain that has stopped, as a comment on the open issue "recorder: gaps".
+interval allows (counted from the source's first hour, so a new source or the first day isn't a gap), one
+more than an hour behind (Lighter's blobs), rules items that failed all day, a chain that has stopped, or
+storage past its limits (below), as a comment on the open issue "recorder: gaps".
 
 Set the repo variable `RECORDER_STOP=1` to stop it.
 
@@ -54,7 +55,9 @@ their batch number; a batch committed twice appears twice, and the last commit w
 
 A local 2-minute trial (2026-11-21) wrote, gzipped: `hl_ctx` about 28 KB a call (11 dexes, 568 markets),
 `one_quote` 85 KB a round, `rules` 0.7 MB a day (567 items), and Lighter blobs about 18.5 KB each
-(131,072 bytes raw; about 740 a day). About 3 MB an hour, 2.5 GB a month, all in releases.
+(131,072 bytes raw; about 740 a day). On GitHub the first hours were 3.0–3.4 MB each (5.1 MB for the
+first, which also caught up an hour of blobs and took the day's rules), so about 2.5 GB a month, more
+while `events` has hot names.
 
 - Storage: about 2.5 GB a month in GitHub releases. The daily check flags all months together past 20 GB
   (then older months move off GitHub, to S3 or similar) and a month's release past 900 of its 1,000 files.
@@ -63,7 +66,7 @@ A local 2-minute trial (2026-11-21) wrote, gzipped: `hl_ctx` about 28 KB a call 
 - Lighter blobs come through Blobscan, the code of the state replay; a blob Blobscan doesn't have yet is
   tried again in the next run, from that commit on, so none is skipped or kept twice.
 - `solana_quotes` is what Jupiter would route, not each venue's own quote: a venue Jupiter doesn't route
-  through lite-api (HumidiFi, TesseraV on 2026-11-21) is missing. One run takes about 40 s.
+  through its free API (HumidiFi, TesseraV on 2026-11-21) is missing. One run takes about 15 s.
 - `events` keeps only books while a name is hot, not the mids it watches; the minute before a trigger is in
   `hl_ctx`. A name that is hot when a job ends stays hot in the next job (its state holds hashed names).
 - What the recorder doesn't keep: anything that has to be bought.

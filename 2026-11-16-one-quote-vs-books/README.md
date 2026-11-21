@@ -16,6 +16,12 @@ so the record only exists if it keeps running; set the repo variable `ONE_QUOTE_
 The first answer goes here and on [fabrknt.com/research](https://fabrknt.com/research) once the data
 covers a weekend.
 
+From 2026-11-21 the same round (`collect.py`, now keeping each Variational listing row whole: funding,
+open interest, volume) also runs inside the [recorder](../recorder/) as its `one_quote` source, read
+with `recorder/read.py one_quote`. This workflow keeps running beside it for a few days, until the two
+are seen to match, and is then stopped with `ONE_QUOTE_STOP=1`; `fetch_actions.sh` still reads the hours
+it kept.
+
 Gaps: 2026-11-16 14:02–22:50 UTC (the schedule did not fire) and 2026-11-17 08:40–14:16 UTC (a 429
 from Variational at start-up failed a job and the next was never started; fixed so a failed hour still
 keeps its data and starts the next).
