@@ -56,6 +56,8 @@ A local 2-minute trial (2026-11-21) wrote, gzipped: `hl_ctx` about 28 KB a call 
 `one_quote` 85 KB a round, `rules` 0.7 MB a day (567 items), and Lighter blobs about 18.5 KB each
 (131,072 bytes raw; about 740 a day). About 3 MB an hour, 2.5 GB a month, all in releases.
 
+- Storage: about 2.5 GB a month in GitHub releases. The daily check flags all months together past 20 GB
+  (then older months move off GitHub, to S3 or similar) and a month's release past 900 of its 1,000 files.
 - Between two jobs there is a gap of a few minutes; `hl_ctx` covers about 90% of the minutes.
 - A Variational listing without quotes at that moment has `quotes: null` (6 of 40 in the trial).
 - Lighter blobs come through Blobscan, the code of the state replay; a blob Blobscan doesn't have yet is
