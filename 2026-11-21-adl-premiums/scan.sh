@@ -4,13 +4,14 @@
 # ap-northeast-1, where the bucket is, so the ~385 GB never leaves the region.
 [ -f ~/creds.env ] && source ~/creds.env
 mkdir -p ~/out
+export EXTRACT="$(cd "$(dirname "$0")" && pwd)/extract.py"
 one() {  # $1 = prefix/day/hour.lz4
   out=~/out/$(echo "$1" | tr '/' '_').csv
   [ -f "$out" ] && return
   # pipefail: a failed download must not pass as an hour with no ADL (grep's 1 = no match)
   ( set -o pipefail
     aws s3 cp "s3://hl-mainnet-node-data/$1" - --request-payer requester --only-show-errors \
-      | lz4 -dc | { grep -F 'Auto-Deleveraging' || [ $? -eq 1 ]; } | python3 ~/extract.py > "$out.tmp" ) \
+      | lz4 -dc | { grep -F 'Auto-Deleveraging' || [ $? -eq 1 ]; } | python3 -I "$EXTRACT" > "$out.tmp" ) \
     && mv "$out.tmp" "$out" || echo "FAIL $1" >> ~/fail.log
 }
 export -f one
