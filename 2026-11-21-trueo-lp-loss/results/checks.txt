@@ -1,0 +1,8 @@
+quote token: "TYD" "True Yield Dollar" decimals 6
+hook 0x3e83479b2276ecfb7c7181f67b5d092d3511e0c4 feeNumerator (/10000): 80 swapValidator: 0x55e26CF92B924C069db4d8Da7B0b36154374Dd38
+pools in data/pools.json: 480 ; resolved markets: 104 ; pools per resolved market: {2: 104}
+winningPosition: {1: 48, 2: 52, 3: 4} ; with finalizedAt set: 104 ; statuses with finalizedAt set (all markets): {7: 104}
+endOfTrading: 2026-09-11 to 2026-11-17
+swap fee field (pips) in these pools' Swap events: {1: 5419} ; pool fee at Initialize: {1: 208}
+swaps after endOfTrading: 1022 hours after it: p10 2.1 median 100.0 p90 587.0 ; before resolution was proposed: 818
+liquidity added, by caller: {'0x7c5f5a4bbd8fd63184577525326123b519429bdc': 0.897, '0x1cdb1c43eb64e99780ea9d3c7162c23432c59a1a': 0.103} ; PositionManager positions: 7848

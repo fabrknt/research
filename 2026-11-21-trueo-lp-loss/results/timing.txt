@@ -1,0 +1,9 @@
+markets 104 LP loss vs hold 126557.94 volume 773360.94
+median hours from endOfTrading to resolution proposed: 24.0
+share of LP loss in the 1 h before resolution was proposed: 0.042
+share of LP loss in the 6 h before resolution was proposed: 0.055
+share of LP loss in the 24 h before resolution was proposed: 0.323
+share of LP loss in the 72 h before resolution was proposed: 0.534
+share of LP loss in the 168 h before resolution was proposed: 0.794
+share after resolution was proposed: 0.001
+top 30 by loss: median LP liquidity (raw units, all its pools) left at R / its peak 0.001 ; at R-24h 0.012 ; nearly all gone (<5%) at R: 28 of 30

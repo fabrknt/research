@@ -1,0 +1,1 @@
+Initialize with TYD: 486 through a TruthMarketHook: 480 other hooks or none: 6

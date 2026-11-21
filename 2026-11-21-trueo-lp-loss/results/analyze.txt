@@ -1,0 +1,129 @@
+resolved markets w/ full life in window: 104 with swaps: 104
+trader_pnl        126557.94
+vol               773360.94
+lpfee                  0.77
+hookfee             6576.34
+post_T_pnl          8863.93
+post_T_vol         47026.78
+pnl_1h               486.54
+pnl_6h              1008.52
+pnl_24h            44556.55
+pnl_72h            63513.64
+LP net loss vs hold (=trader pnl): 126557.94  gross loss before LP fee: 126558.71  LP fee cover of gross: 0.0
+LP fee here is an estimate: each swap's TYD leg x the fee in its Swap event.
+hook fee, valued at the outcome (to Trueo's fee collector) / LP loss: 0.052  / volume: 0.0085  LP loss / hook fee: 19.24
+LP loss / volume: 0.1636
+top 20 markets' share of LP loss: 0.89  median loss per market: 27.3 ; median volume per market: 209.3
+share of LP loss in the 1 h before endOfTrading: 0.004
+share of LP loss in the 6 h before endOfTrading: 0.008
+share of LP loss in the 24 h before endOfTrading: 0.352
+share of LP loss in the 72 h before endOfTrading: 0.502
+
+per-market (sorted by LP loss):
+   LPloss   last1h   last6h  last24h  last72h    postT       vol  lpfee hookfee  nsw  trd liq@T/peak q
+    11799        0        0    12942    12022     -223     20654    0.0     203  117    0       0.55 "Will Hyperliquid’s revenue increase this week?"
+    10336        0        0        0    -1360        0     52864    0.1     442  328    0       0.00 "Pumpfun October revenue exceeds $70M?"
+    10309        0       51     5191     9677      358     30626    0.0     265  149    0       0.28 "Pump revenue be above Hyperliquid revenue this week?"
+    10110        0        0      700        0        0     26112    0.0     228  116    0       0.00 "Papertrade October revenue exceeds $85M?"
+     7267        0        0     7267     7267        0     12723    0.0     136   86    0       0.00 "Will there be a $10M+ hack this week?"
+     6371       -1        1       -0     7309        1     27136    0.0     224  154    0       0.00 "Will there be a $5M+ hack this week?"
+     6320        0        0     6280     6320        0      8762    0.0     121   65    0       0.00 "Will there be a $25M+ hack this week?"
+     6317        0        0     6317     6317        0     29677    0.0     288  105    0       0.00 "Will there be a $5M+ hack this week?"
+     4852       -0       -0       -0     5851        0     15139    0.0     159   69    0       0.02 "Will there be a $10M+ hack this week?"
+     4520        0        0       56     -281        0     49955    0.0     423  390    0       0.00 "Aero Protocol October revenue exceeds $10M?"
+     4271        0        0        0     4117        0     31674    0.0     253   72    0       0.00 "Will there be a $1M+ hack this week?"
+     4219        0        0        0        0        0     14223    0.0     130   58    0       0.00 "Will TradeXYZ’s revenue increase this week?"
+     4153        0        0        3     5383        0     18774    0.0     160  181    0       0.00 "Will Fomo’s revenue increase this week?"
+     3244        0       -1       -1       -1     3245      8410    0.0      77   37    0       0.52 "Will there be a $10M+ hack this week?"
+     3232        0        0     3241     3231        1     14309    0.0     113   48    0       0.00 "Will there be a $1M+ hack this week?"
+     3163        0        0        0     4703        0      5435    0.0      56   43    0       0.00 "Will Hyperliquid’s revenue increase this week?"
+     3158        0        0        0      434        0     12796    0.0     104   57    0       0.00 "Collector Crypt October revenue exceeds $15M?"
+     3104        0        0        0    -1177        0     26215    0.0     205  178    0       0.00 "Hyperliquid October revenue exceeds $60M?"
+     3070        0        0        4        8        0    100648    0.1     824  289    0       0.00 "Aave bad debt or exploit in October 2026?"
+     2816        0      468      467      467     2349      5041    0.0      47   29    0       0.58 "Will there be a $5M+ hack this week?"
+     2702        0        0        0        0        0     17170    0.0     146  247    0       0.00 "Robinhood Chain DEX volume above $40B in October?"
+     2309      156      282     1725     2041      240      8702    0.0      76   91    0       0.78 "Base TVL above Solana TVL at the end of this week?"
+     2078        0      -20      -20      665       11     18256    0.0     143  124    0       0.00 "Will TradeXYZ’s revenue increase this week?"
+     1928       -3       15     3293    -5881        6     36357    0.0     310  196    0       0.00 "Robinhood Chain RWA market cap above $330M on October 31?"
+     1835        0        0        0        1        0     13590    0.0     110  106    0       0.00 "Will Polymarket’s revenue increase this week?"
+     1778        0        0       41    -1208        1     27699    0.0     205  250    0       0.00 "Uniswap October revenue exceeds $10M?"
+     1618       -2      -54      -53     1884      -36     20156    0.0     157   56    0       0.00 "Will Fomo’s revenue increase this week?"
+     1543        0        2        2        2       -3      8317    0.0      68   60    0       0.00 "Will Polymarket’s revenue increase this week?"
+     1303        0        0       -0       -2     1305     10025    0.0      89  182    0       0.37 "Anthropic above $1.25T at close on IPO day?"
+     1088        0        0        4        4     1084      2277    0.0      20   24    0       0.90 "$50M+ crypto hack this week?\n"
+      958        0        9        9       55        0      4157    0.0      35   23    0       0.00 "Will Pump’s revenue increase this week?"
+      419        0        0        0      327        0     15618    0.0     132   73    0       0.02 "Will there be a $5M+ hack this week?"
+      342        0        0       17       17       23     12571    0.0     103  101    0       0.00 "Morpho bad debt or exploit in October 2026?"
+      323        0       -0       21       21      302      1333    0.0      13   24    0       0.36 "$25M+ crypto hack this week?\n"
+      122        0        0        0        0       61       212    0.0       3   10    0       1.00 "New Pump.fun token above $50M market cap in October?"
+      120        0        7       25       69       51       236    0.0       3   39    0       1.00 "Will the Pudgy Penguins floor price fall below 2 ETH by the
+      118        0        0        0        0      118        86    0.0       1   18    0       1.00 "Major Crash Event (Mt. Gox/FTX or \"10/10\"-Style) in Octob
+       98        0       17       17       18        0       360    0.0       3   39    0       1.00 "ETH above $2,600 on November 1, 2026?"
+       88        0        0       38       38       15       136    0.0       2   11    0       1.00 "Will Vitalik Buterin say \"prediction market\" on stage at 
+       88        0        0        0       31       57       129    0.0       2   11    0       1.00 "Will Ripple receive final OCC approval for a national bank 
+       86        0        0        0       40       46       198    0.0       2   14    0       1.00 "Will Variational's October Perp Volume Hit $70B?"
+       58        0        0        0       58        0      1010    0.0       9   11    0       0.00 "Will Bitcoin hit $70K in November?"
+       54        0       -0       57        7        4       792    0.0       6   83    0       1.00 "HYPE above $90 on November 1, 2026?"
+       52        0        0        0       13       39       132    0.0       2   22    0       1.00 "Conference Board Consumer Confidence Index for Oct 2026 bel
+       47        0        1       47       47        0       946    0.0       8   33    0       0.99 "$10M+ crypto hack this week?\n"
+       44        0        0       19       19       25       103    0.0       1    6    0       1.00 "Will the United States or Israel undertake military action 
+       40        0        0       -6        2       38       145    0.0       2   24    0       1.00 "Will Metric TVL reach $25M by end of October?"
+       40        0        0        1       27        0       126    0.0       1   19    0       1.00 "BTC above $83,000 on November 1, 2026?"
+       37        0        0        0        3        0       137    0.0       1   15    0       1.00 "SOL above $115 on November 1, 2026?"
+       33        0        0       20       28        4       152    0.0       2   11    0       1.00 "Will CryptoPunk #4798 be pulled from Fake World Assets gach
+       31        0        0       12       12       19       158    0.0       2   20    0       1.00 "Will IREN publicly confirm a cloud agreement with Anthropic
+       28        0        0        0        0       28       100    0.0       1    6    0       1.00 "RBA raises cash rate at Nov 3, 2026 decision?"
+       27        0        0       66       51        0       198    0.0       1   29    0       1.00 "New Pons token above $5M market cap in October?"
+       25        0        0        0        0       25       132    0.0       1   17    0       1.00 "Will Saudi East–West pipeline resume 7M bpd pumping before 
+       22        0        0        0       10       12       129    0.0       1   17    0       1.00 "Will BoC project 2027 CPI above 2% on Oct 28?"
+       21        0        0        0        0       21        63    0.0       1    5    0       1.00 "Will Arc's TVL reach $500M before December 30, 2026?"
+       21        0        0        5        9       12       206    0.0       2   28    0       1.00 "Will EWZ (iShares MSCI Brazil ETF) trade below $30 before O
+       21        0        0        0        0       11        80    0.0       1    9    0       1.00 "Will the BoJ's Oct 30, 2026 Outlook Report put its FY2027 c
+       19        0        0        0        0       19       127    0.0       1   11    0       1.00 "Will Jumper launch a JUMP token by October 2026?"
+       19        0        0        0        1        0       152    0.0       1   20    0       1.00 "NVDA above $235 on November 1, 2026?"
+       17        0        0        0        5       12        83    0.0       1    9    0       1.00 "Will the Brent-WTI spread exceed $15 before October 1, 2026
+       14        0        0      -16       -9       23       512    0.0       4   29    0       0.56 "Will Relay’s revenue increase this week?"
+       13        0        0        0        0        0       132    0.0       1   11    0       1.00 "Will Robinhood Chain reach $2B stablecoin supply before Nov
+       11        0        0        0      -10       21       115    0.0       1   12    0       1.00 "Will $STONK's USD market capitalization reach $600M in Octo
+       11        0        0        0      -20       31        95    0.0       1   12    0       1.00 "Will the 2026 Atlantic hurricane season produce zero hurric
+       10        0        5        5        5        0        60    0.0       1    6    0       1.00 "Will TRUEO’s TRUE token be spot-listed on Gate.io on or bef
+        9        0        0        0        0        0       314    0.0       2   31    0       1.00 "Will US–Russia–Ukraine talks open in Abu Dhabi by Nov 15?"
+        8        0        0        0        0        8        60    0.0       0    8    0       1.00 "Will the BLS revise its initially‑reported August 2026 nonf
+        8        0        0        0        0        8        77    0.0       1    7    0       1.00 "Kalshi Gold + Silver Perps: $500M Volume in First 30 Days?"
+        8        0        0        0        3        5        53    0.0       0    7    0       1.00 "Will the Mt. Gox repayment deadline be extended beyond Octo
+        8        0        0        0        0        0       109    0.0       1   10    0       1.00 "ZEC above $1,200 on October 1, 2026?"
+        7        0        0        4       -6       14        89    0.0       1    9    0       1.00 "Will HSBC launch its HKD stablecoin to the public before 20
+        6        0        0        0        3        2        76    0.0       1   10    0       1.00 "Will Pons Generate More Revenue Than Pump in October?"
+        5        0        0        2        2        3        61    0.0       1    6    0       1.00 "Will the ISM Manufacturing PMI for September 2026 print bel
+        5        0        0        0      -20       25       122    0.0       1   29    0       1.00 "Will Micron report fiscal Q4 2026 revenue of at least $50.0
+        5        0        0      -10      -20       25       151    0.0       1   20    0       1.00 "Will LIGHTER hit $6 by end of September?"
+        3        0        0        0        0        3        28    0.0       0    3    0       1.00 "Will both Ping Ping and Fu Shuang be on Zoo Atlanta grounds
+        3        0        0      -10      -10       13       162    0.0       1   16    0       1.00 "Will the BoE raise Bank Rate at its Nov 5, 2026 MPC decisio
+        3        0        0        0        0        3        76    0.0       0   11    0       1.00 "OpenAI or Anthropic say their AI hasn't broken cryptography
+        2        0        0        0        0        2        46    0.0       0    5    0       1.00 "Major privacy-related leak before November 2026?"
+        2        0        0      -10      -39       41       226    0.0       1   34    0       1.00 "Will the Fed raise rates at the October 2026 FOMC meeting?"
+        2        0        0        0        2        0        17    0.0       0    1    0       0.00 "Will $TRUE reach $0.02 before October 1, 2026 (UTC)?"
+        2        0        0        0        0        2        30    0.0       0    2    0       1.00 "Will Evernorth's XRPN begin trading on Nasdaq before Octobe
+        1        0        0        0        1        0       222    0.0       1   33    0       1.00 "Jensen Huang out as Nvidia CEO in 2026?"
+        1        0        0        0        1        1        29    0.0       0    4    0       1.00 "Will Jumper's JUMP token Legion presale FDV exceed $500M?"
+        1        0        0        0      -20       21        79    0.0       0    5    0       1.00 "Will Strategy Report 855K BTC Holdings by October 31?"
+        1        0        0        0        0        1        19    0.0       0    2    0       1.00 "Will Trump sign the Graham Russia sanctions bill?"
+        1        0        0        0      -10       11       179    0.0       1   23    0       1.00 "Will President Trump publicly announce an agreement in prin
+        1        0        0        0        0        1        63    0.0       1   16    0       1.00 "Will Arc (ARC) hold its TGE before October 30?"
+        0        0        0        0      -10       10       229    0.0       1   12    0       1.00 "Will Alibaba (BABAB) Tokenized Stock Hit $121 by End of Sep
+       -0        0        0        0      -10       10       142    0.0       1    9    0       1.00 "Will HYPE trade at $100 or higher before the end of this we
+       -4        0        0        0       -5        1        29    0.0       0    5    0       1.00 "Will Anthropic CEO Dario Amodei attend the White House dinn
+       -5        0        0        0      -10        5        73    0.0       1    5    0       1.00 "Will OCTOCORE reach #1 on the Quotron builder pool ranking 
+       -5        0        0        0      -10        5        30    0.0       0    6    0       1.00 "Will Blockstream Recover the Remaining 598.5 BTC by Septemb
+       -7        0        0        0      -10        3        23    0.0       0    5    0       1.00 "Will IMF PortWatch report a single-day Strait of Hormuz tra
+      -20        0        0        0      -20        0        20    0.0       0    2    0       0.00 "Will Flávio Bolsonaro flee Brazil?"
+      -34        0        0        0      -10      -24       169    0.0       1   12    0       1.00 "Will Pump generate more protocol revenue than Hyperliquid i
+     -122        0        0      -11       94       12       761    0.0       4   26    0       0.00 "Will there be a $1M+ hack this week?"
+     -251      342      143     -325     -369      118      2972    0.0      23   39    0       0.00 "Will Fomo’s revenue increase this week?"
+     -385        0        0        0     1568        0     21384    0.0     169   86    0       0.05 "Will there be a $25M+ hack this week?"
+     -424        0        0       37       37     -461      3323    0.0      23   47    0       0.63 "$5M+ crypto hack this week?"
+     -529       -5      -24     -209     -209     -320      2746    0.0      18   22    0       0.28 "Will Polymarket’s revenue increase this week?"
+    -2068        0        0    -1893    -2011      -57      4986    0.0      37   40    0       0.08 "Will Collector Crypt’s revenue increase this week?"
+    -3970        0      107     -814    -4066       17     19542    0.0     147   76    0       0.95 "Uniswap revenue be above Aero Protocol revenue this week?"
+
+median liquidity remaining at endOfTrading / peak (non-OrderManager LP): 1.0 n= 104  share >=0.5: 0.6442307692307693
