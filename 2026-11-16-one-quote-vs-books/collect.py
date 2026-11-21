@@ -87,7 +87,8 @@ def round_(markets):
     rows = []
     for mk in markets:
         v = byt.get(mk["var"], {})
-        row = {"t": t, "var": mk["var"], "mark": v.get("mark_price"), "quotes": v.get("quotes")}
+        # "listing" is the whole row (funding, open interest, volume, ...), kept from 2026-11-21
+        row = {"t": t, "var": mk["var"], "mark": v.get("mark_price"), "quotes": v.get("quotes"), "listing": v}
         if mk["lighter"] is not None:
             try:
                 d = get(f"{LIT}/orderBookOrders?market_id={mk['lighter']}&limit=250")

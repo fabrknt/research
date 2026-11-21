@@ -1,0 +1,26 @@
+# What the recorder keeps. One [[source]] per thing recorded: the module in sources/ that fetches it,
+# how often (seconds), and the question it is kept for. Add a source only when that line can be written.
+
+[[source]]
+name = "hl_ctx"
+module = "hl_ctx"
+every = 60
+why = "Hyperliquid's mark, oracle, mid, funding and open interest on the main dex and every HIP-3 dex: the API keeps no history of open interest or oracle prices, and candles reach back only 5,000 bars."
+
+[[source]]
+name = "one_quote"
+module = "one_quote"
+every = 300
+why = "Variational's dealer quotes (whole listing rows: funding, open interest, volume) next to the Lighter and Hyperliquid books for the same markets at the same moment. Variational keeps no public history of its quotes."
+
+[[source]]
+name = "lighter_blobs"
+module = "lighter_blobs"
+every = 600
+why = "Every Lighter batch blob, so Lighter's state can be rebuilt without its API: Ethereum drops blobs after about 18 days, and older ones are readable today only through Blobscan."
+
+[[source]]
+name = "rules"
+module = "rules"
+every = 86400
+why = "Each venue's rules as they stood that day (Hyperliquid dex settings and margin tables, Lighter market settings, the Hyperliquid, Lighter and Variational docs), to explain later what the rules were when something happened."

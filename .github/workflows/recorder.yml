@@ -1,0 +1,120 @@
+# The recorder (recorder/): every source in recorder/sources.toml at its own interval, on GitHub's machines.
+# A job records for 55 minutes, then starts the next job itself (GitHub's hourly schedule is only the backup;
+# it fired hours late on 2026-11-16). Jobs queue one behind the other.
+#
+# What it records is third-party API data, which this repo does not publish: each hour is encrypted to
+# .github/one-quote-data.pub.pem (AES-256 with a random key, the key wrapped with RSA-OAEP; the private key
+# is kept off GitHub) and goes into the month's release (recorder-YYYYMM) as <run id>-<attempt>.tar, next to an
+# unencrypted count.json (calls and rows per source, no data) for recorder/health.py. Each source's state
+# (when it last ran, how far it got) is kept in the recorder-state release. Set the repo variable
+# RECORDER_STOP=1 to stop.
+name: recorder
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "minutes to record"
+        default: "55"
+
+concurrency:
+  group: recorder
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    permissions:
+      contents: write  # releases: the hour and the state
+      actions: write   # to start the next hour
+    env:
+      GH_TOKEN: ${{ github.token }}
+      R: ${{ github.repository }}
+    steps:
+      - name: Stop when asked
+        id: window
+        run: |
+          if [ "${{ vars.RECORDER_STOP }}" = "1" ]; then echo "RECORDER_STOP is set"; exit 1; fi
+      # From here on the next hour starts even if this one fails.
+      - uses: actions/checkout@v4
+      # Start empty only when there is no state yet; if it exists but can't be read, skip the hour rather
+      # than start Lighter's blobs from an hour back and skip what lies between.
+      - name: Last state
+        id: state
+        run: |
+          # The state is kept as state.json and state.next.json, and each save replaces first the copy it
+          # was not read from, so one good copy survives a failed upload. A state release with neither
+          # stops here instead of starting over.
+          if assets=$(gh release view recorder-state -R "$R" --json assets -q '.assets[].name' 2>"$RUNNER_TEMP/err"); then
+            for f in state.json state.next.json; do
+              if echo "$assets" | grep -qx "$f"; then
+                gh release download recorder-state -R "$R" -p "$f" -O "$RUNNER_TEMP/state.json" &&
+                  { echo "from=$f" >> "$GITHUB_OUTPUT"; exit 0; }
+              fi
+            done
+            echo "recorder-state has no readable state"; exit 1
+          elif grep -q "release not found" "$RUNNER_TEMP/err"; then
+            echo "no state yet"; echo '{}' > "$RUNNER_TEMP/state.json"
+          else
+            cat "$RUNNER_TEMP/err"; exit 1
+          fi
+      - name: Record
+        id: record
+        if: steps.state.outcome == 'success'
+        continue-on-error: true
+        run: python3 -I recorder/record.py "${{ inputs.minutes || '55' }}" "$RUNNER_TEMP/out" "$RUNNER_TEMP/state.json"
+      - name: Encrypt
+        if: always()
+        id: pack
+        run: |
+          out=$RUNNER_TEMP/out pack=$RUNNER_TEMP/pack
+          [ -f "$out/count.json" ] || { echo "nothing recorded"; exit 0; }
+          mkdir -p "$pack"
+          tar czf "$RUNNER_TEMP/data.tgz" -C "$out" .
+          openssl rand -out "$RUNNER_TEMP/key.bin" 32
+          openssl enc -aes-256-cbc -pbkdf2 -salt -in "$RUNNER_TEMP/data.tgz" -out "$pack/data.tgz.enc" -pass file:"$RUNNER_TEMP/key.bin"
+          openssl pkeyutl -encrypt -pubin -inkey .github/one-quote-data.pub.pem \
+            -pkeyopt rsa_padding_mode:oaep -in "$RUNNER_TEMP/key.bin" -out "$pack/key.bin.enc"
+          cp "$out/count.json" "$pack/"
+          rm -f "$RUNNER_TEMP/key.bin" "$RUNNER_TEMP/data.tgz"
+          tar cf "$RUNNER_TEMP/${{ github.run_id }}-${{ github.run_attempt }}.tar" -C "$pack" data.tgz.enc key.bin.enc count.json
+          ls -l "$pack" "$RUNNER_TEMP/${{ github.run_id }}-${{ github.run_attempt }}.tar"
+          echo "tar=$RUNNER_TEMP/${{ github.run_id }}-${{ github.run_attempt }}.tar" >> "$GITHUB_OUTPUT"
+      - name: Keep the hour in the month's release
+        if: always() && steps.pack.outputs.tar != ''
+        id: keep
+        run: |
+          tag=recorder-$(date -u +%Y%m)
+          gh release view "$tag" -R "$R" >/dev/null 2>&1 ||
+            gh release create "$tag" -R "$R" --prerelease --title "$tag" \
+              --notes "Encrypted hourly recordings of recorder/ (see recorder/README.md); read them with recorder/read.py." ||
+            gh release view "$tag" -R "$R" >/dev/null
+          gh release upload "$tag" "${{ steps.pack.outputs.tar }}" -R "$R" --clobber
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.keep.outcome != 'success' && steps.pack.outputs.tar != ''
+        with:
+          name: recorder-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ steps.pack.outputs.tar }}
+          retention-days: 90
+      # The state moves on only once the hour is kept, so an hour that couldn't be kept is recorded again
+      # where the sources keep a position (Lighter's blobs).
+      - name: Save the state
+        if: always() && steps.keep.outcome == 'success'
+        run: |
+          gh release view recorder-state -R "$R" >/dev/null 2>&1 ||
+            gh release create recorder-state -R "$R" --prerelease --title recorder-state \
+              --notes "Each recorder source's state (last run, how far it got). No data." ||
+            gh release view recorder-state -R "$R" >/dev/null
+          cp "$RUNNER_TEMP/state.json" "$RUNNER_TEMP/state.next.json"
+          if [ "${{ steps.state.outputs.from }}" = "state.next.json" ]; then order="state.json state.next.json"
+          else order="state.next.json state.json"; fi
+          for f in $order; do gh release upload recorder-state "$RUNNER_TEMP/$f" -R "$R" --clobber || exit 1; done
+      - name: Back off after a failed hour
+        if: always() && (steps.record.outcome == 'failure' || steps.state.outcome == 'failure')
+        run: sleep 300
+      - name: Start the next hour
+        if: always() && steps.window.outcome == 'success' && github.ref == 'refs/heads/main'
+        run: gh workflow run recorder -R "$R" --ref main
