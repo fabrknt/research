@@ -24,3 +24,9 @@ name = "rules"
 module = "rules"
 every = 86400
 why = "Each venue's rules as they stood that day (Hyperliquid dex settings and margin tables, Lighter market settings, the Hyperliquid, Lighter and Variational docs), to explain later what the rules were when something happened."
+
+[[source]]
+name = "solana_quotes"
+module = "solana_quotes"
+every = 60
+why = "What each Solana prop AMM would pay for SOL/USDC at three sizes each way, minute by minute: their quotes are in no order book and Solana keeps no past account state to simulate them against later."

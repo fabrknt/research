@@ -17,7 +17,7 @@ def fetch(url: str, body=None, tries: int = 4, raw: bool = False):
                 data = r.read()
             return data.decode("utf-8", "replace") if raw else json.loads(data)
         except Exception as e:  # 429s and timeouts: wait (as long as a 429 asks, at least) and retry
-            if i == tries - 1:
+            if i == tries - 1 or getattr(e, "code", None) in (400, 404):  # an answer, not a hiccup
                 raise
             wait = 2 + 3 * i
             if getattr(e, "code", None) == 429:
