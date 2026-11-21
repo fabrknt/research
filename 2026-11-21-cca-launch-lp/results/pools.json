@@ -1,0 +1,1139 @@
+[
+ {
+  "chain": "ethereum",
+  "tok": "AZTEC",
+  "pool": "0xce2899b16743cfd5a954d8122d5e07f410305b1aebee39fd73d9f3b9ebf10c2f",
+  "hooks": "0xd53006d1e3110fd319a79aeec4c527a0d265e080",
+  "hooked": true,
+  "hookFlags": [
+   "beforeInitialize",
+   "beforeSwap"
+  ],
+  "fee": 500,
+  "Pc": 1.5511514091167004e-05,
+  "P0": 1.5511514091167004e-05,
+  "TVL0usd": 16496814.731285343,
+  "raisedUSD": 58880328.67764484,
+  "usdper": 1947.8399217972387,
+  "ccaRemoved_h": [],
+  "ccaRemovedFrac": [],
+  "otherLPadds": 114,
+  "pAtRemoval": null,
+  "jitPairs72": 104,
+  "lpSenders": [
+   [
+    "other verified: Uniswap v4 Positions NFT 0xbd216513",
+    106
+   ],
+   [
+    "unlabeled 0xc30f6ee3",
+    7
+   ],
+   [
+    "unlabeled 0x5814fc20",
+    1
+   ]
+  ],
+  "p_0.0833333h": 0.802740666578451,
+  "p_1h": 0.7240530747686288,
+  "p_6h": 0.7015947556673958,
+  "p_24h": 0.7311199609235146,
+  "p_72h": 0.7255229836952568,
+  "max24": 1.0,
+  "min24": 0.6357938207348993,
+  "n24": 5880,
+  "vol24": 9291213.34410187,
+  "fees24": 4645.606672050941,
+  "posHorizon24": 24,
+  "il24": -173289.95826639823,
+  "posFees24": 4592.536216656204,
+  "posNet24": -168697.42204974205,
+  "posNet24_pct": -1.0226060290888535,
+  "ccaFeeShare24": 0.9885762056193819,
+  "max72": 1.0,
+  "min72": 0.6357938207348993,
+  "n72": 11256,
+  "vol72": 25139233.419535138,
+  "fees72": 12569.616709767504,
+  "posHorizon72": 72,
+  "il72": -181219.52762068115,
+  "posFees72": 12132.50059646072,
+  "posNet72": -169087.0270242204,
+  "posNet72_pct": -1.0249677272761981,
+  "ccaFeeShare72": 0.9652243880302959,
+  "m5_24h": -257869.7969992379,
+  "m1h_24h": -231533.46262605736,
+  "m24h_24h": -165917.58739012404,
+  "firstSwap_h": 0.0,
+  "traders": 760,
+  "top5from": 0.42469857350109697,
+  "topSenders": [
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.509,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x2b3acfc9f10d52cd3a5bfc2639470e3a7ed15070",
+    0.146,
+    "unlabeled"
+   ],
+   [
+    "0x5bb5825814c3a4434fa91b99ad0014c516fa192a",
+    0.079,
+    "unlabeled"
+   ],
+   [
+    "0x0d64023379e7df7f30ff19be817a27f853c195bf",
+    0.066,
+    "unlabeled"
+   ],
+   [
+    "0xb822e26a15e1c89c0d981f8f1d967fe5ea3bfc07",
+    0.04,
+    "unlabeled"
+   ],
+   [
+    "0x36331e299247e5d0d3261e1d9852f6e0cffee95c",
+    0.038,
+    "unlabeled"
+   ]
+  ],
+  "topTo": [
+   [
+    "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+    0.177,
+    "CoW Protocol"
+   ],
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.147,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xb300000b72deaeb607a12d5f54773d1c19c7028d",
+    0.138,
+    "other verified: Diamond"
+   ],
+   [
+    "0x1f2f10d1c40777ae1da742455c65828ff36df387",
+    0.105,
+    "unlabeled"
+   ],
+   [
+    "0x0060f96990eb1b3582a397c9cedd86204d406110",
+    0.091,
+    "unlabeled"
+   ],
+   [
+    "0x0e63ee1a039bcc422b1baaf65c7ae30c497d3fc8",
+    0.052,
+    "unlabeled"
+   ]
+  ],
+  "routing": {
+   "Uniswap Universal Router": 0.509,
+   "CoW Protocol": 0.177,
+   "own contract (to == swap sender)": 0.151,
+   "other verified: Diamond": 0.138,
+   "unlabeled": 0.019,
+   "other verified: ERC1967Proxy": 0.006,
+   "other verified: TransparentUpgradeableProxy": 0.0,
+   "ERC-4337 smart wallet": 0.0
+  },
+  "routingGroups": {
+   "Uniswap Universal Router": 0.509,
+   "aggregators, solvers, bridges": 0.177,
+   "unattributed": 0.163,
+   "own contract (to == swap sender)": 0.151,
+   "ERC-4337 smart wallet": 0.0
+  },
+  "arbShareVol": 0.738516046750514,
+  "bids": 21218,
+  "bidders": 16741,
+  "winners": 15423,
+  "demand_ge_1x": 0.5619935648434884,
+  "demand_ge_1.5x": 0.3480402567708175,
+  "demand_ge_2x": 0.31719766270197297,
+  "demand_ge_3x": 0.29479575892985366,
+  "demand_ge_5x": 0.2801495412366185,
+  "winnerMaxPrice_median_byAmount": 4.226993865030675,
+  "sellVolFromBidders": 0.2413844373962946,
+  "buyVolFromBidders": 0.006189457784999808,
+  "sellShare": 0.5590962577071376,
+  "refundedAbove24hUSD": 13527528.798142448,
+  "day1BuyUSD": 4096530.733855897,
+  "keptFull24": -168697.42204974205,
+  "keptFull72": -169087.0270242204,
+  "cfA_k2_net24": -587047.0314446256,
+  "cfA_k2_il24": -591648.9257362082,
+  "cfA_k2_fees24": 4601.894291582627,
+  "cfA_k2_net72": -606507.9455988901,
+  "cfA_k2_il72": -618722.1689693762,
+  "cfA_k2_fees72": 12214.223370486274,
+  "cfA_k4_net24": -341982.1058018133,
+  "cfA_k4_il24": -346579.91653279844,
+  "cfA_k4_fees24": 4597.810730985187,
+  "cfA_k4_net72": -350259.8409207899,
+  "cfA_k4_il72": -362439.0552413613,
+  "cfA_k4_fees72": 12179.214320571398,
+  "cfB_keep1_m5": -173053.79382576142,
+  "cfB_keep1_volKept": 0.8401455913322436,
+  "cfB_keep0.5_m5": -186155.32172049792,
+  "cfB_keep0.5_volKept": 0.8136700778872125,
+  "cfB_breakeven_keep": -2.236874502536115
+ },
+ {
+  "chain": "ethereum",
+  "tok": "wOCT",
+  "pool": "0x5eb459d3fc44f3f412ef43f93fa1e44ecb4ca9cb62a16bcbd94b5d0b834ff854",
+  "hooks": "0x890681cff5ad2069f020027f41f5f68f6a292000",
+  "hooked": true,
+  "hookFlags": [
+   "beforeInitialize"
+  ],
+  "fee": 3000,
+  "Pc": 1.236443130886e-05,
+  "P0": 1.236443130886e-05,
+  "TVL0usd": 572383.8584922724,
+  "raisedUSD": 2724926.426728272,
+  "usdper": 2314.6386071300276,
+  "ccaRemoved_h": [],
+  "ccaRemovedFrac": [],
+  "otherLPadds": 24,
+  "pAtRemoval": null,
+  "jitPairs72": 11,
+  "lpSenders": [
+   [
+    "other verified: Uniswap v4 Positions NFT 0xbd216513",
+    23
+   ],
+   [
+    "unlabeled 0x6ed9fa42",
+    1
+   ]
+  ],
+  "p_0.0833333h": 0.9381750872741391,
+  "p_1h": 1.669000397360636,
+  "p_6h": 1.2274375875849886,
+  "p_24h": 1.0357388124933262,
+  "p_72h": 0.7420334521942786,
+  "max24": 2.3805104828201973,
+  "min24": 0.6703211382623787,
+  "n24": 2882,
+  "vol24": 4869082.204983777,
+  "fees24": 14607.246614951395,
+  "posHorizon24": 24,
+  "il24": -89.78815182458669,
+  "posFees24": 14543.591753516668,
+  "posNet24": 14453.803601692081,
+  "posNet24_pct": 2.5251941310443535,
+  "ccaFeeShare24": 0.9956422409292678,
+  "max72": 2.3805104828201973,
+  "min72": 0.6703211382623787,
+  "n72": 3520,
+  "vol72": 5431567.970112427,
+  "fees72": 16294.703910337295,
+  "posHorizon72": 72,
+  "il72": -5496.653793968598,
+  "posFees72": 16000.353894321392,
+  "posNet72": 10503.700100352793,
+  "posNet72_pct": 1.8350797187084897,
+  "ccaFeeShare72": 0.9819358475222634,
+  "m5_24h": -87278.31775282789,
+  "m1h_24h": -23707.56565636607,
+  "m24h_24h": 14767.400174544024,
+  "firstSwap_h": 0.06,
+  "traders": 1049,
+  "top5from": 0.11971146479410112,
+  "topSenders": [
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.523,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xfec5db3e0b274a32ddfe2339997fbb6c21724883",
+    0.149,
+    "unlabeled"
+   ],
+   [
+    "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+    0.078,
+    "unlabeled"
+   ],
+   [
+    "0x7f54f05635d15cde17a49502fedb9d1803a3be8a",
+    0.068,
+    "unlabeled"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.045,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x163f3103de041d25464e2c8a4f8f3187ec1856e0",
+    0.04,
+    "aggregator adapter (unattributed)"
+   ]
+  ],
+  "topTo": [
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.309,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xef6fc636a63859e08ad3479fe456262eed2e5042",
+    0.152,
+    "unlabeled"
+   ],
+   [
+    "0xfec5db3e0b274a32ddfe2339997fbb6c21724883",
+    0.149,
+    "unlabeled"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.045,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+    0.044,
+    "KyberSwap"
+   ],
+   [
+    "0x5e1f62dac767b0491e3ce72469c217365d5b48cc",
+    0.037,
+    "OKX"
+   ]
+  ],
+  "routing": {
+   "Uniswap Universal Router": 0.513,
+   "own contract (to == swap sender)": 0.23,
+   "other verified: TransparentUpgradeableProxy": 0.07,
+   "KyberSwap": 0.044,
+   "unlabeled": 0.044,
+   "OKX": 0.037,
+   "0x": 0.03,
+   "Relay": 0.014,
+   "other verified: Diamond": 0.006,
+   "MetaMask": 0.004,
+   "other verified: SwapProxy": 0.002,
+   "CoW Protocol": 0.002,
+   "aggregator adapter (unattributed)": 0.002,
+   "LI.FI": 0.001,
+   "deBridge": 0.0,
+   "ERC-4337 smart wallet": 0.0
+  },
+  "routingGroups": {
+   "Uniswap Universal Router": 0.513,
+   "own contract (to == swap sender)": 0.23,
+   "aggregators, solvers, bridges": 0.134,
+   "unattributed": 0.123,
+   "ERC-4337 smart wallet": 0.0
+  },
+  "arbShareVol": 0.569609122154754,
+  "bids": 1867,
+  "bidders": 812,
+  "winners": 480,
+  "demand_ge_1x": 0.26248120664641444,
+  "demand_ge_1.5x": 0.11923362529622379,
+  "demand_ge_2x": 0.040955022972958784,
+  "demand_ge_3x": 0.022893550956079894,
+  "demand_ge_5x": 0.01599684696713426,
+  "winnerMaxPrice_median_byAmount": 1.2911876011466115,
+  "sellVolFromBidders": 0.3939750695566222,
+  "buyVolFromBidders": 0.024573563283014077,
+  "sellShare": 0.4973820182159859,
+  "refundedAbove24hUSD": 0.0,
+  "day1BuyUSD": 2447288.271009405,
+  "keptFull24": 14453.803601692081,
+  "keptFull72": 10503.700100352793,
+  "cfA_k2_net24": 11304.621623459278,
+  "cfA_k2_il24": -306.5559256999363,
+  "cfA_k2_fees24": 11611.177549159214,
+  "cfA_k2_net72": -5565.150984873111,
+  "cfA_k2_il72": -18766.74993103706,
+  "cfA_k2_fees72": 13201.59894616395,
+  "cfA_k4_net24": 14383.648635867461,
+  "cfA_k4_il24": -179.5763036491169,
+  "cfA_k4_fees24": 14563.224939516578,
+  "cfA_k4_net72": 5112.736170585336,
+  "cfA_k4_il72": -10993.30758793713,
+  "cfA_k4_fees72": 16106.043758522466,
+  "cfB_keep1_m5": -21153.33184538725,
+  "cfB_keep1_volKept": 0.978824024604699,
+  "cfB_keep0.5_m5": -148530.908213375,
+  "cfB_keep0.5_volKept": 0.7802407728842675,
+  "cfB_breakeven_keep": 0.7404371012822198
+ },
+ {
+  "chain": "ethereum",
+  "tok": "FOLD",
+  "pool": "0x909e4a022a7505d44b19b36fe76ee18567379ee4c9697438acde2e159c006c32",
+  "hooks": "0x0000000000000000000000000000000000000000",
+  "hooked": false,
+  "hookFlags": [],
+  "fee": 3000,
+  "Pc": 1.2e-05,
+  "P0": 1.1999999999999999e-05,
+  "TVL0usd": 589890.6285520279,
+  "raisedUSD": 940603.6840440704,
+  "usdper": 2251.7346140069594,
+  "ccaRemoved_h": [
+   -0.92
+  ],
+  "ccaRemovedFrac": [
+   1.0
+  ],
+  "otherLPadds": 227,
+  "pAtRemoval": 1.0,
+  "jitPairs72": 26,
+  "lpSenders": [
+   [
+    "other verified: Uniswap v4 Positions NFT 0xbd216513",
+    138
+   ],
+   [
+    "Arrakis Modular vault module 0x083063ea",
+    85
+   ],
+   [
+    "unlabeled 0xa462d9ac",
+    4
+   ]
+  ],
+  "p_0.0833333h": 1.4767340536267126,
+  "p_1h": 2.3427105897396823,
+  "p_6h": 1.4163332046753696,
+  "p_24h": 2.0699321050580384,
+  "p_72h": 3.8194110417892975,
+  "max24": 3.2356184284715357,
+  "min24": 0.685587529500412,
+  "n24": 13280,
+  "vol24": 22064405.666595325,
+  "fees24": 77203.35542741761,
+  "posHorizon24": -0.9233333333333333,
+  "il24": null,
+  "posFees24": null,
+  "posNet24": null,
+  "posNet24_pct": null,
+  "ccaFeeShare24": null,
+  "max72": 3.967310564614968,
+  "min72": 0.685587529500412,
+  "n72": 24146,
+  "vol72": 35382668.68867676,
+  "fees72": 123803.95774168031,
+  "posHorizon72": -0.9233333333333333,
+  "il72": null,
+  "posFees72": null,
+  "posNet72": null,
+  "posNet72_pct": null,
+  "ccaFeeShare72": null,
+  "m5_24h": -99430.80667450857,
+  "m1h_24h": -96665.67974073021,
+  "m24h_24h": -36312.856451584776,
+  "firstSwap_h": 0.0,
+  "traders": 2388,
+  "top5from": 0.10387788100050843,
+  "topSenders": [
+   [
+    "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+    0.203,
+    "unlabeled"
+   ],
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.198,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.121,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x0889e9327b98d7d1be3c301a4585ff3330502c9a",
+    0.108,
+    "unlabeled"
+   ],
+   [
+    "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+    0.091,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xb704fcb4c43bdc030de7ec5e0d5264b99aa3af36",
+    0.044,
+    "unlabeled"
+   ]
+  ],
+  "topTo": [
+   [
+    "0xccc88a9d1b4ed6b0eaba998850414b24f1c315be",
+    0.169,
+    "Relay"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.132,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0xf9280799c85d376e0425f6fb38e4a674e8bedb56",
+    0.115,
+    "unlabeled"
+   ],
+   [
+    "0x4337084d9e255ff0702461cf8895ce9e3b5ff108",
+    0.095,
+    "ERC-4337 smart wallet"
+   ],
+   [
+    "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+    0.082,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xb704fcb4c43bdc030de7ec5e0d5264b99aa3af36",
+    0.044,
+    "unlabeled"
+   ]
+  ],
+  "routing": {
+   "Uniswap Universal Router": 0.265,
+   "Relay": 0.171,
+   "own contract (to == swap sender)": 0.154,
+   "other verified: TransparentUpgradeableProxy": 0.139,
+   "ERC-4337 smart wallet": 0.095,
+   "unlabeled": 0.045,
+   "1inch": 0.043,
+   "aggregator adapter (unattributed)": 0.016,
+   "KyberSwap": 0.016,
+   "other verified: Diamond": 0.012,
+   "0x": 0.011,
+   "Velora (ParaSwap)": 0.01,
+   "Multicall3": 0.01,
+   "CoW Protocol": 0.007,
+   "MetaMask": 0.004,
+   "other verified: ERC1967Proxy": 0.001,
+   "other verified: SwapProxy": 0.001,
+   "LI.FI": 0.0,
+   "deBridge": 0.0,
+   "other verified: Uniswap v4 Positions NFT": 0.0
+  },
+  "routingGroups": {
+   "aggregators, solvers, bridges": 0.279,
+   "Uniswap Universal Router": 0.265,
+   "unattributed": 0.208,
+   "own contract (to == swap sender)": 0.154,
+   "ERC-4337 smart wallet": 0.095
+  },
+  "arbShareVol": 0.5251273791126235,
+  "bids": 311,
+  "bidders": 216,
+  "winners": 216,
+  "demand_ge_1x": 1.0,
+  "demand_ge_1.5x": 0.20795993619871553,
+  "demand_ge_2x": 0.091559620433168,
+  "demand_ge_3x": 0.04432485913092446,
+  "demand_ge_5x": 0.028129603659148312,
+  "winnerMaxPrice_median_byAmount": 1.14,
+  "sellVolFromBidders": 0.08580956475799825,
+  "buyVolFromBidders": 0.0005599535585514103,
+  "sellShare": 0.4929252199427031,
+  "refundedAbove24hUSD": 0.0,
+  "day1BuyUSD": 11188303.650483808,
+  "keptFull24": -3557.143765909895,
+  "keptFull72": -188683.58832659284,
+  "cfA_k2_net24": -159491.20359107014,
+  "cfA_k2_il24": -193401.1116488206,
+  "cfA_k2_fees24": 33909.90805775046,
+  "cfA_k2_net72": -673734.8470705289,
+  "cfA_k2_il72": -709401.7264622886,
+  "cfA_k2_fees72": 35666.87939175977,
+  "cfA_k4_net24": -51427.90810996047,
+  "cfA_k4_il24": -113542.37334740646,
+  "cfA_k4_fees24": 62114.465237446,
+  "cfA_k4_net72": -441390.5912239685,
+  "cfA_k4_il72": -537241.9069021015,
+  "cfA_k4_fees72": 95851.31567813297,
+  "cfB_keep1_m5": 197604.50100228807,
+  "cfB_keep1_volKept": 0.9673558183787888,
+  "cfB_keep0.5_m5": -512105.35551781586,
+  "cfB_keep0.5_volKept": 0.8008422803483874,
+  "cfB_breakeven_keep": 0.7907346890085198
+ },
+ {
+  "chain": "ethereum",
+  "tok": "BALANCE",
+  "pool": "0xd262227cd6ad883b3d85c5138f017f90aaac0ff3ce69136c36a7280dbd009a03",
+  "hooks": "0x2eef0e2a9a652d755accad95a24541a98b5ca000",
+  "hooked": true,
+  "hookFlags": [
+   "beforeInitialize"
+  ],
+  "fee": 3000,
+  "Pc": 0.000227,
+  "P0": 0.000227,
+  "TVL0usd": 271748.950968947,
+  "raisedUSD": 135874.47548447349,
+  "usdper": 2472.6790339173845,
+  "ccaRemoved_h": [],
+  "ccaRemovedFrac": [],
+  "otherLPadds": 159,
+  "pAtRemoval": null,
+  "jitPairs72": 20,
+  "lpSenders": [
+   [
+    "other verified: Uniswap v4 Positions NFT 0xbd216513",
+    126
+   ],
+   [
+    "unlabeled 0xc2c0ed4f",
+    21
+   ],
+   [
+    "unlabeled 0xad54ff31",
+    7
+   ],
+   [
+    "unlabeled 0x00acd500",
+    5
+   ]
+  ],
+  "p_0.0833333h": 0.26146472285604416,
+  "p_1h": 0.18256699024732836,
+  "p_6h": 0.11938419629242396,
+  "p_24h": 0.10509391825929373,
+  "p_72h": 0.05887732048985352,
+  "max24": 1.0,
+  "min24": 0.08844837228505929,
+  "n24": 12282,
+  "vol24": 1693423.1350334745,
+  "fees24": 5080.269405100604,
+  "posHorizon24": 24,
+  "il24": -62057.959400486514,
+  "posFees24": 3171.652745414865,
+  "posNet24": -58886.306655071654,
+  "posNet24_pct": -21.669377727165777,
+  "ccaFeeShare24": 0.6243079830039167,
+  "max72": 1.0,
+  "min72": 0.05417379354085335,
+  "n72": 30294,
+  "vol72": 1844912.8652624956,
+  "fees72": 5534.738595786141,
+  "posHorizon72": 72,
+  "il72": -77935.47063711082,
+  "posFees72": 3484.4081931469577,
+  "posNet72": -74451.06244396386,
+  "posNet72_pct": -27.397000863665323,
+  "ccaFeeShare72": 0.6295524409770324,
+  "m5_24h": -35444.41594962169,
+  "m1h_24h": -41560.9843301226,
+  "m24h_24h": -68715.02471874832,
+  "firstSwap_h": 0.0,
+  "traders": 9356,
+  "top5from": 0.1424960936108427,
+  "topSenders": [
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.268,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+    0.105,
+    "unlabeled"
+   ],
+   [
+    "0x23617e59a5925b2a4bf75d73ff6711cd0b29de85",
+    0.08,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x0cef320d0c5793ade37964e2661a033771e53cd5",
+    0.074,
+    "unlabeled"
+   ],
+   [
+    "0xba412d8b36bfd7d65dff5cc0df7b3c29a7eae687",
+    0.065,
+    "unlabeled"
+   ],
+   [
+    "0xcaf0beadeaefc66fef60ac6526ab566d58c8647a",
+    0.044,
+    "aggregator adapter (unattributed)"
+   ]
+  ],
+  "topTo": [
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.268,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x23617e59a5925b2a4bf75d73ff6711cd0b29de85",
+    0.072,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xba412d8b36bfd7d65dff5cc0df7b3c29a7eae687",
+    0.065,
+    "unlabeled"
+   ],
+   [
+    "0xccc88a9d1b4ed6b0eaba998850414b24f1c315be",
+    0.064,
+    "Relay"
+   ],
+   [
+    "0x000000000004444c5dc75cb358380d2e3de08a90",
+    0.049,
+    "PoolManager called directly"
+   ],
+   [
+    "0x8feab81d36e7576107d5de0758c1b839be31b4f6",
+    0.039,
+    "OKX"
+   ]
+  ],
+  "routing": {
+   "other verified: TransparentUpgradeableProxy": 0.277,
+   "own contract (to == swap sender)": 0.258,
+   "Uniswap Universal Router": 0.112,
+   "Relay": 0.072,
+   "PoolManager called directly": 0.049,
+   "unlabeled": 0.044,
+   "OKX": 0.039,
+   "KyberSwap": 0.036,
+   "ERC-4337 smart wallet": 0.03,
+   "0x": 0.029,
+   "other verified: ERC1967Proxy": 0.027,
+   "other verified: Diamond": 0.01,
+   "Sushi (RedSnwapper)": 0.006,
+   "other verified: SimpleTokenProxy": 0.003,
+   "CoW Protocol": 0.002,
+   "Velora (ParaSwap)": 0.002,
+   "MetaMask": 0.001,
+   "aggregator adapter (unattributed)": 0.001,
+   "other verified: SwapProxy": 0.001,
+   "Multicall3": 0.0,
+   "LI.FI": 0.0,
+   "deBridge": 0.0,
+   "Tycho router (solvers)": 0.0
+  },
+  "routingGroups": {
+   "unattributed": 0.411,
+   "own contract (to == swap sender)": 0.258,
+   "aggregators, solvers, bridges": 0.188,
+   "Uniswap Universal Router": 0.112,
+   "ERC-4337 smart wallet": 0.03
+  },
+  "arbShareVol": 0.5558881131864118,
+  "bids": 729,
+  "bidders": 369,
+  "winners": 171,
+  "demand_ge_1x": 0.18859442793768647,
+  "demand_ge_1.5x": 0.06099590165211908,
+  "demand_ge_2x": 0.03080469223523059,
+  "demand_ge_3x": 0.02113640428031479,
+  "demand_ge_5x": 0.00719109098227533,
+  "winnerMaxPrice_median_byAmount": 1.2629955947136564,
+  "sellVolFromBidders": 0.056200494166078224,
+  "buyVolFromBidders": 0.0752402254278787,
+  "sellShare": 0.5315012763680582,
+  "refundedAbove24hUSD": 427623.6851739428,
+  "day1BuyUSD": 793366.5773320164,
+  "keptFull24": -58886.306655071654,
+  "keptFull72": -74451.06244396386,
+  "cfA_k2_net24": -115680.09834085726,
+  "cfA_k2_il24": -115680.09834085726,
+  "cfA_k2_fees24": 0.0,
+  "cfA_k2_net72": -124560.8729956585,
+  "cfA_k2_il72": -124560.8729956585,
+  "cfA_k2_fees72": 0.0,
+  "cfA_k4_net24": -106189.15737281577,
+  "cfA_k4_il24": -107315.31344429417,
+  "cfA_k4_fees24": 1126.156071478387,
+  "cfA_k4_net72": -118748.46933401492,
+  "cfA_k4_il72": -119874.62540549332,
+  "cfA_k4_fees72": 1126.156071478387,
+  "cfB_keep1_m5": -4808.5648530251765,
+  "cfB_keep1_volKept": 0.939794209196573,
+  "cfB_keep0.5_m5": -46039.86048609375,
+  "cfB_keep0.5_volKept": 0.7543451707896085,
+  "cfB_breakeven_keep": 0.6284878921919475
+ },
+ {
+  "chain": "ethereum",
+  "tok": "BFX",
+  "pool": "0x243956c1d643608723722af7187f0f9f4da06c7318e6a0f6a16aecf6e05e5b8a",
+  "hooks": "0x0000000000000000000000000000000000000000",
+  "hooked": false,
+  "hookFlags": [],
+  "fee": 10000,
+  "Pc": 2.1887269218189e-05,
+  "P0": 2.1887269218189004e-05,
+  "TVL0usd": 37732.07811382101,
+  "raisedUSD": 37732.078113821,
+  "usdper": 2684.708553282074,
+  "ccaRemoved_h": [
+   3.09
+  ],
+  "ccaRemovedFrac": [
+   0.85
+  ],
+  "otherLPadds": 15,
+  "pAtRemoval": 2.199,
+  "jitPairs72": 13,
+  "lpSenders": [
+   [
+    "other verified: Uniswap v4 Positions NFT 0xbd216513",
+    9
+   ],
+   [
+    "unlabeled 0x140022b7",
+    4
+   ],
+   [
+    "unlabeled 0x5aae4d2f",
+    1
+   ],
+   [
+    "unlabeled 0x009a8dba",
+    1
+   ]
+  ],
+  "p_0.0833333h": 1.0933439535179172,
+  "p_1h": 1.3632179550346843,
+  "p_6h": 0.013361469247837226,
+  "p_24h": 0.009765280274091133,
+  "p_72h": 0.014842535076674964,
+  "max24": 2.385801530008487,
+  "min24": 0.00027161893744402654,
+  "n24": 2924,
+  "vol24": 72606.45656597303,
+  "fees24": 794.5036292124882,
+  "posHorizon24": 3.0866666666666664,
+  "il24": -4397.021235324209,
+  "posFees24": 234.23453912901164,
+  "posNet24": -4162.786696195197,
+  "posNet24_pct": -11.032487221185933,
+  "ccaFeeShare24": 0.2948187151280666,
+  "max72": 2.385801530008487,
+  "min72": 0.00027161893744402654,
+  "n72": 4051,
+  "vol72": 89961.4962788172,
+  "fees72": 985.2355156566456,
+  "posHorizon72": 3.0866666666666664,
+  "il72": -4397.021235324209,
+  "posFees72": 234.23453912901164,
+  "posNet72": -4162.786696195197,
+  "posNet72_pct": -11.032487221185933,
+  "ccaFeeShare72": 0.23774471728508245,
+  "m5_24h": -3689.8965980758694,
+  "m1h_24h": -3459.7353504203247,
+  "m24h_24h": 6495.902444757713,
+  "firstSwap_h": 0.0,
+  "traders": 775,
+  "top5from": 0.11889872693553058,
+  "topSenders": [
+   [
+    "0x23617e59a5925b2a4bf75d73ff6711cd0b29de85",
+    0.347,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xcaf0beadeaefc66fef60ac6526ab566d58c8647a",
+    0.195,
+    "aggregator adapter (unattributed)"
+   ],
+   [
+    "0x666fedd4cdd4e890a5ad20e7b60975409435a64a",
+    0.096,
+    "unlabeled"
+   ],
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.054,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.027,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x0000000061b878403d27b500af1e900056707555",
+    0.023,
+    "unlabeled"
+   ]
+  ],
+  "topTo": [
+   [
+    "0x8feab81d36e7576107d5de0758c1b839be31b4f6",
+    0.185,
+    "OKX"
+   ],
+   [
+    "0x23617e59a5925b2a4bf75d73ff6711cd0b29de85",
+    0.15,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x881d40237659c251811cec9c364ef91dc08d300c",
+    0.079,
+    "MetaMask"
+   ],
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.036,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+    0.029,
+    "CoW Protocol"
+   ],
+   [
+    "0x1f2f10d1c40777ae1da742455c65828ff36df387",
+    0.024,
+    "unlabeled"
+   ]
+  ],
+  "routing": {
+   "Uniswap Universal Router": 0.358,
+   "own contract (to == swap sender)": 0.187,
+   "OKX": 0.185,
+   "MetaMask": 0.079,
+   "other verified: TransparentUpgradeableProxy": 0.045,
+   "unlabeled": 0.035,
+   "CoW Protocol": 0.029,
+   "ERC-4337 smart wallet": 0.026,
+   "other verified: Diamond": 0.02,
+   "0x": 0.013,
+   "Relay": 0.011,
+   "KyberSwap": 0.004,
+   "LI.FI": 0.003,
+   "1inch": 0.001,
+   "PoolManager called directly": 0.001,
+   "aggregator adapter (unattributed)": 0.001,
+   "other verified: SwapProxy": 0.001,
+   "other verified: ERC1967Proxy": 0.0
+  },
+  "routingGroups": {
+   "Uniswap Universal Router": 0.358,
+   "aggregators, solvers, bridges": 0.327,
+   "own contract (to == swap sender)": 0.187,
+   "unattributed": 0.102,
+   "ERC-4337 smart wallet": 0.026
+  },
+  "arbShareVol": 0.5614249107852635,
+  "bids": 494,
+  "bidders": 227,
+  "winners": 109,
+  "demand_ge_1x": 0.4441264385124515,
+  "demand_ge_1.5x": 0.2735666853216494,
+  "demand_ge_2x": 0.12855667060956144,
+  "demand_ge_3x": 0.08403016157756665,
+  "demand_ge_5x": 0.04580583762821517,
+  "winnerMaxPrice_median_byAmount": 1.9813084112149533,
+  "sellVolFromBidders": 0.145096415743038,
+  "buyVolFromBidders": 0.25289572886910994,
+  "sellShare": 0.46003061672980483,
+  "refundedAbove24hUSD": 35951.60244879918,
+  "day1BuyUSD": 39205.26357336269,
+  "keptFull24": -14527.7035591417,
+  "keptFull72": -13567.23054416229,
+  "cfA_k2_net24": -18378.22786983137,
+  "cfA_k2_il24": -18605.495438952934,
+  "cfA_k2_fees24": 227.26756912156316,
+  "cfA_k2_net72": -18242.763623191422,
+  "cfA_k2_il72": -18470.031192312985,
+  "cfA_k2_fees72": 227.26756912156316,
+  "cfA_k4_net24": -18227.639052132134,
+  "cfA_k4_il24": -18497.574738805142,
+  "cfA_k4_fees24": 269.93568667300866,
+  "cfA_k4_net72": -18036.063677317266,
+  "cfA_k4_il72": -18305.999363990275,
+  "cfA_k4_fees72": 269.93568667300866,
+  "cfB_keep1_m5": -3454.652965795587,
+  "cfB_keep1_volKept": 0.971110834205368,
+  "cfB_keep0.5_m5": -3659.904367693876,
+  "cfB_keep0.5_volKept": 0.9250826754522066,
+  "cfB_breakeven_keep": 0.42693781843971035
+ },
+ {
+  "chain": "ethereum",
+  "tok": "BWLK",
+  "pool": "0x5fb5c7c820435b24362f90474ea933fef03ffbe2e727a446c7bc95c449f87956",
+  "hooks": "0x0000000000000000000000000000000000000000",
+  "hooked": false,
+  "hookFlags": [],
+  "fee": 10000,
+  "Pc": 0.00016034463406682095,
+  "P0": 0.00016034463406682095,
+  "TVL0usd": 46429.09637579463,
+  "raisedUSD": 23214.548187897315,
+  "usdper": 1870.8170349782704,
+  "ccaRemoved_h": [],
+  "ccaRemovedFrac": [],
+  "otherLPadds": 0,
+  "pAtRemoval": null,
+  "jitPairs72": 0,
+  "lpSenders": [],
+  "p_0.0833333h": 1.0,
+  "p_1h": 0.9951203028446607,
+  "p_6h": 1.2630356400480833,
+  "p_24h": 1.0808742906486564,
+  "p_72h": 1.0699702428142823,
+  "max24": 5.708339110798917,
+  "min24": 0.8656334082489779,
+  "n24": 125,
+  "vol24": 131216.59418693243,
+  "fees24": 1312.1659418693257,
+  "posHorizon24": 24,
+  "il24": -36.49803313386792,
+  "posFees24": 1312.1659418693257,
+  "posNet24": 1275.6679087354578,
+  "posNet24_pct": 2.74756135335969,
+  "ccaFeeShare24": 1.0,
+  "max72": 5.708339110798917,
+  "min72": 0.8656334082489779,
+  "n72": 146,
+  "vol72": 134139.4904764157,
+  "fees72": 1341.394904764158,
+  "posHorizon72": 72,
+  "il72": -27.461041878487013,
+  "posFees72": 1341.394904764158,
+  "posNet72": 1313.9338628856708,
+  "posNet72_pct": 2.829979399665159,
+  "ccaFeeShare72": 1.0,
+  "m5_24h": -32595.57642932,
+  "m1h_24h": -309.3659329882856,
+  "m24h_24h": 1022.8664378171267,
+  "firstSwap_h": 0.7066666666666667,
+  "traders": 52,
+  "top5from": 0.460754364341257,
+  "topSenders": [
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.53,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+    0.202,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xb704fcb4c43bdc030de7ec5e0d5264b99aa3af36",
+    0.166,
+    "unlabeled"
+   ],
+   [
+    "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+    0.044,
+    "unlabeled"
+   ],
+   [
+    "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+    0.036,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0x7f54f05635d15cde17a49502fedb9d1803a3be8a",
+    0.015,
+    "unlabeled"
+   ]
+  ],
+  "topTo": [
+   [
+    "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+    0.53,
+    "other verified: TransparentUpgradeableProxy"
+   ],
+   [
+    "0xf9280799c85d376e0425f6fb38e4a674e8bedb56",
+    0.176,
+    "unlabeled"
+   ],
+   [
+    "0xb704fcb4c43bdc030de7ec5e0d5264b99aa3af36",
+    0.166,
+    "unlabeled"
+   ],
+   [
+    "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+    0.035,
+    "Uniswap Universal Router"
+   ],
+   [
+    "0xccc88a9d1b4ed6b0eaba998850414b24f1c315be",
+    0.027,
+    "Relay"
+   ],
+   [
+    "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+    0.021,
+    "KyberSwap"
+   ]
+  ],
+  "routing": {
+   "other verified: TransparentUpgradeableProxy": 0.53,
+   "Uniswap Universal Router": 0.233,
+   "own contract (to == swap sender)": 0.174,
+   "Relay": 0.031,
+   "KyberSwap": 0.021,
+   "ERC-4337 smart wallet": 0.011,
+   "Velora (ParaSwap)": 0.0,
+   "aggregator adapter (unattributed)": 0.0
+  },
+  "routingGroups": {
+   "unattributed": 0.53,
+   "Uniswap Universal Router": 0.233,
+   "own contract (to == swap sender)": 0.174,
+   "aggregators, solvers, bridges": 0.053,
+   "ERC-4337 smart wallet": 0.011
+  },
+  "arbShareVol": 0.6911785598596429,
+  "bids": 69,
+  "bidders": 61,
+  "winners": 61,
+  "demand_ge_1x": 1.0,
+  "demand_ge_1.5x": 0.4868834871315342,
+  "demand_ge_2x": 0.021883704802120457,
+  "demand_ge_3x": 0.0016704649836890141,
+  "demand_ge_5x": 0.001640244434814296,
+  "winnerMaxPrice_median_byAmount": 1.25,
+  "sellVolFromBidders": 0.08992675591260019,
+  "buyVolFromBidders": 0.014087363040057243,
+  "sellShare": 0.49396232444865323,
+  "refundedAbove24hUSD": 0.0,
+  "day1BuyUSD": 66400.54031611967,
+  "keptFull24": 1275.6679087354578,
+  "keptFull72": 1313.9338628856708,
+  "cfA_k2_net24": 582.7310151916924,
+  "cfA_k2_il24": -124.61207972558864,
+  "cfA_k2_fees24": 707.3430949172811,
+  "cfA_k2_net72": 642.8141961936866,
+  "cfA_k2_il72": -93.75786161842692,
+  "cfA_k2_fees72": 736.5720578121135,
+  "cfA_k4_net24": 947.8187327577965,
+  "cfA_k4_il24": -72.99606626773503,
+  "cfA_k4_fees24": 1020.8147990255316,
+  "cfA_k4_net72": 995.121678163389,
+  "cfA_k4_il72": -54.922083756974786,
+  "cfA_k4_fees72": 1050.0437619203637,
+  "cfB_keep1_m5": -32594.442244360627,
+  "cfB_keep1_volKept": 1.0,
+  "cfB_keep0.5_m5": -32595.225781940047,
+  "cfB_keep0.5_volKept": 0.9997839097702542,
+  "cfB_breakeven_keep": 0.2762408663200924
+ }
+]

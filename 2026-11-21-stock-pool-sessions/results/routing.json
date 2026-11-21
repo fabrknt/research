@@ -1,0 +1,297 @@
+{
+ "volume_by_kind_usd": {
+  "hookless": 569983448,
+  "other_hook": 61873355,
+  "fables": 39474178
+ },
+ "senders": [
+  {
+   "address": "0x520ed467860d840ec6ca20f1dacb9c0fa5168aa7",
+   "name": "unverified contract (23506 bytes)",
+   "share_all": 0.2571,
+   "share_of_hookless": 0.3028,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+   "name": "unverified contract (609 bytes)",
+   "share_all": 0.1611,
+   "share_of_hookless": 0.1897,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x203bffa697bee74d39d255c1c028e3efa689b5f7",
+   "name": "proxy -> unverified contract (16631 bytes)",
+   "share_all": 0.0465,
+   "share_of_hookless": 0.0439,
+   "share_of_other_hook": 0.0774,
+   "share_of_fables": 0.0353
+  },
+  {
+   "address": "0x8876789976decbfcbbbe364623c63652db8c0904",
+   "name": "contracts/UniversalRouter.sol:UniversalRouter",
+   "share_all": 0.0382,
+   "share_of_hookless": 0.037,
+   "share_of_other_hook": 0.038,
+   "share_of_fables": 0.0557
+  },
+  {
+   "address": "0xc348f6953705cd6dbf6d681b79b1e75f843d8a48",
+   "name": "unverified contract (3276 bytes)",
+   "share_all": 0.033,
+   "share_of_hookless": 0.0,
+   "share_of_other_hook": 0.3581,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x98be4f49e551a4c5c289c53a7bc619326589f11b",
+   "name": "unverified contract (8594 bytes)",
+   "share_all": 0.0229,
+   "share_of_hookless": 0.027,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0xbb61b21f2b6252013fe37a37f90334fea9f0d131",
+   "name": "unverified contract (23967 bytes)",
+   "share_all": 0.0227,
+   "share_of_hookless": 0.0267,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x204faca1764b154221e35c0d20abb3c525710498",
+   "name": "contracts/UniversalRouter.sol:UniversalRouter",
+   "share_all": 0.0208,
+   "share_of_hookless": 0.0201,
+   "share_of_other_hook": 0.0118,
+   "share_of_fables": 0.0443
+  },
+  {
+   "address": "0x6353e3ec42d38ee7280688f39adbbd7b353c982c",
+   "name": "unverified contract (6632 bytes)",
+   "share_all": 0.0189,
+   "share_of_hookless": 0.0,
+   "share_of_other_hook": 0.2055,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x5aae05c3977726a93fa2775151b68e7469508238",
+   "name": "unverified contract (20705 bytes)",
+   "share_all": 0.0166,
+   "share_of_hookless": 0.0196,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0xd750615e5900f2aa09083e95c0dbb4958b173800",
+   "name": "unverified contract (17504 bytes)",
+   "share_all": 0.0163,
+   "share_of_hookless": 0.0144,
+   "share_of_other_hook": 0.0101,
+   "share_of_fables": 0.0536
+  },
+  {
+   "address": "0x7edfe71d8af84fd8cfcbbd37d0f4e0dc628605df",
+   "name": "unverified contract (22300 bytes)",
+   "share_all": 0.0145,
+   "share_of_hookless": 0.0171,
+   "share_of_other_hook": 0.0,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x3c7476e8be0efd5b9667421448a99e217b806e80",
+   "name": "src/launchpad/LaunchRouter.sol:LaunchRouter",
+   "share_all": 0.014,
+   "share_of_hookless": 0.0,
+   "share_of_other_hook": 0.1523,
+   "share_of_fables": 0.0
+  },
+  {
+   "address": "0x29d8d0a5c38716ebb4ae1786a46cf0ab74d480db",
+   "name": "unverified contract (16361 bytes)",
+   "share_all": 0.0131,
+   "share_of_hookless": 0.0121,
+   "share_of_other_hook": 0.009,
+   "share_of_fables": 0.0353
+  },
+  {
+   "address": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+   "name": "unverified contract (13529 bytes)",
+   "share_all": 0.0127,
+   "share_of_hookless": 0.0127,
+   "share_of_other_hook": 0.0006,
+   "share_of_fables": 0.0319
+  }
+ ],
+ "distinct_senders": {
+  "hookless": 8583,
+  "other_hook": 1719,
+  "fables": 7007
+ },
+ "tx_to_sample": {
+  "hookless": {
+   "n": 1497,
+   "distinct_from": 522,
+   "top": [
+    {
+     "to": "0x520ed467860d840ec6ca20f1dacb9c0fa5168aa7",
+     "name": "unverified contract (23506 bytes)",
+     "share": 0.304
+    },
+    {
+     "to": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+     "name": "unverified contract (609 bytes)",
+     "share": 0.17
+    },
+    {
+     "to": "0x203bffa697bee74d39d255c1c028e3efa689b5f7",
+     "name": "proxy -> unverified contract (16631 bytes)",
+     "share": 0.049
+    },
+    {
+     "to": "0x8876789976decbfcbbbe364623c63652db8c0904",
+     "name": "contracts/UniversalRouter.sol:UniversalRouter",
+     "share": 0.03
+    },
+    {
+     "to": "0xbb61b21f2b6252013fe37a37f90334fea9f0d131",
+     "name": "unverified contract (23967 bytes)",
+     "share": 0.028
+    },
+    {
+     "to": "0x98be4f49e551a4c5c289c53a7bc619326589f11b",
+     "name": "unverified contract (8594 bytes)",
+     "share": 0.024
+    },
+    {
+     "to": "0x7edfe71d8af84fd8cfcbbd37d0f4e0dc628605df",
+     "name": "unverified contract (22300 bytes)",
+     "share": 0.022
+    },
+    {
+     "to": "0x5aae05c3977726a93fa2775151b68e7469508238",
+     "name": "unverified contract (20705 bytes)",
+     "share": 0.02
+    }
+   ]
+  },
+  "other_hook": {
+   "n": 1482,
+   "distinct_from": 801,
+   "top": [
+    {
+     "to": "0x6353e3ec42d38ee7280688f39adbbd7b353c982c",
+     "name": "unverified contract (6632 bytes)",
+     "share": 0.2
+    },
+    {
+     "to": "0x3c7476e8be0efd5b9667421448a99e217b806e80",
+     "name": "src/launchpad/LaunchRouter.sol:LaunchRouter",
+     "share": 0.128
+    },
+    {
+     "to": "0x203bffa697bee74d39d255c1c028e3efa689b5f7",
+     "name": "proxy -> unverified contract (16631 bytes)",
+     "share": 0.083
+    },
+    {
+     "to": "0x8876789976decbfcbbbe364623c63652db8c0904",
+     "name": "contracts/UniversalRouter.sol:UniversalRouter",
+     "share": 0.036
+    },
+    {
+     "to": "0xf655dc64dc698da4175f99123bf4b76066792eb2",
+     "name": "unverified contract (22575 bytes)",
+     "share": 0.026
+    },
+    {
+     "to": "0x204faca1764b154221e35c0d20abb3c525710498",
+     "name": "contracts/UniversalRouter.sol:UniversalRouter",
+     "share": 0.013
+    },
+    {
+     "to": "0x922ec6501f7362712ad0ecf8369ebded7216051a",
+     "name": "unverified contract (8717 bytes)",
+     "share": 0.013
+    },
+    {
+     "to": "0x190b452d16e12e3beedd76a030ea991fe3856c33",
+     "name": "src/launchpad/LaunchRouter.sol:LaunchRouter",
+     "share": 0.009
+    }
+   ]
+  },
+  "fables": {
+   "n": 1470,
+   "distinct_from": 663,
+   "top": [
+    {
+     "to": "0xc33acc93942105c57602e59e8e448c20ba718a85",
+     "name": "unverified contract (10346 bytes)",
+     "share": 0.151
+    },
+    {
+     "to": "0x30988a612802e141757f05ae5c4a23246c985a04",
+     "name": "unverified contract (60005 bytes)",
+     "share": 0.059
+    },
+    {
+     "to": "0x7ddbd3952d9fd58cc7d344ad0931d08db072114a",
+     "name": "script/Deploy.s.sol:ERC1967Proxy",
+     "share": 0.049
+    },
+    {
+     "to": "0x203bffa697bee74d39d255c1c028e3efa689b5f7",
+     "name": "proxy -> unverified contract (16631 bytes)",
+     "share": 0.039
+    },
+    {
+     "to": "0x29d8d0a5c38716ebb4ae1786a46cf0ab74d480db",
+     "name": "unverified contract (16361 bytes)",
+     "share": 0.033
+    },
+    {
+     "to": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+     "name": "MetaRouter.sol:MetaAggregationRouterV2",
+     "share": 0.029
+    },
+    {
+     "to": "0xcedb799b8eed839b10add695e7c7803dd82b79c8",
+     "name": "proxy -> unverified contract (5872 bytes)",
+     "share": 0.028
+    },
+    {
+     "to": "0x4b97980e21d5fbfe8edd2ae0bb07e8174059d9ee",
+     "name": "unverified contract (81427 bytes)",
+     "share": 0.024
+    }
+   ]
+  }
+ },
+ "volume_share_in_multi_pool_txs": 0.135,
+ "best_quote": {
+  "best_is_hookless": {
+   "usd": 233196995,
+   "share_to_best": 0.763,
+   "avg_gap_to_best_bp": 68.3
+  },
+  "all": {
+   "usd": 381779332,
+   "share_to_best": 0.678,
+   "avg_gap_to_best_bp": null
+  },
+  "best_is_fables": {
+   "usd": 58637227,
+   "share_to_best": 0.494,
+   "avg_gap_to_best_bp": 2.7
+  },
+  "best_is_other_hook": {
+   "usd": 89945110,
+   "share_to_best": 0.576,
+   "avg_gap_to_best_bp": 216.1
+  }
+ }
+}

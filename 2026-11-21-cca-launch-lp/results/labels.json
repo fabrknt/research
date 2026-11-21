@@ -1,0 +1,1127 @@
+{
+ "ethereum:0x66a9893cc07d91d95644aedd05d03f95e1dba8af": {
+  "cat": "Uniswap Universal Router",
+  "name": "UniversalRouter",
+  "src": "known"
+ },
+ "ethereum:0x2b3acfc9f10d52cd3a5bfc2639470e3a7ed15070": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb300000b72deaeb607a12d5f54773d1c19c7028d": {
+  "cat": "other verified: Diamond",
+  "name": "Diamond",
+  "src": "blockscout"
+ },
+ "ethereum:0xa7da6e61a9e00a023dac739b4236d62a0d922155": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x7a41d603663ccc8bac2d537252718dc639b6d53d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd06c50cde7279a98ef970fbdba73e84930ad8468": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x06cff7088619c7178f5e14f0b119458d08d2f5ef": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x68028a8fcb2de9efa7ce386823917a81b71f4d6b": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd226997439ecfbeff8e110c8c78c8a7eefd19f89": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x36331e299247e5d0d3261e1d9852f6e0cffee95c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xf1c7d3e114df9077b16671b37eddb7f71d81847c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xa9b8363895060cf2b200aaeebcac1153a16d933e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x00000f91109c4d0007e90000d9facad5298a0cac": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x3d810cfbdf51a2176b4eadba019bb42e3ea86358": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2ffea7c181ff67314363b90b978519a83e12e4d0": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x00000000fd3a7b3fa5bcfa843c648714b11e089b": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xadacdd97b78c62d3bc261d9aa996f6349ebdbecb": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4cfc111e7aa7b1594b3699cdf48521073bd723e6": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xaf682de1f2e6f710731121a05a44cb3c1b511f7d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd2306a7187fe8b0c0dee59b50fdc438d2075d24c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1f2f10d1c40777ae1da742455c65828ff36df387": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x9008d19f58aabd9ed0d60971565aa8510560ab41": {
+  "cat": "CoW Protocol",
+  "name": "GPv2Settlement",
+  "src": "known"
+ },
+ "ethereum:0x225f99aaaa914d0481ef3a0bedd8aabf1b9c4d1d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc31a49d1c4c652af57cefdef248f3c55b801c649": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xfa0253943c3ff0e43898cba5a7a0da9d17c27995": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd7d2807b0715aa1af8157574642f4f06c9badda2": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2d22414c5a37fff7d41e715a87bfa1afda77b8ca": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xdd2cae07c054b7f67ac5d969cd1cd12264a40226": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x807e9932e707e621ec6dbcc44d1bf292d786a348": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x026529025008f688d4bb69c1f1ae20c1ae6c67ea": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb822e26a15e1c89c0d981f8f1d967fe5ea3bfc07": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xfc9642049d1151868e45946330215e3df3ae69c2": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x92eae2d4f34f17eb32bf390af5019a37d375418e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0d64023379e7df7f30ff19be817a27f853c195bf": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbc7e8347a323937dad530734cd755630e9f7a3d7": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb3445d5413abf63df1112a4a517de2602f249785": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xe08d97e151473a848c3d9ca3f323cb720472d015": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x88649f4743a758171077b98ee2003f1989b1615a": {
+  "cat": "other verified: ERC1967Proxy",
+  "name": "ERC1967Proxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x682ea8aa9b23250e0e240580e8ae55205f612979": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc93764a49b5a1101e01393f3d91623e15ff7b8b8": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0000c7000000003bb9aa5e907d7b000037a3debb": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0489cb47898d10d7b66d10838012a13b44602123": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xa8ca67aca86c0e081bd17b039de3d8822f3d3414": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x418d957a86005c01e59483341d2fda96ee30e660": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xeea178a4aafc4eb18a04cebd6cfcba04ce9219fd": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x39bf741406f0208b8e3f5701d8ceca91a11df8a5": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x559e2d43f4ac1bcc939561e02faf5dea0ee22caf": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x282886d79c7495df43ad3d734b636644a0a3f320": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x3d90f66b534dd8482b181e24655a9e8265316be9": {
+  "cat": "other verified: TransparentUpgradeableProxy",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x722d04a54659ad88913ea6e79c7969c3bfaf52db": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0ba6d224169bbfad4eb2d38c500d2c8e8ede696c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1fa2c36bb8e3c8695c0636b16bced5a3c6529a1d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x50d3865a63d52c0a54e4679949647ea752107390": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd41f60dc2e3693a9bce68674e055f4958321c0bd": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x7d7150dfd28cb7fa0b918af99507b760cd6aadcb": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb2773408be9e751ab88e0aef3d6bc1351d54ba0a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2616ff637ebdc57985a1207f727c4a4838d190f9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbcb8e49814b887fd9e9d3f34b86ce23bb9b3e2e2": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x70b848c93f8ba3b7f5c08931325a4128d5bfbf1f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb53047237ac06976fad29daf4eb1760b9bd9b934": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4313c378cc91ea583c91387b9216e2c03096b27f": {
+  "cat": "other verified: TransparentUpgradeableProxy",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0xf9280799c85d376e0425f6fb38e4a674e8bedb56": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb704fcb4c43bdc030de7ec5e0d5264b99aa3af36": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca": {
+  "cat": "Uniswap Universal Router",
+  "name": "UniversalRouter",
+  "src": "blockscout"
+ },
+ "ethereum:0x503972ee3a62480f66e7a1bd485dd5f7da754bec": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x8f10b468b06c6fd214b65f87778827f7d113f996": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x28b1dc1a5e3699a428bc51d234dfab7c9cb2a183": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x163f3103de041d25464e2c8a4f8f3187ec1856e0": {
+  "cat": "aggregator adapter (unattributed)",
+  "name": "UniV4HookAdapter",
+  "src": "blockscout"
+ },
+ "ethereum:0x6131b5fae19ea4f9d964eac0408e4408b66337b5": {
+  "cat": "KyberSwap",
+  "name": "MetaAggregationRouterV2",
+  "src": "known"
+ },
+ "ethereum:0xccc88a9d1b4ed6b0eaba998850414b24f1c315be": {
+  "cat": "Relay",
+  "name": "RelayApprovalProxyV3",
+  "src": "blockscout"
+ },
+ "ethereum:0x7f54f05635d15cde17a49502fedb9d1803a3be8a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xfec5db3e0b274a32ddfe2339997fbb6c21724883": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xef6fc636a63859e08ad3479fe456262eed2e5042": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5e1f62dac767b0491e3ce72469c217365d5b48cc": {
+  "cat": "OKX",
+  "name": "DexRouter",
+  "src": "blockscout"
+ },
+ "ethereum:0x5ce741a6e8307c8b11f2d27a75df0844f06bfef1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0000000000001ff3684f28c67538d4d072c22734": {
+  "cat": "0x",
+  "name": "AllowanceHolder",
+  "src": "known"
+ },
+ "ethereum:0x9012cbd4910cb6ea84e7403c767922b461dd68bc": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x7505e3cf0b695488820e486f5cd950f235ec0d67": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x841b6ff0979f86bd76579a3cd03fa43a6a1bb697": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x881d40237659c251811cec9c364ef91dc08d300c": {
+  "cat": "MetaMask",
+  "name": "MetaSwap",
+  "src": "blockscout"
+ },
+ "ethereum:0x734ab9de48f6bab1f2297a34d257cd757deba6aa": {
+  "cat": "other verified: TransparentUpgradeableProxy",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x02e5be68d46dac0b524905bff209cf47ee6db2a9": {
+  "cat": "other verified: SwapProxy",
+  "name": "SwapProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x2405ca2138b3ca20fde463320ca567a195140726": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x03588d14a7aff8a566afd539a4b44cdecca00fdb": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbc1d9760bd6ca468ca9fb5ff2cfbeac35d86c973": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc9d04c8c0d799fbf69f2086da948aeea2f6a8556": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x009a8dbad7000f0000009b002d050058ca881b57": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x63242a4ea82847b20e506b63b0e2e2eff0cc6cb0": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x61230b10cf353774ba086c126064efa813b5fd6f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5ff137d4b0fdcd49dca30c7cf57e578a026d2789": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x42e213a3ad048e899b89ea8cb11d21bc97b84748": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbd32122bad41a09f2405bb374a83877d8245079c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x606ef6e21279389614fb71386fbcbf52d95f5159": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x8392876883cf0e9e7ee24d9b1f606ed88644f23b": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x77edae6a5f332605720688c7fda7476476e8f83f": {
+  "cat": "other verified: TransparentUpgradeableProxy",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0xaca82b234347b21a5995f54e55ae99ddfea18ee7": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x60943cb06b76a24431659165c81a03c16f1c325c": {
+  "cat": "other verified: TransparentUpgradeableProxy",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0xad2eae16157002a97e11b4201d111e6cd4c977ca": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x663dc15d3c1ac63ff12e45ab68fea3f0a883c251": {
+  "cat": "deBridge",
+  "name": "TransparentUpgradeableProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae": {
+  "cat": "LI.FI",
+  "name": "LiFiDiamond",
+  "src": "blockscout"
+ },
+ "ethereum:0xc10639ca017080a6983413a637c6ae71aca81e6d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x00000000f93f6960b7678068a49bce0379e35c55": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc039492610f7984178906f1175e875eab393557f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x8da2aaa435591dcff7adc99b2fdd7ae0be59ba8d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2822d70c6a3df026fff1925b576721e07dd3b958": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x6ad722d700b64aa67ff42c08b776d6cdb0b2727c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xdeadc0de0000e54725ad1bf220324717043e02bf": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xfd0b31d2e955fa55e3fa641fe90e08b677188d35": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x01fdc48ba0903bb1ae7c517c9287d88ea236f8e1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1f13094e11a06a37e930928d679aedb86ab6a9d1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc5ab0138a77ef326800530bca4ad71a8e9d5ea40": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x23617e59a5925b2a4bf75d73ff6711cd0b29de85": {
+  "cat": "Uniswap Universal Router",
+  "name": "UniversalRouter",
+  "src": "blockscout"
+ },
+ "ethereum:0x0cef320d0c5793ade37964e2661a033771e53cd5": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb92fe925dc43a0ecde6c8b1a2709c170ec4fff4f": {
+  "cat": "Relay",
+  "name": "RelayRouterV3",
+  "src": "blockscout"
+ },
+ "ethereum:0xba412d8b36bfd7d65dff5cc0df7b3c29a7eae687": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xcaf0beadeaefc66fef60ac6526ab566d58c8647a": {
+  "cat": "aggregator adapter (unattributed)",
+  "name": "UniversalUniswapV4Adapter",
+  "src": "blockscout"
+ },
+ "ethereum:0x8feab81d36e7576107d5de0758c1b839be31b4f6": {
+  "cat": "OKX",
+  "name": "DexRouter",
+  "src": "blockscout"
+ },
+ "ethereum:0x000000000004444c5dc75cb358380d2e3de08a90": {
+  "cat": "PoolManager called directly",
+  "name": "PoolManager",
+  "src": "blockscout"
+ },
+ "ethereum:0x2313e563d53639939ddc7afc4ded28209973f0b8": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc10ee9031f2a0b84766a86b55a8d90f357910fb4": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0000000071727de22e5e9d8baf0edac6f37da032": {
+  "cat": "ERC-4337 smart wallet",
+  "name": "EntryPoint",
+  "src": "blockscout"
+ },
+ "ethereum:0xe7d19f7779b8b8589d1c083c0ad060f436441690": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5228ed975c6bcb53d2e221ba737362fd9add0b60": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4337084d9e255ff0702461cf8895ce9e3b5ff108": {
+  "cat": "ERC-4337 smart wallet",
+  "name": "EntryPoint",
+  "src": "blockscout"
+ },
+ "ethereum:0xc2c0ed4febe5b1b9ee566a475471359b1b1feac5": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbaa84fcc0268543bdd95112f7f1090068f3c3399": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x9a313b57ae8a755498479edabbe3d52ed288793d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0005ea683517b3a4463bfd798c9850ad2d586795": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xada3344693f368cd0ebf510f26617ad4213bf5b3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xf873dfcd185ef7dde4ad853e22ac6c8f3275f0f3": {
+  "cat": "other verified: SimpleTokenProxy",
+  "name": "SimpleTokenProxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x0c8c5891a41078cef36970932d5c05dc1de7288b": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x90c496dea71307da373ea6fbca54b24bf5025de3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1b388a45cabc2b7fcdf25bcf4d52dae91d7e0ecf": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x88df0717296d5e4a4a34bb4d173642bbd34e48de": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x9689992f5b5c09447f15906d8d11214944488341": {
+  "cat": "other verified: ERC1967Proxy",
+  "name": "ERC1967Proxy",
+  "src": "blockscout"
+ },
+ "ethereum:0xbdfc22de1c7307c691a59a4e605029740bfe37d3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xe6e49e792dc5727a1dd3450d9834c7058c6d72ce": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1644d2477f809cc2c71bccfd6dc9497e3f83210d": {
+  "cat": "Tycho router (solvers)",
+  "name": "TychoRouterV3",
+  "src": "blockscout"
+ },
+ "ethereum:0xac4c6e212a361c968f1725b4d055b47e63f80b75": {
+  "cat": "Sushi (RedSnwapper)",
+  "name": "RedSnwapper",
+  "src": "blockscout"
+ },
+ "ethereum:0x00030021cefa00f00024ceeaad3bc9000055002d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x99e66f3ce49266bd04a64d989ea63df0b8f43b80": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5e64d3c805829da4a356fb4e0d01be7d9ed06516": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x32ca30b23e4c64e0b3412b1548d55b5301ad0aa0": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x77f40a04c3f552a0dfe82282de73db30d34c6e25": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xad54ff31542d8b0223aacc90fa31d692e3637928": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x6a000f20005980200259b80c5102003040001068": {
+  "cat": "Velora (ParaSwap)",
+  "name": null,
+  "src": "known"
+ },
+ "ethereum:0x0fe4429b79d26035b1029a9befda769ceaa07359": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x000000000b9712d19930e300b6e930a51cece58e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x00000002a22b28512cf6e221e0c94259d7132ee9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x37b4377977599fe9d325d5dcfb74641c3ee967e1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x00acd5005200e7009beb000000e35e1e002b5565": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x16b5e16c936cccf16fad4d18d7eb18cd92effba9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x10f4c55aa15bf3ddcb3b8ac621a8db2649799da3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0c258a011da68c2be7d48316a9ba06a28a2af6c3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x8a321218956ee460eaff36171d85d1d0baae5575": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x666fedd4cdd4e890a5ad20e7b60975409435a64a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x85940d36a1f438d4292dd77365d99cc2d1eae3c7": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x505e957f9c1f5a8bdbdec173bca72066e49761af": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc6229863885cd043e494bd4b70e5f7a8b68b0cfd": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x565344d220b634fa09d24ce9c2555f2a13ef6505": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x22ec88b9ff78c6f2458ab1a7aa8bb99d84bd4b86": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4563b9378b4ed1f35b3107d1d8e14c25a05898a4": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x111116053f09d34a7eae8102887004445176ca11": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc2f175d0568b7f7142c969ed418f5022b9392348": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x8aa163d604765adba61c41af4924ad31d383663a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x473f7487d7fcda4b6f1fbc1cbdf272ca0f4c4362": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xa0f1c3ad83e07d97b5e7030e177718be175275ea": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xe6c49169bd4c54611dc60a83458af7f56943ab6a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb47ed46cd19905df324967f7c9f29eada97c5a33": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0000000061b878403d27b500af1e900056707555": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1465fbebdc88d10d0f939cd72c918471cb1ecf32": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x140022b7000081000001094700609300d2187dab": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x05320020f8455cff2b0420928883ae83a17fc90d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4ecef7bd1ed0c9f64a3a5c1a785a3bb39dc5df6a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x812a3bef79ac1c31f589db9fd19feee436b8eaf3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4311ffcb371da94df25a986b21986a89db72c147": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x632eec87e1a4c181a7a4aa67ca23d21af558ac60": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xf1d4c0d0f5158cd2af59cdf85287f21d74c5c968": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2d843f9890756f596f4529858d3901b7157af90f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4b484e256161301241eb361a9dfea2f6a7b4fa49": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x003baa012aa04d61f5af86115819d31ce6163854": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb0ce83eadbf865a9ed303f055a74e6f2451d98b4": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2f68417a18da681589f4ea64b9cc9839209acff7": {
+  "cat": "other verified: ERC1967Proxy",
+  "name": "ERC1967Proxy",
+  "src": "blockscout"
+ },
+ "ethereum:0x96c6aa5da67ef09b53d7b5ceeb4fc2ccf7c93cf9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x81463b0f960f247f704377661ec81c1fd65b5128": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0000000000be226afde21672a5e4adc45692e69d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd5fd6d3eeb669dcdd3d8bf78c2745fc920de39ba": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc74281560aa0828f91dd95c20172fa4f219bb819": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x824520adebfa988772ae597ba1d2d81203380b9e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xf92ac81dc4693cdc7960c5d2460803168f4adf09": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xd2325bdf455a60c45771577f5e37494ab1b996c7": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x0889e9327b98d7d1be3c301a4585ff3330502c9a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x111111125421ca6dc452d289314280a0f8842a65": {
+  "cat": "1inch",
+  "name": "AggregationRouterV6",
+  "src": "known"
+ },
+ "ethereum:0x00000000e91fc5bad977c0cc4ad60557c06886a2": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x11111605b53ecef22726df86881e4d6d40b5ca11": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xe2536231fc1512babc8c856ad7499830a936bdd9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1d4c96ec9dfdaa9493165da397c7dfdf7e771169": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb8a22be3d948803f490787758ca525136007bd7d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xca11bde05977b3631167028862be2a173976ca11": {
+  "cat": "Multicall3",
+  "name": "Multicall3",
+  "src": "blockscout"
+ },
+ "ethereum:0x4296339b4ff8e67f07de40d97a49a680f2598e0f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x119ea88a5f0ee301224ee10c6e48828db31137f9": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc527b3c52cccef199520d94129f1edddf4047148": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2786ed4ce17214579e359064827715ad2acb1477": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x59da89baee7c773f991731fca0a8bba58d511c05": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xb222da0f9c22ad2addcb0b0d6b150f398e44157a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x4d4e14fbdf6bb02b6e036f86f120f00abe41c791": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x950fd558f47e234a2fde23b7d61f7ccdbcb4a86f": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x884fe40a8e9cb319e5a68646804438de2bd6bd4e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x9b1303ebf09bc51b7fac376c9e421e8daae63b82": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5111d849168e0179e4a184c1c8806d3d9f779df3": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x78dcc4a041eda70fa946458e98c7436f9e7fb25e": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x04d698035a1b34e0cf3835aa2cfedbc6361b3f7a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x14fd7b944b8e70c19aa906beb45469ebe14b422c": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x2de5fad603466731f51be9498cbd9a51b2ed1a38": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x1838a3ebe45da0e5585d0b310cb52ed65dc1df5a": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xe1b6a9c51eec4a303988780862d70c0f3bfca33d": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5ffd71ada755cb2e0635adda04fde47a56fc4dc1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x40a1fe393a7f566f27df6ace18e6773be844dafc": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e": {
+  "cat": "other verified: Uniswap v4 Positions NFT",
+  "name": "Uniswap v4 Positions NFT",
+  "src": "blockscout"
+ },
+ "ethereum:0x6ed9fa421a53bf675573bb235721f6bd7e7059ae": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5aae4d2f360e156de3416936049837a7bb685588": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x5814fc20f0e09114503569ed6b27a4a86c9f8de4": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0xc30f6ee36a1746dd71c7e81529eeae7ce2f52252": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ },
+ "ethereum:0x083063ea233c876fe6a009d4d703d08a140bf673": {
+  "cat": "Arrakis Modular vault module",
+  "name": "BeaconProxy->UniV4StandardModuleV2Private",
+  "src": "blockscout"
+ },
+ "ethereum:0xa462d9acaccb141ce7f17213b95198fe248c27a1": {
+  "cat": "unlabeled",
+  "name": null,
+  "src": null
+ }
+}

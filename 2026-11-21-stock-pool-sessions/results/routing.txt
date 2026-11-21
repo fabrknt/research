@@ -1,0 +1,55 @@
+volume by pool kind {'hookless': '$570.0M (84.9%)', 'other_hook': '$61.9M (9.2%)', 'fables': '$39.5M (5.9%)'}
+
+PoolManager callers (Swap.sender), top 15 by volume
+  0x520ed467860d840ec6ca20f1dacb9c0fa5168aa7 unverified contract (23506 bytes)                       all  25.7%  fables   0.0%  hookless  30.3%  other_hook   0.0%
+  0x278d858f05b94576c1e6f73285886876ff6ef8d2 unverified contract (609 bytes)                         all  16.1%  fables   0.0%  hookless  19.0%  other_hook   0.0%
+  0x203bffa697bee74d39d255c1c028e3efa689b5f7 proxy -> unverified contract (16631 bytes)              all   4.7%  fables   3.5%  hookless   4.4%  other_hook   7.7%
+  0x8876789976decbfcbbbe364623c63652db8c0904 contracts/UniversalRouter.sol:UniversalRouter           all   3.8%  fables   5.6%  hookless   3.7%  other_hook   3.8%
+  0xc348f6953705cd6dbf6d681b79b1e75f843d8a48 unverified contract (3276 bytes)                        all   3.3%  fables   0.0%  hookless   0.0%  other_hook  35.8%
+  0x98be4f49e551a4c5c289c53a7bc619326589f11b unverified contract (8594 bytes)                        all   2.3%  fables   0.0%  hookless   2.7%  other_hook   0.0%
+  0xbb61b21f2b6252013fe37a37f90334fea9f0d131 unverified contract (23967 bytes)                       all   2.3%  fables   0.0%  hookless   2.7%  other_hook   0.0%
+  0x204faca1764b154221e35c0d20abb3c525710498 contracts/UniversalRouter.sol:UniversalRouter           all   2.1%  fables   4.4%  hookless   2.0%  other_hook   1.2%
+  0x6353e3ec42d38ee7280688f39adbbd7b353c982c unverified contract (6632 bytes)                        all   1.9%  fables   0.0%  hookless   0.0%  other_hook  20.5%
+  0x5aae05c3977726a93fa2775151b68e7469508238 unverified contract (20705 bytes)                       all   1.7%  fables   0.0%  hookless   2.0%  other_hook   0.0%
+  0xd750615e5900f2aa09083e95c0dbb4958b173800 unverified contract (17504 bytes)                       all   1.6%  fables   5.4%  hookless   1.4%  other_hook   1.0%
+  0x7edfe71d8af84fd8cfcbbd37d0f4e0dc628605df unverified contract (22300 bytes)                       all   1.5%  fables   0.0%  hookless   1.7%  other_hook   0.0%
+  0x3c7476e8be0efd5b9667421448a99e217b806e80 src/launchpad/LaunchRouter.sol:LaunchRouter             all   1.4%  fables   0.0%  hookless   0.0%  other_hook  15.2%
+  0x29d8d0a5c38716ebb4ae1786a46cf0ab74d480db unverified contract (16361 bytes)                       all   1.3%  fables   3.5%  hookless   1.2%  other_hook   0.9%
+  0x8f10b468b06c6fd214b65f87778827f7d113f996 unverified contract (13529 bytes)                       all   1.3%  fables   3.2%  hookless   1.3%  other_hook   0.1%
+
+tx.to, volume-weighted sample of transactions
+ hookless: n=1497 distinct tx.from=522
+     30.4% 0x520ed467860d840ec6ca20f1dacb9c0fa5168aa7 unverified contract (23506 bytes)
+     17.0% 0x278d858f05b94576c1e6f73285886876ff6ef8d2 unverified contract (609 bytes)
+      4.9% 0x203bffa697bee74d39d255c1c028e3efa689b5f7 proxy -> unverified contract (16631 bytes)
+      3.0% 0x8876789976decbfcbbbe364623c63652db8c0904 contracts/UniversalRouter.sol:UniversalRouter
+      2.8% 0xbb61b21f2b6252013fe37a37f90334fea9f0d131 unverified contract (23967 bytes)
+      2.4% 0x98be4f49e551a4c5c289c53a7bc619326589f11b unverified contract (8594 bytes)
+      2.2% 0x7edfe71d8af84fd8cfcbbd37d0f4e0dc628605df unverified contract (22300 bytes)
+      2.0% 0x5aae05c3977726a93fa2775151b68e7469508238 unverified contract (20705 bytes)
+ other_hook: n=1482 distinct tx.from=801
+     20.0% 0x6353e3ec42d38ee7280688f39adbbd7b353c982c unverified contract (6632 bytes)
+     12.8% 0x3c7476e8be0efd5b9667421448a99e217b806e80 src/launchpad/LaunchRouter.sol:LaunchRouter
+      8.3% 0x203bffa697bee74d39d255c1c028e3efa689b5f7 proxy -> unverified contract (16631 bytes)
+      3.6% 0x8876789976decbfcbbbe364623c63652db8c0904 contracts/UniversalRouter.sol:UniversalRouter
+      2.6% 0xf655dc64dc698da4175f99123bf4b76066792eb2 unverified contract (22575 bytes)
+      1.3% 0x204faca1764b154221e35c0d20abb3c525710498 contracts/UniversalRouter.sol:UniversalRouter
+      1.3% 0x922ec6501f7362712ad0ecf8369ebded7216051a unverified contract (8717 bytes)
+      0.9% 0x190b452d16e12e3beedd76a030ea991fe3856c33 src/launchpad/LaunchRouter.sol:LaunchRouter
+ fables: n=1470 distinct tx.from=663
+     15.1% 0xc33acc93942105c57602e59e8e448c20ba718a85 unverified contract (10346 bytes)
+      5.9% 0x30988a612802e141757f05ae5c4a23246c985a04 unverified contract (60005 bytes)
+      4.9% 0x7ddbd3952d9fd58cc7d344ad0931d08db072114a script/Deploy.s.sol:ERC1967Proxy
+      3.9% 0x203bffa697bee74d39d255c1c028e3efa689b5f7 proxy -> unverified contract (16631 bytes)
+      3.3% 0x29d8d0a5c38716ebb4ae1786a46cf0ab74d480db unverified contract (16361 bytes)
+      2.9% 0x6131b5fae19ea4f9d964eac0408e4408b66337b5 MetaRouter.sol:MetaAggregationRouterV2
+      2.8% 0xcedb799b8eed839b10add695e7c7803dd82b79c8 proxy -> unverified contract (5872 bytes)
+      2.4% 0x4b97980e21d5fbfe8edd2ae0bb07e8174059d9ee unverified contract (81427 bytes)
+
+volume in txs touching >1 selected pool: 13.5%
+
+best-quote check (stock/USDG pairs with >= 2 live pools; price incl. last LP fee and the swap's own impact on in-range liquidity; no tick crossing, no splitting)
+  best pool is hookless  : $  233.2M of swaps, 76% went to it, avg 68.3bp worse when not
+  best pool is all       : $  381.8M of swaps, 68% went to it
+  best pool is fables    : $   58.6M of swaps, 49% went to it, avg 2.7bp worse when not
+  best pool is other_hook: $   89.9M of swaps, 58% went to it, avg 216.1bp worse when not

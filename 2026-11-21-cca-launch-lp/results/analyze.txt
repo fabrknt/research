@@ -1,0 +1,70 @@
+pool | chain | raised$ | TVL0$ | bids | bidders | p5m/Pc p1h p24h p72h | max/min 72h | vol24$ | fees24$ | posNet24$ (%) | posNet72$ (%)
+AZTEC | ethereum | 58,880,329 | 16,496,815 | 21218 | 16741 | 0.80 0.72 0.73 0.73 | 1.00/0.64 | 9,291,213 | 4,646 | -168,697 (-1.0%) | -169,087 (-1.0%)
+wOCT | ethereum | 2,724,926 | 572,384 | 1867 | 812 | 0.94 1.67 1.04 0.74 | 2.38/0.67 | 4,869,082 | 14,607 | 14,454 (2.5%) | 10,504 (1.8%)
+FOLD | ethereum | 940,604 | 589,891 | 311 | 216 | 1.48 2.34 2.07 3.82 | 3.97/0.69 | 22,064,406 | 77,203 | n/a (removed before trading) | n/a (removed before trading)
+BALANCE | ethereum | 135,874 | 271,749 | 729 | 369 | 0.26 0.18 0.11 0.06 | 1.00/0.05 | 1,693,423 | 5,080 | -58,886 (-21.7%) | -74,451 (-27.4%)
+BFX | ethereum | 37,732 | 37,732 | 494 | 227 | 1.09 1.36 0.01 0.01 | 2.39/0.00 | 72,606 | 795 | -4,163 (-11.0%) [to removal at 3.1 h] | -4,163 (-11.0%) [to removal at 3.1 h]
+BWLK | ethereum | 23,215 | 46,429 | 69 | 61 | 1.00 1.00 1.08 1.07 | 5.71/0.87 | 131,217 | 1,312 | 1,276 (2.7%) | 1,314 (2.8%)
+
+day-1 markouts (LP, after fees) at 5 min / 1 h / 24 h; first swap (h after window start); price when the CCA position left
+AZTEC: -257,870 / -231,533 / -165,918 | first swap 0.00 h | None
+wOCT: -87,278 / -23,708 / 14,767 | first swap 0.06 h | None
+FOLD: -99,431 / -96,666 / -36,313 | first swap 0.00 h | 1.0
+BALANCE: -35,444 / -41,561 / -68,715 | first swap 0.00 h | None
+BFX: -3,690 / -3,460 / 6,496 | first swap 0.00 h | 2.199
+BWLK: -32,596 / -309 / 1,023 | first swap 0.71 h | None
+
+pool | vol72$ | fees72$ | il24$ il72$ | posFees24$ posFees72$ | m5 day1$ | arb-looking vol share | traders | top5 | removals(h) | other LP adds
+AZTEC | 25,139,233 | 12,570 | -173,290 -181,220 | 4,593 12,133 | -257,870 | 0.74 | 760 | 0.42 | [] [] | 114 | jit 104 | CCA fee share 24h 0.99
+wOCT | 5,431,568 | 16,295 | -90 -5,497 | 14,544 16,000 | -87,278 | 0.57 | 1049 | 0.12 | [] [] | 24 | jit 11 | CCA fee share 24h 1.00
+FOLD | 35,382,669 | 123,804 | n/a n/a | n/a n/a | -99,431 | 0.53 | 2388 | 0.10 | [-0.92] [1.0] | 227 | jit 26 | CCA fee share 24h n/a
+BALANCE | 1,844,913 | 5,535 | -62,058 -77,935 | 3,172 3,484 | -35,444 | 0.56 | 9356 | 0.14 | [] [] | 159 | jit 20 | CCA fee share 24h 0.62
+BFX | 89,961 | 985 | -4,397 -4,397 | 234 234 | -3,690 | 0.56 | 775 | 0.12 | [3.09] [0.85] | 15 | jit 13 | CCA fee share 24h 0.29
+BWLK | 134,139 | 1,341 | -36 -27 | 1,312 1,341 | -32,596 | 0.69 | 52 | 0.46 | [] [] | 0 | jit 0 | CCA fee share 24h 1.00
+
+liquidity added by others within 72 h (label, count):
+AZTEC: [('other verified: Uniswap v4 Positions NFT 0xbd216513', 106), ('unlabeled 0xc30f6ee3', 7), ('unlabeled 0x5814fc20', 1)]
+wOCT: [('other verified: Uniswap v4 Positions NFT 0xbd216513', 23), ('unlabeled 0x6ed9fa42', 1)]
+FOLD: [('other verified: Uniswap v4 Positions NFT 0xbd216513', 138), ('Arrakis Modular vault module 0x083063ea', 85), ('unlabeled 0xa462d9ac', 4)]
+BALANCE: [('other verified: Uniswap v4 Positions NFT 0xbd216513', 126), ('unlabeled 0xc2c0ed4f', 21), ('unlabeled 0xad54ff31', 7), ('unlabeled 0x00acd500', 5)]
+BFX: [('other verified: Uniswap v4 Positions NFT 0xbd216513', 9), ('unlabeled 0x140022b7', 4), ('unlabeled 0x5aae4d2f', 1), ('unlabeled 0x009a8dba', 1)]
+BWLK: []
+
+routing of day-1 volume (by tx entry contract, else swap sender):
+AZTEC hook flags=['beforeInitialize', 'beforeSwap']: {'Uniswap Universal Router': 0.509, 'aggregators, solvers, bridges': 0.177, 'unattributed': 0.163, 'own contract (to == swap sender)': 0.151, 'ERC-4337 smart wallet': 0.0}
+wOCT hook flags=['beforeInitialize']: {'Uniswap Universal Router': 0.513, 'own contract (to == swap sender)': 0.23, 'aggregators, solvers, bridges': 0.134, 'unattributed': 0.123, 'ERC-4337 smart wallet': 0.0}
+FOLD hook flags=[]: {'aggregators, solvers, bridges': 0.279, 'Uniswap Universal Router': 0.265, 'unattributed': 0.208, 'own contract (to == swap sender)': 0.154, 'ERC-4337 smart wallet': 0.095}
+BALANCE hook flags=['beforeInitialize']: {'unattributed': 0.411, 'own contract (to == swap sender)': 0.258, 'aggregators, solvers, bridges': 0.188, 'Uniswap Universal Router': 0.112, 'ERC-4337 smart wallet': 0.03}
+BFX hook flags=[]: {'Uniswap Universal Router': 0.358, 'aggregators, solvers, bridges': 0.327, 'own contract (to == swap sender)': 0.187, 'unattributed': 0.102, 'ERC-4337 smart wallet': 0.026}
+BWLK hook flags=[]: {'unattributed': 0.53, 'Uniswap Universal Router': 0.233, 'own contract (to == swap sender)': 0.174, 'aggregators, solvers, bridges': 0.053, 'ERC-4337 smart wallet': 0.011}
+detail:
+AZTEC: {'Uniswap Universal Router': 0.509, 'CoW Protocol': 0.177, 'own contract (to == swap sender)': 0.151, 'other verified: Diamond': 0.138, 'unlabeled': 0.019, 'other verified: ERC1967Proxy': 0.006, 'other verified: TransparentUpgradeableProxy': 0.0, 'ERC-4337 smart wallet': 0.0}
+wOCT: {'Uniswap Universal Router': 0.513, 'own contract (to == swap sender)': 0.23, 'other verified: TransparentUpgradeableProxy': 0.07, 'KyberSwap': 0.044, 'unlabeled': 0.044, 'OKX': 0.037, '0x': 0.03, 'Relay': 0.014, 'other verified: Diamond': 0.006, 'MetaMask': 0.004, 'other verified: SwapProxy': 0.002, 'CoW Protocol': 0.002, 'aggregator adapter (unattributed)': 0.002, 'LI.FI': 0.001, 'deBridge': 0.0, 'ERC-4337 smart wallet': 0.0}
+FOLD: {'Uniswap Universal Router': 0.265, 'Relay': 0.171, 'own contract (to == swap sender)': 0.154, 'other verified: TransparentUpgradeableProxy': 0.139, 'ERC-4337 smart wallet': 0.095, 'unlabeled': 0.045, '1inch': 0.043, 'aggregator adapter (unattributed)': 0.016, 'KyberSwap': 0.016, 'other verified: Diamond': 0.012, '0x': 0.011, 'Velora (ParaSwap)': 0.01, 'Multicall3': 0.01, 'CoW Protocol': 0.007, 'MetaMask': 0.004, 'other verified: ERC1967Proxy': 0.001, 'other verified: SwapProxy': 0.001, 'LI.FI': 0.0, 'deBridge': 0.0, 'other verified: Uniswap v4 Positions NFT': 0.0}
+BALANCE: {'other verified: TransparentUpgradeableProxy': 0.277, 'own contract (to == swap sender)': 0.258, 'Uniswap Universal Router': 0.112, 'Relay': 0.072, 'PoolManager called directly': 0.049, 'unlabeled': 0.044, 'OKX': 0.039, 'KyberSwap': 0.036, 'ERC-4337 smart wallet': 0.03, '0x': 0.029, 'other verified: ERC1967Proxy': 0.027, 'other verified: Diamond': 0.01, 'Sushi (RedSnwapper)': 0.006, 'other verified: SimpleTokenProxy': 0.003, 'CoW Protocol': 0.002, 'Velora (ParaSwap)': 0.002, 'MetaMask': 0.001, 'aggregator adapter (unattributed)': 0.001, 'other verified: SwapProxy': 0.001, 'Multicall3': 0.0, 'LI.FI': 0.0, 'deBridge': 0.0, 'Tycho router (solvers)': 0.0}
+BFX: {'Uniswap Universal Router': 0.358, 'own contract (to == swap sender)': 0.187, 'OKX': 0.185, 'MetaMask': 0.079, 'other verified: TransparentUpgradeableProxy': 0.045, 'unlabeled': 0.035, 'CoW Protocol': 0.029, 'ERC-4337 smart wallet': 0.026, 'other verified: Diamond': 0.02, '0x': 0.013, 'Relay': 0.011, 'KyberSwap': 0.004, 'LI.FI': 0.003, '1inch': 0.001, 'PoolManager called directly': 0.001, 'aggregator adapter (unattributed)': 0.001, 'other verified: SwapProxy': 0.001, 'other verified: ERC1967Proxy': 0.0}
+BWLK: {'other verified: TransparentUpgradeableProxy': 0.53, 'Uniswap Universal Router': 0.233, 'own contract (to == swap sender)': 0.174, 'Relay': 0.031, 'KyberSwap': 0.021, 'ERC-4337 smart wallet': 0.011, 'Velora (ParaSwap)': 0.0, 'aggregator adapter (unattributed)': 0.0}
+
+information: demand share with max price >= m x clearing | winners | median winner max price (by amount) | day-1 sell share | sells from bidders | buys from bidders | refunded bids with max >= 24h price $ | day-1 buy volume $
+AZTEC: 1x=0.56 1.5x=0.35 2x=0.32 3x=0.29 5x=0.28 | 15423 | 4.226993865030675 | 0.56 | 0.24 | 0.01 | 13,527,529 | 4,096,531
+wOCT: 1x=0.26 1.5x=0.12 2x=0.04 3x=0.02 5x=0.02 | 480 | 1.2911876011466115 | 0.50 | 0.39 | 0.02 | 0 | 2,447,288
+FOLD: 1x=1.00 1.5x=0.21 2x=0.09 3x=0.04 5x=0.03 | 216 | 1.14 | 0.49 | 0.09 | 0.00 | 0 | 11,188,304
+BALANCE: 1x=0.19 1.5x=0.06 2x=0.03 3x=0.02 5x=0.01 | 171 | 1.2629955947136564 | 0.53 | 0.06 | 0.08 | 427,624 | 793,367
+BFX: 1x=0.44 1.5x=0.27 2x=0.13 3x=0.08 5x=0.05 | 109 | 1.9813084112149533 | 0.46 | 0.15 | 0.25 | 35,952 | 39,205
+BWLK: 1x=1.00 1.5x=0.49 2x=0.02 3x=0.00 5x=0.00 | 61 | 1.25 | 0.49 | 0.09 | 0.01 | 0 | 66,401
+
+counterfactual A (range around clearing, same capital, same path): net vs hold 24h / 72h, actual full range first
+AZTEC: full range kept -168,697 / -169,087 | x/2..2x -587,047 / -606,508 | x/4..4x -341,982 / -350,260
+wOCT: full range kept 14,454 / 10,504 | x/2..2x 11,305 / -5,565 | x/4..4x 14,384 / 5,113
+FOLD: full range kept -3,557 / -188,684 | x/2..2x -159,491 / -673,735 | x/4..4x -51,428 / -441,391
+BALANCE: full range kept -58,886 / -74,451 | x/2..2x -115,680 / -124,561 | x/4..4x -106,189 / -118,748
+BFX: full range kept -14,528 / -13,567 | x/2..2x -18,378 / -18,243 | x/4..4x -18,228 / -18,036
+BWLK: full range kept 1,276 / 1,314 | x/2..2x 583 / 643 | x/4..4x 948 / 995
+
+counterfactual B (3% first hour, 1% to 6 h): day-1 5-min markout, actual vs keep-others 100% / 50%, and volume kept
+AZTEC: actual -257,870 | -173,054 (vol 0.84) | -186,155 (vol 0.81) | break-even share of other trades kept -2.24
+wOCT: actual -87,278 | -21,153 (vol 0.98) | -148,531 (vol 0.78) | break-even share of other trades kept 0.74
+FOLD: actual -99,431 | 197,605 (vol 0.97) | -512,105 (vol 0.80) | break-even share of other trades kept 0.79
+BALANCE: actual -35,444 | -4,809 (vol 0.94) | -46,040 (vol 0.75) | break-even share of other trades kept 0.63
+BFX: actual -3,690 | -3,455 (vol 0.97) | -3,660 (vol 0.93) | break-even share of other trades kept 0.43
+BWLK: actual -32,596 | -32,594 (vol 1.00) | -32,595 (vol 1.00) | break-even share of other trades kept 0.28

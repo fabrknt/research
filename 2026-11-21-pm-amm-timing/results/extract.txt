@@ -1,0 +1,3 @@
+swaps 5419 markets 104 loss 126557.94 vol 773360.94
+exec price within [pre,post] (+-3%): 5419 of 5419
+kinds: Counter({'metric_month': 1758, 'revenue_week': 1123, 'hack': 978, 'other': 814, 'price': 746})

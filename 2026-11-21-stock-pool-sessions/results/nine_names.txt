@@ -1,0 +1,2 @@
+to 11-13: $301.6M over 17.4 d  LP 300s -1.6bp  LP 3600s -3.3bp  hookless share 91%
+after 11-13: $125.3M over 7.9 d  LP 300s -0.7bp  LP 3600s 0.2bp  hookless share 95%

@@ -1,0 +1,263 @@
+{
+ "h": 3600,
+ "days": 25.3,
+ "volume_usd": 670137088,
+ "policies": [
+  {
+   "policy": "session schedule (rth 3, ext/overnight/weekend 5, open 20, Monday open 30, close 15 bp)",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -8500,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "session schedule (rth 3, ext/overnight/weekend 5, open 20, Monday open 30, close 15 bp)",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -18752,
+   "volume_lost_share": 0.025,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "session schedule (rth 3, ext/overnight/weekend 5, open 20, Monday open 30, close 15 bp)",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -39256,
+   "volume_lost_share": 0.075,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "session schedule (rth 3, ext/overnight/weekend 5, open 20, Monday open 30, close 15 bp)",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -59896,
+   "volume_lost_share": 0.188,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "   control: +2.59 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -8500,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "   control: +2.59 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -8675,
+   "volume_lost_share": 0.025,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "   control: +2.59 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -9023,
+   "volume_lost_share": 0.075,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "   control: +2.59 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -10244,
+   "volume_lost_share": 0.252,
+   "avg_fee_bp": 13.95
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 0.5 x distance",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -67518,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 0.5 x distance",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -19289,
+   "volume_lost_share": 0.016,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 0.5 x distance",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 18330,
+   "volume_lost_share": 0.042,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 0.5 x distance",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 68054,
+   "volume_lost_share": 0.092,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "   control: +1.68 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -67518,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "   control: +1.68 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -66639,
+   "volume_lost_share": 0.016,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "   control: +1.68 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -64879,
+   "volume_lost_share": 0.049,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "   control: +1.68 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": -58721,
+   "volume_lost_share": 0.164,
+   "avg_fee_bp": 13.07
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 1.0 x distance",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 111869,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 1.0 x distance",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 144388,
+   "volume_lost_share": 0.043,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 1.0 x distance",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 162418,
+   "volume_lost_share": 0.105,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "distance: toward-reference swaps pay 1.0 x distance",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 197921,
+   "volume_lost_share": 0.216,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "   control: +4.44 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 111869,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "   control: +4.44 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 106228,
+   "volume_lost_share": 0.043,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "   control: +4.44 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 94947,
+   "volume_lost_share": 0.129,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "   control: +4.44 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 55461,
+   "volume_lost_share": 0.431,
+   "avg_fee_bp": 15.75
+  },
+  {
+   "policy": "session schedule + 0.5 x distance",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 69945,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "session schedule + 0.5 x distance",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 98510,
+   "volume_lost_share": 0.037,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "session schedule + 0.5 x distance",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 96800,
+   "volume_lost_share": 0.103,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "session schedule + 0.5 x distance",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 77539,
+   "volume_lost_share": 0.239,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "   control: +3.79 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.0,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 69945,
+   "volume_lost_share": 0.0,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "   control: +3.79 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.01,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 66714,
+   "volume_lost_share": 0.037,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "   control: +3.79 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.03,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 60250,
+   "volume_lost_share": 0.111,
+   "avg_fee_bp": 15.12
+  },
+  {
+   "policy": "   control: +3.79 bp on every swap (same avg fee)",
+   "elasticity_per_bp": 0.1,
+   "lp_before_usd": -177130,
+   "lp_after_usd": 37628,
+   "volume_lost_share": 0.369,
+   "avg_fee_bp": 15.12
+  }
+ ]
+}

@@ -1,0 +1,740 @@
+[
+ {
+  "pair": "USDG/NVDA",
+  "id": "0x7990aad9e8fb048f49a155a7df5603db0366f0657035b78eb4196395cccb3dcd",
+  "hooks": "0x66622f77b797d506e5376f7798b67ab288966080",
+  "floorConfig_pips": {
+   "openFloor": 1000,
+   "overnightFloor": 800,
+   "closedFloor": 300,
+   "spikeMult": 5,
+   "closedSpike": 4000,
+   "descentWindow": 7200,
+   "closeFloor": 2200,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "SPY/USDG",
+  "id": "0x8674c1c5544f3c9563565b5d4bd5916701d90b3559b072acf7cef5b4fc5b8dcd",
+  "hooks": "0xa0e8fbff13e24af2b5e61a72800e08a161bde080",
+  "floorConfig_pips": {
+   "openFloor": 400,
+   "overnightFloor": 500,
+   "closedFloor": 250,
+   "spikeMult": 0,
+   "closedSpike": 0,
+   "descentWindow": 0,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "SPY/NVDA",
+  "id": "0x988f3b6ceec4795e0d6d28a054af87ffbcbdeee2566f72ae391da5f109bd485f",
+  "hooks": "0x79576fbad6e83915630bbb5d5658483f05532080",
+  "floorConfig_pips": {
+   "openFloor": 500,
+   "overnightFloor": 350,
+   "closedFloor": 300,
+   "spikeMult": 0,
+   "closedSpike": 0,
+   "descentWindow": 0,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "USDG/AAPL",
+  "id": "0xa2347ba69167e5602f74640ffbf737ee7cdd825e4726d3462564fc6533070147",
+  "hooks": "0x70a9a88402989226847ec122043ce5e7ff462080",
+  "floorConfig_pips": {
+   "openFloor": 500,
+   "overnightFloor": 350,
+   "closedFloor": 300,
+   "spikeMult": 8,
+   "closedSpike": 2800,
+   "descentWindow": 1500,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "TSLA/USDG",
+  "id": "0xd5effce87036cd858146c0c15fa825c231a9de1843200ca108e431e431331e8e",
+  "hooks": "0x67d86050d22d574df046f3d90f722045f714e080",
+  "floorConfig_pips": {
+   "openFloor": 900,
+   "overnightFloor": 1500,
+   "closedFloor": 400,
+   "spikeMult": 3,
+   "closedSpike": 4000,
+   "descentWindow": 1500,
+   "closeFloor": 1600,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x000000/USDG",
+  "id": "0xbac3aa3b91584a53a579b3c999a56756e954e59247e497bad1d25a4334bde551",
+  "hooks": "0x06a889870c8f83640d6816319f72e2aa579b6080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xc9a981",
+  "id": "0xfe281bbfa9aa658c1aa9c2ad1b0c62c4286f96c7cb1074296b54e869935a7a3a",
+  "hooks": "0xb608a78761f179f7c56f15e7d13921b92f00a080",
+  "floorConfig_pips": {
+   "openFloor": 1500,
+   "overnightFloor": 1500,
+   "closedFloor": 500,
+   "spikeMult": 0,
+   "closedSpike": 0,
+   "descentWindow": 0,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "SPY/0xc9a981",
+  "id": "0x118887805417a88865010dfe9ab3a516214e720aff2b01a19fcdb92b924c397f",
+  "hooks": "0xa4570c37590e45f0b06898123d4de16307a32080",
+  "floorConfig_pips": {
+   "openFloor": 500,
+   "overnightFloor": 350,
+   "closedFloor": 300,
+   "spikeMult": 0,
+   "closedSpike": 0,
+   "descentWindow": 0,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "USDG/META",
+  "id": "0x4ac4259eb99dce57268a856719d087fa1a53569b2fed6f330aabe32d9a4aa4f5",
+  "hooks": "0x8af95932ec4484fb10c641a4cbcf19a798cb2080",
+  "floorConfig_pips": {
+   "openFloor": 1200,
+   "overnightFloor": 1200,
+   "closedFloor": 450,
+   "spikeMult": 3,
+   "closedSpike": 4000,
+   "descentWindow": 1800,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "0x05a3d1/USDG",
+  "id": "0x6ef20273e821b24ca2b27861d700db239c5449f6446c91d13d9c2bc01c7b8bb9",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 3000,
+   "overnightFloor": 3450,
+   "closedFloor": 3250,
+   "spikeMult": 5,
+   "closedSpike": 18500,
+   "descentWindow": 1800,
+   "closeFloor": 6000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x020bfc/USDG",
+  "id": "0x31608601d541e868706aa557558a4d4f99c57e6dd13bd3362edcf05d00a16212",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x05a3d1",
+  "id": "0x31f8624041c93e2abd0fb23540d259b069fa76c053eb7e3f5abc754d7194726b",
+  "hooks": "0xca89f079af00f752bfd3c345358dc38d4d73e080",
+  "floorConfig_pips": {
+   "openFloor": 2000,
+   "overnightFloor": 1400,
+   "closedFloor": 500,
+   "spikeMult": 5,
+   "closedSpike": 8000,
+   "descentWindow": 7200,
+   "closeFloor": 3500,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x000000/0x39dbed",
+  "id": "0xb59001413cb070e28433826f927b7265a0813213ba21f454d86896cee3cce674",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "AMZN/USDG",
+  "id": "0x5619cb8420678b47997f20925eb01be8750c907d6226a0df5d7eafeff966346f",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 3000,
+   "overnightFloor": 3150,
+   "closedFloor": 3450,
+   "spikeMult": 5,
+   "closedSpike": 17000,
+   "descentWindow": 7200,
+   "closeFloor": 6000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/HIMS",
+  "id": "0x16dce5f6a91bd93c2f5f05866dbb780afbe47d2776ea8dcdbb758efff57248a7",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 3000,
+   "overnightFloor": 3150,
+   "closedFloor": 3750,
+   "spikeMult": 5,
+   "closedSpike": 17000,
+   "descentWindow": 7200,
+   "closeFloor": 6000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "SPCX/USDG",
+  "id": "0xb81d873dfb2bb1aaf08804053f8940fd06bb30a2b5a0fafcdbcc7325544452b9",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 2000,
+   "overnightFloor": 500,
+   "closedFloor": 500,
+   "spikeMult": 5,
+   "closedSpike": 3000,
+   "descentWindow": 1800,
+   "closeFloor": 2000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x39dbed/USDG",
+  "id": "0x486435a1f76cd58193f854c6e6213cd05fd58d637865d02065ff558b387fa6ea",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x385f4f/USDG",
+  "id": "0x8660c1c24d58fdad98d9008be534240e5d79ece4d4d4ef16f215af001779ec1f",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "GME/USDG",
+  "id": "0xbb15d6b62c893a86912b5d4b14599f9cc72111e5898327dcadefa0352f20ae11",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x1d11f0/USDG",
+  "id": "0x01b71670a61dd9175a3d1e08d4e0af00ce71e76d230c92649f3ce9857f7d4abd",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "SPY/QQQ",
+  "id": "0x422ed2d698601ea2114b103501e305ae7e3164f87079c72c626d2df832d74a0e",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x2e8c31",
+  "id": "0xe85f633a1374ee279140fa997b547d6a2ccd94fc5eae0e98f7d15ce0e3ddfa93",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xe77d35",
+  "id": "0xf7e180365aed9c463022976c37c615f483bfbe57717b665deff31922c877c8b3",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x4a72b9/USDG",
+  "id": "0xd40585db9c332f3dcd82a77546c9670e38f82f06f18460eb3c4fca2adeda863e",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x2e8c31/USDG",
+  "id": "0x592e3fb7ea947506b36481025abc15baada8e1839a50fded46ecf08b3182fa96",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xd9db30",
+  "id": "0x6b187fad6ca2dcb913f2451c5d5e24d3d77b9d09ce272c2c99f64dac672bc485",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x7dbf38",
+  "id": "0x4e2a7c0057cec67170ee71641d23d0e835afb6f1deb6b4c6a182b4c16ec8f594",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x56910d/USDG",
+  "id": "0x8fb2273e40a44bd4b442bf7f24b953e46a7ecae7384038b266008ae44ebe62be",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x812486",
+  "id": "0x4aaa4f57bec2b6e67dac42909c8c4f9a6ddaf02bb63f8dcbbafb35316731d2a7",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xcec185",
+  "id": "0xf50a897ae1b4dfdac5a8d573f0d0f59c75832b7832b7e631e1192d1e64019039",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x020bfc",
+  "id": "0x286f707c75266f4633638e557c6ada1bd4c58c3d533badb8c440a851f0940aa2",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/MU",
+  "id": "0x8e36bc9877b9383ae306dd937d40ab0e9df65811e7fdfb6bad25e7102bc398b2",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 3000,
+   "overnightFloor": 2000,
+   "closedFloor": 1000,
+   "spikeMult": 5,
+   "closedSpike": 12000,
+   "descentWindow": 1800,
+   "closeFloor": 4000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x2d4276/USDG",
+  "id": "0x6948116f31d66206c10fc6aa6eff7e58842f2fb4dc32533f972a1cd50ed77e02",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 2500,
+   "overnightFloor": 1700,
+   "closedFloor": 900,
+   "spikeMult": 5,
+   "closedSpike": 11000,
+   "descentWindow": 1800,
+   "closeFloor": 3000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/CRCL",
+  "id": "0xdb9c34002d173981250969293af6f43f42a26f2110f19893bbe2ad373375e9e6",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 2200,
+   "overnightFloor": 1500,
+   "closedFloor": 800,
+   "spikeMult": 5,
+   "closedSpike": 10000,
+   "descentWindow": 1800,
+   "closeFloor": 2600,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/MSTR",
+  "id": "0xe1c3e133c917674bd51704e47c7dfe7f0d66375c89ceb30b083de95f9a1dc5ea",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 2200,
+   "overnightFloor": 1500,
+   "closedFloor": 800,
+   "spikeMult": 5,
+   "closedSpike": 10000,
+   "descentWindow": 1800,
+   "closeFloor": 2600,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/0xaa07a0",
+  "id": "0xc761f7de760d2b73cc3e3cc3d729916a4ed2f7fc6b0aa3872e2ced4258961e92",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x4f11d7",
+  "id": "0x29bb26f93fe1bbbf81ee62671cc2a66fbf318f20e6b0757607a2fe3713651fdf",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xa3b6ae",
+  "id": "0xa1f381b8938b5a9dfb601e692958bc5eff9898f4468ab5e398a52a0d53575093",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x8b84d6",
+  "id": "0xdc844c8cc27ad9a1d122c03adeadc8b3652d29008d88344823ad9d52555b926b",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/USDG",
+  "id": "0x7e42e835239ea7f2707b77b7672e4358aa2b799746274ab1254d8a576b5f56fb",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xca9c78",
+  "id": "0x4030f646babe7643c33ee0b9a5123e04ee97a8820a26d0d9dec8b0265f31170d",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x98096d",
+  "id": "0xcf0bd6587434f9f6b6e7745230f137a4a0e3910e42b60448e151e09d9361394e",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x0339f5/USDG",
+  "id": "0xd98f0f503d64cfe5e28db27054318c28cc7bf3d03b66932c41fb46e4ffba3107",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0xe77d35",
+  "id": "0x0f4d4d8a40ce635f1317f18b9fdf41fb5492bec9763abdacf3ea59a2c3bf5758",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x72dc55",
+  "id": "0x3428910987af3506702305be9869f3320b55d7f280af90804bf376786f6082fe",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/SPY",
+  "id": "0x6c330014af1c9e8fd0c6b5e3407439af7bce820c53c72cff168c1b92d9f96ca2",
+  "hooks": "0xca89f079af00f752bfd3c345358dc38d4d73e080",
+  "floorConfig_pips": {
+   "openFloor": 800,
+   "overnightFloor": 1200,
+   "closedFloor": 1000,
+   "spikeMult": 1,
+   "closedSpike": 2000,
+   "descentWindow": 1800,
+   "closeFloor": 0,
+   "closeBefore": 0,
+   "closeAfter": 0
+  }
+ },
+ {
+  "pair": "0x000000/0x0e0d2c",
+  "id": "0x76d4e09a330a2f1b110a7ffba2c52804c8d4b64615254590e06822575ee9097e",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x63ee32",
+  "id": "0xaf30b4c0110121efe3702cbead77d943d0765eb772fea5341d37b73364066ff9",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0xe934e3",
+  "id": "0x0bae6c92e5af1240e8728b77ff86139a5d90e6f63b14d67d606671b0fd9abaf5",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/COIN",
+  "id": "0x8138ea2894ce8f825d830569df6faf33e55344290954ce22432ca4f11913bacc",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 3000,
+   "overnightFloor": 2700,
+   "closedFloor": 2400,
+   "spikeMult": 5,
+   "closedSpike": 16000,
+   "descentWindow": 1800,
+   "closeFloor": 3600,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/0xe02c53",
+  "id": "0x46c24538a851e105a217d2b9b23e2f7f1cb47fbc136572c92d023e36bebd98fe",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xce2443",
+  "id": "0x9fc86429019dc022aa8981fc0bf2710a05fb21787e30b1f3b714d243e9fb26d9",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x5cb6f1",
+  "id": "0x3078bf0a7a6b5a2eb4bc367516854ae93a9aae334e0067f2a2be5cb616bfec6f",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xab093d",
+  "id": "0xcb69f1b3d627d84795f6ba157faa1051f6160919d7f3cd0e510ff6afcbe03961",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/INTC",
+  "id": "0x5e4c353496e4c82a406a38ca1eaad6d2d4cdb8d405d422faff84bcb6f548d97e",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 10500,
+   "overnightFloor": 10000,
+   "closedFloor": 5000,
+   "spikeMult": 2,
+   "closedSpike": 25000,
+   "descentWindow": 1800,
+   "closeFloor": 12000,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "USDG/PLTR",
+  "id": "0xbe1a90db81cf52603ea9059a6fde2e5fa893a8750647ff189ee7618c61b4c4f9",
+  "hooks": "0x5eb87f69be00df39981622fd60a8de4b7837e080",
+  "floorConfig_pips": {
+   "openFloor": 2000,
+   "overnightFloor": 1700,
+   "closedFloor": 1400,
+   "spikeMult": 5,
+   "closedSpike": 10000,
+   "descentWindow": 1800,
+   "closeFloor": 2400,
+   "closeBefore": 1800,
+   "closeAfter": 1800
+  }
+ },
+ {
+  "pair": "0x000000/0xc69117",
+  "id": "0xb4f01c156256c361e938e1391421d1297db290f9a055c1ad4a33dd42e6a76b5e",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xa15604",
+  "id": "0xe1c6088c8a16517358f7696e5522df87a5370fb2b8dbc79d5b0d1bfcf77b0652",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xfce34d",
+  "id": "0x8147584eacbfe717d34539da5a2e8227da28983e8f40ce39e94c8c166e45d221",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0xa15604",
+  "id": "0x281e37e8abdc04f2c7e533e46c28b4507c536a488bd90675fbc247b56b875878",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x07ebb2/USDG",
+  "id": "0x22a4834bbb173adb82d9d4f3fef381928aa4488708e54260e8d24aa48daf8eb9",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x18e674/USDG",
+  "id": "0x71065a51e4fe5f74b6014fc447c5be160620ee053a2c1ac8e876e8fdbbc1db7c",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x15d36b/USDG",
+  "id": "0x67c0a63cd2610f9061265c051f91dd67b64ec8d1c9cb90a87c17d7c21f09b592",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x7fe995",
+  "id": "0x712a1610c207eab7a0ccb8315ac99a24ab7b7c28472b967f3ebb70c21756391e",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x378a50/USDG",
+  "id": "0xfed6a0bfe2390b71837220ce02cf736852aa1b3c37513f27c4c10f51e0f34b79",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x000000",
+  "id": "0x4f72cb3cdc8947b678a8b18a05b77862338b9e5635337e3450c2d46130c2df1c",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/SPY",
+  "id": "0x3e6fd764d07df0f76cc6d33c4153f05b64705fbd1fb604bf6b5a4a1b4b158be6",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x6ddb85",
+  "id": "0x806628a7d5dea7679c1947b14997643c72db0b867aa6250d2454728990414ed8",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xb63d07",
+  "id": "0xcce8dcf7c4dcfee6b6588db724240d9d6a22ee456f9387bb831c8fcea970869e",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xe25842",
+  "id": "0x368d790b54fc424325de945084b1c4a4cb93cc993631ed1e88bf8cd13e6d5bf0",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x0a4be7/0xfce34d",
+  "id": "0x8667dc01c5ea8b95d52d17f80ba0298a75d4ca985a1d33118c34af10831db1ad",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x5be5b0/0xfce34d",
+  "id": "0xf4c94a3a8ff5b7ffd85f75300779ea5a6aeab1b8f5d4898670da8d1ec1069b94",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "GOOGL/USDG",
+  "id": "0xcfa8e46c338d26bf71e687f10a6b59f405f5fd0eeef833ff48f1a35e1159518d",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xa30fa3",
+  "id": "0xb30c60ec2068aec2f09d125d4634fd54995624c1ac9cd0a790585e6c0ac4b8f1",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/MSFT",
+  "id": "0x2f524a78ab92dde9de4581a6b4db0223de61ffa6af70a207a56296367f4bb506",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/SKHY",
+  "id": "0x0df0a8bf5edc10095d35d586f442499f9ecc6a88ecfe97177959547b44366051",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x2fdaa4/USDG",
+  "id": "0xa348b177b287790ea538ca4d827899aaf33802bdea19995084a4ec2750a189bb",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x501b1b/USDG",
+  "id": "0xfcced781a7cdfd9dd818efb03ce2e2f5e5d2e0871b8c73194cbabdad3775a657",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "SPY/0xb63d07",
+  "id": "0xac78051a093b2b3b6f2ef815e21e0436ff0f3fb6e1f36b6bbdac2e807cd4eb74",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x7163ae",
+  "id": "0x59640ddc477289e530b3e5e1f1eca2be84595ef92fc8091e3d242f2c572667be",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0x8b84d6",
+  "id": "0x6f106e2c2688b1c881e1c178913990445a70be6c25c9ec9efe5abeecb55fc164",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "SPY/0x8b84d6",
+  "id": "0xd53b0bf3f41360ccb179d28d725e8fc830a9c933d1889b91cd4d26d46de8b6a0",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x8b84d6",
+  "id": "0x3c9e69ce8e98a9786a00bc35753cfeb3d561799636b1a28241ab0f381b3cdfa8",
+  "hooks": "0x594e8e6281edf2d363a0293a50004cf868e7a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x378a50/0xcec185",
+  "id": "0xe2d76d6d8cddb82474ca253ad3d9d366c7cf638f306498b76550998c538de2b4",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x000000/0x378a50",
+  "id": "0xd60a6609ce38f462743962537898690a3036815f8e15a9cb0bd67a1cf988b0cb",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/QQQ",
+  "id": "0x268950a0222af855289e9ca648d1044bcf2b18804261aea2430c326f26a95e5c",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "0x43cac7/USDG",
+  "id": "0xd19689d7f10c34d5e3fd0e4caaf77aa942e3d654828a0a16a36303705b14dff5",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ },
+ {
+  "pair": "USDG/0xbbb6c2",
+  "id": "0x6ed5c8e8c88563ad16568598027d40dd71dccfc672058410075e7400754f7734",
+  "hooks": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "floorConfig_pips": null
+ }
+]

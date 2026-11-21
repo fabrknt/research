@@ -1,0 +1,25 @@
+chain | created | graduated | migrated to v4 | graduated >= $10k | graduated >= $100k
+ethereum | 402 | 91 | 18 | 9 | 7
+base | 495 | 141 | 9 | 2 | 2
+unichain | 131 | 22 | 8 | 1 | 0
+arbitrum | 86 | 36 | 1 | 2 | 1
+total | 1114 | 290 | 36 | 14 | 10
+graduated raised total $75,477,416; largest share 78.0%
+first auction created 2025-11-13, last 2026-11-21
+
+graduated >= $10k: chain | token | raised $ | clearing | bids | bidders | status
+ethereum | VAZT | 58,880,329 | 1.551e-05 | 21218 | 16741 | migrated
+base | UMIA | 6,112,005 | 0.36 | 0 | 0 | migrated
+ethereum | rCAP | 3,842,507 | 0.01065 | 1002 | 416 | no_migration_found
+ethereum | wOCT | 2,724,926 | 1.236e-05 | 1867 | 812 | migrated
+ethereum | STRATO | 1,344,025 | 0.0005354 | 577 | 292 | migrated
+ethereum | FOLD | 940,604 | 1.2e-05 | 311 | 216 | migrated
+ethereum | FOLD | 532,425 | 0.02241 | 182 | 116 | no_migration_found
+arbitrum | rIDOS | 399,301 | 3.611e-05 | 1672 | 1144 | no_migration_found
+base | RNBW | 330,578 | 0.111 | 2137 | 1526 | migrated
+ethereum | BALANCE | 135,874 | 0.000227 | 729 | 369 | migrated
+arbitrum | HUDL | 63,467 | 0.1 | 515 | 392 | no_migration_found
+ethereum | BFX | 37,732 | 2.189e-05 | 494 | 227 | migrated
+unichain | AGS | 28,448 | 9.24e-06 | 27 | 20 | no_migration_found
+ethereum | BWLK | 23,215 | 0.0001603 | 69 | 61 | migrated
+migration searched for 43 graduated auctions (raised >= $1k, or in a currency without a USD price): migrated 36, no migration found 6, live 1; graduated below $1k were not searched (247)

@@ -1,0 +1,114 @@
+[
+ {
+  "hook": "0x08e52564bad99e05a694b4809f397edca417a080",
+  "flags": [
+   "beforeSwap",
+   "beforeInitialize"
+  ],
+  "code_bytes": 32997,
+  "timestamp_opcode": true,
+  "sourcify": {
+   "name": "src/FablesRamp.sol:FablesRamp",
+   "keywords": [
+    "block.timestamp",
+    "oracle",
+    "session",
+    "weekend"
+   ]
+  }
+ },
+ {
+  "hook": "0x2bf0fc7adb40f69f201baddf9dd5db9a91782888",
+  "flags": [
+   "beforeSwapReturnDelta",
+   "beforeSwap",
+   "beforeAddLiquidity",
+   "beforeInitialize"
+  ],
+  "code_bytes": 11137,
+  "timestamp_opcode": false,
+  "sourcify": {
+   "name": "src/MetricEquityHook.sol:MetricEquityHook",
+   "keywords": []
+  }
+ },
+ {
+  "hook": "0x4f0067581931d9205e848862a7042b5ebc11f0c0",
+  "flags": [
+   "afterSwap",
+   "beforeSwap",
+   "afterInitialize",
+   "beforeInitialize"
+  ],
+  "code_bytes": 18203,
+  "timestamp_opcode": true,
+  "sourcify": {
+   "name": "contracts/arbitrage_plugin/singleton_hook/HomelanderUniV4SingletonHook.sol:HomelanderUniV4SingletonHook",
+   "keywords": [
+    "block.timestamp"
+   ]
+  }
+ },
+ {
+  "hook": "0x5800dd5c9d56c1dc9e6eb05892a6ba8e039b2a88",
+  "flags": [
+   "beforeSwapReturnDelta",
+   "beforeSwap",
+   "beforeRemoveLiquidity",
+   "beforeAddLiquidity",
+   "beforeInitialize"
+  ],
+  "code_bytes": 24371,
+  "timestamp_opcode": true,
+  "sourcify": {
+   "name": "follower/src/CarryStrategy.sol:CarryStrategy",
+   "keywords": [
+    "block.timestamp",
+    "oracle",
+    "pyth"
+   ]
+  }
+ },
+ {
+  "hook": "0xa57b77a340a5d5af554c531e8cda59a2d5360040",
+  "flags": [
+   "afterSwap"
+  ],
+  "code_bytes": 19279,
+  "timestamp_opcode": true,
+  "sourcify": null
+ },
+ {
+  "hook": "0xa607e4dde59e382e3dca27b183d6d0dee109e088",
+  "flags": [
+   "beforeSwapReturnDelta",
+   "beforeSwap",
+   "beforeInitialize"
+  ],
+  "code_bytes": 24463,
+  "timestamp_opcode": true,
+  "sourcify": {
+   "name": "src/HelmFeeHook.sol:HelmFeeHook",
+   "keywords": [
+    "block.timestamp",
+    "session",
+    "weekend"
+   ]
+  }
+ },
+ {
+  "hook": "0xe136bc1a37fa63cbd7051d0545572a69f815a080",
+  "flags": [
+   "beforeSwap",
+   "beforeInitialize"
+  ],
+  "code_bytes": 14199,
+  "timestamp_opcode": true,
+  "sourcify": {
+   "name": "src/hook/BellswapHook.sol:BellswapHook",
+   "keywords": [
+    "block.timestamp"
+   ]
+  }
+ }
+]
