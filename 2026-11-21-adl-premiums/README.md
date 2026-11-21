@@ -52,22 +52,25 @@ xyz:SKHX (SK hynix) on 2026-07-27 ($25.4M), xyz:EWZ on 2026-10-26 ($7.7M).
 
 `asset_ctxs` has no HIP-3 coins, so the price after the window is the first fill that is not an ADL
 5–8 minutes later, read from the same fills archive (`fetch_hip3.sh`: the 145 hourly files with a
-HIP-3 ADL and the hour after, ~5 GB streamed). Taking the median of the fills in that window
-instead changes the total by 0.3% ($1,386k → $1,382k).
+HIP-3 ADL and the hour after, ~5 GB streamed). An ADL fill with no other trade in that window is
+left unpriced: more than 99.9% of xyz's, flx's, para's, cash's and io's ADL'd notional was priced,
+but only 84% of hyna's, 81% of vntl's and 56% of km's.
 
-| dex | ADL days | ADL'd notional | modelled payout | per ADL'd dollar |
+| dex | ADL days | ADL'd notional | modelled payout | per priced ADL'd dollar |
 |---|---|---|---|---|
 | xyz | 52 | $85.2M | $1,119k | 1.3% |
 | para | 11 | $1.45M | $136k | 9.4% |
 | flx | 8 | $2.65M | $98k | 3.7% |
 | vntl | 14 | $0.30M | $29k | 12.1% |
-| hyna, cash, io, km | 31 | $0.68M | $4k | |
+| hyna, cash, io, km | 28 | $0.68M | $4k | |
 
 **The large ADLs cost little; the costly one was a stale price.** xyz:BRENTOIL (2026-03-23, $33.2M)
 and xyz:SKHX (2026-07-27, $25.4M) would have paid 0.1% and 0.2%. xyz:EWZ paid $782k, 56% of all
 HIP-3 payouts: on Sunday 2026-10-25 from 23:17 UTC xyz traded at 40.456 with no change, at 00:05
 UTC $7.6M of shorts were ADL'd at up to that price, and five minutes later EWZ traded at 34.2. The
-cover worth pricing on HIP-3 is the gap when a closed market's price catches up, which is what
+prices and times in this paragraph are read from the individual fills, which are not committed;
+the payout and its share are in `results/hip3_by_day_coin.csv`. The cover worth pricing on HIP-3
+is the gap when a closed market's price catches up, which is what
 [weekend gaps](../2026-11-21-weekend-gaps/) records.
 
 Rate: there is no open-interest history for HIP-3 here, so `results/hip3_by_dex.csv` divides by
