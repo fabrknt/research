@@ -6,6 +6,8 @@
 # The snapshots are third-party API data, which this repo does not publish (see the README). Each hour's
 # are encrypted to .github/one-quote-data.pub.pem (AES-256 with a random key, the key wrapped with RSA-OAEP)
 # and kept as a workflow artifact; only the holder of the private key, kept off GitHub, can read them.
+# Artifacts expire after 90 days, so each hour also goes into a release per month (one-quote-data-YYYYMM),
+# which doesn't expire. Collection has no end date; set the repo variable ONE_QUOTE_STOP=1 to stop it.
 name: one-quote-collect
 
 on:
@@ -26,13 +28,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 80
     permissions:
-      contents: read
+      contents: write  # to add the hour to the month's release
       actions: write   # to start the next hour
     steps:
-      - name: Stop after the study window
+      - name: Stop when asked
         id: window
         run: |
-          if [ "$(date -u +%Y%m%d)" -gt 20261126 ]; then echo "window over"; exit 1; fi
+          if [ "${{ vars.ONE_QUOTE_STOP }}" = "1" ]; then echo "ONE_QUOTE_STOP is set"; exit 1; fi
       # From here on the next hour starts even if this one fails: a 429 at start-up broke the chain
       # for 5.5 hours on 2026-11-17.
       - uses: actions/checkout@v4
@@ -59,6 +61,19 @@ jobs:
           name: one-quote-${{ github.run_id }}
           path: out/
           retention-days: 90
+      - name: Keep the hour in the month's release
+        if: always() && hashFiles('out/data.tgz.enc') != ''
+        continue-on-error: true   # the artifact above still has the hour
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=one-quote-data-$(date -u +%Y%m)
+          gh release view "$tag" -R "${{ github.repository }}" >/dev/null 2>&1 ||
+            gh release create "$tag" -R "${{ github.repository }}" --prerelease --title "$tag" \
+              --notes "Encrypted hourly snapshots for 2026-11-16-one-quote-vs-books; read them with fetch_actions.sh." ||
+            gh release view "$tag" -R "${{ github.repository }}" >/dev/null
+          tar cf "${{ github.run_id }}.tar" -C out data.tgz.enc key.bin.enc
+          gh release upload "$tag" "${{ github.run_id }}.tar" -R "${{ github.repository }}" --clobber
       - name: Back off after a failed hour
         if: always() && steps.collect.outcome == 'failure'
         run: sleep 300

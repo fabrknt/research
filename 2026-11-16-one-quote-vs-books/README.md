@@ -4,14 +4,16 @@ Variational's Omni has one market maker (OLP) quoting every trade, with no fee: 
 Lighter and Hyperliquid are order books. This study asks what a market order of $1k, $100k and $1M
 costs on each, for the same markets, in US market hours, outside them and at weekends.
 
-**Status: collecting since 2026-11-16 08:48 UTC (every 5 minutes, until 2026-11-26). Weekday results
+**Status: collecting since 2026-11-16 08:48 UTC (every 5 minutes, with no end date since 2026-11-21). Weekday results
 so far below; no weekend yet.** From 2026-11-16 13:00 UTC the collection runs on GitHub Actions
 (`.github/workflows/one-quote-collect.yml`), so a laptop going to sleep doesn't stop it: each job
 collects for an hour and then starts the next one itself (GitHub's hourly schedule fired once in the
 first ten hours, so it is only the backup). The snapshots are third-party API data, so each hour's are
-encrypted to `.github/one-quote-data.pub.pem` before they are kept as a workflow artifact;
-`fetch_actions.sh` downloads and decrypts them with the private key, which is kept off GitHub. The
-final answer goes here and on [fabrknt.com/research](https://fabrknt.com/research) once the window
+encrypted to `.github/one-quote-data.pub.pem` before they are kept, as a workflow artifact (90 days)
+and in a release per month (`one-quote-data-YYYYMM`, kept); `fetch_actions.sh` downloads and decrypts
+them with the private key, which is kept off GitHub. Variational keeps no public history of its quotes,
+so the record only exists if it keeps running; set the repo variable `ONE_QUOTE_STOP=1` to stop it.
+The first answer goes here and on [fabrknt.com/research](https://fabrknt.com/research) once the data
 covers a weekend.
 
 Gaps: 2026-11-16 14:02–22:50 UTC (the schedule did not fire) and 2026-11-17 08:40–14:16 UTC (a 429
@@ -57,9 +59,9 @@ the busiest one per name), in `data/markets.json`.
 
 ```
 python3 collect.py 1                 # one round -> data/snap-YYYYMMDD.jsonl, data/markets.json
-python3 collect.py 2880 300          # 10 days, every 5 minutes
+python3 collect.py 2880 300          # 10 days, every 5 minutes, on this machine
 cd walk && cargo build --release && cd ..
-sh fetch_actions.sh                  # the hourly Actions runs (needs the private key)
+sh fetch_actions.sh                  # the hourly Actions runs, from releases and artifacts (needs the private key)
 cat data/snap-*.jsonl data/actions/*/data/snap-*.jsonl | walk/target/release/walk > data/walks.jsonl
 python3 summary.py
 python3 check_coarse.py              # is Hyperliquid's coarser book an upper bound?
