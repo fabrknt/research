@@ -11,6 +11,7 @@ in one place: one job chain, one list of what is kept, one storage format, one r
 | `one_quote` | 5 min | Variational's listing rows (quotes, funding, open interest, volume) with the Lighter and Hyperliquid books for the same 40 markets ([one quote vs books](../2026-11-16-one-quote-vs-books/)) | Variational keeps no public history of its quotes |
 | `lighter_blobs` | 10 min | every Lighter batch blob committed to Ethereum | rebuilding Lighter's state ([state replay](../2026-11-18-lighter-state-replay/)) needs every blob; Ethereum drops them after about 18 days |
 | `solana_quotes` | 1 min | Jupiter's free quote (api.jup.ag, lite-api as fallback; no key) for SOL/USDC at 10, 1,000 and 10,000 SOL and $1k, $100k and $1M, from each Solana prop AMM alone (BisonFi, GoonFi V2, SolFi V2, ZeroFi, Kipseli, Scorch) and Jupiter's best route | prop AMM quotes are in no order book, and Solana keeps no past account state to price them against later; HumidiFi and TesseraV had no route through this API on 2026-11-21 and are asked once a run to see when that changes |
+| `events` | 10 s | Hyperliquid mids for every perp; for 72 h after a name (24h volume ≥ $2M) moves 1.5% within a minute, or first lists, its Hyperliquid l2Book every 10 s and its Lighter book every 30 s (at most 8 names) | the book around a move or a listing is what is wanted afterwards, and nobody keeps it across venues at the same instant |
 | `rules` | daily | Hyperliquid perpDexs, meta (margin tables) per dex, spotMeta; Lighter orderBookDetails; every page of the Hyperliquid, Lighter and Variational docs | what the rules were when something happened; each row says whether the item changed since the day before |
 
 The list, with the question each source is kept for, is [`sources.toml`](sources.toml). A source is one
@@ -61,5 +62,6 @@ A local 2-minute trial (2026-11-21) wrote, gzipped: `hl_ctx` about 28 KB a call 
   tried again in the next run, from that commit on, so none is skipped or kept twice.
 - `solana_quotes` is what Jupiter would route, not each venue's own quote: a venue Jupiter doesn't route
   through lite-api (HumidiFi, TesseraV on 2026-11-21) is missing. One run takes about 40 s.
-- What the recorder doesn't keep: anything that has to be bought, and the high-frequency capture around
-  events (next).
+- `events` keeps only books while a name is hot, not the mids it watches; the minute before a trigger is in
+  `hl_ctx`. A name that is hot when a job ends stays hot in the next job (its state holds hashed names).
+- What the recorder doesn't keep: anything that has to be bought.

@@ -30,3 +30,9 @@ name = "solana_quotes"
 module = "solana_quotes"
 every = 60
 why = "What each Solana prop AMM would pay for SOL/USDC at three sizes each way, minute by minute: their quotes are in no order book and Solana keeps no past account state to simulate them against later."
+
+[[source]]
+name = "events"
+module = "events"
+every = 10
+why = "The Hyperliquid and Lighter books every 10-30 s for 72 h after a name moves 1.5% from its last-minute high or low or first lists: what everyone wants later is the book around such moments, and no one sells it across venues at the same instant."
