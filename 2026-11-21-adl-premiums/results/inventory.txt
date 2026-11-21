@@ -1,0 +1,6 @@
+s3://hl-mainnet-node-data/node_fills/hourly/ (listed 2026-11-21)
+Total Objects: 1507
+   Total Size: 31810887432
+s3://hl-mainnet-node-data/node_fills_by_block/hourly/ (listed 2026-11-21)
+Total Objects: 11564
+   Total Size: 352783778968

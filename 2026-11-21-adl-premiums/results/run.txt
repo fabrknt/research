@@ -1,0 +1,3 @@
+ctx files 544 (20250525..20261120)
+adl fills 44816, main-dex coins with marks 235
+mark lag after fill, seconds: min 300.0639998912811 median 341.7909998893738 p99 355.9010000228882 max 359.5130000114441

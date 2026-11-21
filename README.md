@@ -7,6 +7,7 @@ this repo holds what produced it. Newest first.
 | date | study | write-up | answer |
 |---|---|---|---|
 | 2026-11-21 | [Trueo LP loss](2026-11-21-trueo-lp-loss/) | [What do LPs lose before a prediction market resolves?](https://fabrknt.com/research/trueo-lp-loss) | $126,558 lost against holding by the pools of 104 resolved markets; LP fees an estimated $0.77, and the hook's fees, all of them with the same trades, would have covered 5.2%. 79% of the loss in the 7 days before resolution was proposed, 5.5% in the last 6 h |
+| 2026-11-21 | [ADL premiums](2026-11-21-adl-premiums/) | (none yet) | A cover paying the 5-minute re-hedge after ADL: main dex 38 bp/year, 1.4 without 2025-10-10; HIP-3 $1.39M in 0.95 years, over half on one stale-price night (xyz:EWZ) |
 | 2026-11-21 | [Weekend gaps](2026-11-21-weekend-gaps/) | (after more weekends) | Recording every weekend: 22 US names, Friday close to Monday open. First seven: median 129 bp; Hyperliquid's xyz an hour before the open still 91 bp away |
 | 2026-11-18 | [Lighter state replay](2026-11-18-lighter-state-replay/) | (after catch-up) | Running: Lighter's full state carried from the May snapshot to today, one Ethereum blob at a time; matches the committed root at batches 167059 and 167259 |
 | 2026-11-18 | [Anthropic listing quotes](2026-11-18-anthropic-listing-quotes/) | (after the listing) | Collecting: Binance, Bitget and OKX quotes through the pricing and first trade, until 11-21 |
