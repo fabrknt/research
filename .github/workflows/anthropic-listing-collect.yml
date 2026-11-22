@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p ../out
           tar czf data.tgz data
-          openssl rand -out key.bin 32
+          openssl rand -hex -out key.bin 32  # hex: -pass file: reads the first line; raw bytes can start with a newline
           openssl enc -aes-256-cbc -pbkdf2 -salt -in data.tgz -out ../out/data.tgz.enc -pass file:key.bin
           openssl pkeyutl -encrypt -pubin -inkey ../.github/one-quote-data.pub.pem \
             -pkeyopt rsa_padding_mode:oaep -in key.bin -out ../out/key.bin.enc
