@@ -1,0 +1,62 @@
+# Sealed hunches (hunches/): checks the record, stamps each new state of the registry (sealed.csv) on
+# Bitcoin through OpenTimestamps, upgrades pending
+# stamps once Bitcoin confirms them, and opens an issue when a sealed hunch is due. Only hashes leave
+# this repo; the hunches themselves are written off GitHub and published by hand when opened.
+name: hunches
+
+on:
+  push:
+    branches: [main]
+    paths: [hunches/sealed.csv]
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: hunches
+  cancel-in-progress: false
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenTimestamps
+        run: pip install --quiet opentimestamps-client==0.8.0
+      - name: Check the record
+        run: python3 -I hunches/hunch.py verify
+      - name: Stamp the registry when it changed, upgrade pending stamps
+        run: |
+          mkdir -p hunches/stamps
+          last=$(ls hunches/stamps/sealed-*.csv 2>/dev/null | sort | tail -n 1)
+          if [ -z "$last" ] || ! cmp -s "$last" hunches/sealed.csv; then
+            snap="hunches/stamps/sealed-$(date -u +%Y%m%dT%H%M%SZ).csv"
+            cp hunches/sealed.csv "$snap"
+            ots stamp "$snap"
+          fi
+          for f in hunches/stamps/*.ots; do
+            [ -e "$f" ] || continue
+            ots upgrade "$f" || true   # still pending until a Bitcoin block includes it
+          done
+          rm -f hunches/stamps/*.bak
+      - name: Commit stamps
+        run: |
+          git add hunches/stamps
+          git diff --cached --quiet && { echo "no stamp changed"; exit 0; }
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "hunches: stamps $(date -u +%Y-%m-%d)"
+          git pull --rebase && git push
+      - name: Issue for each due hunch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -I hunches/hunch.py due | while IFS=$'\t' read -r id due; do
+            title="Open hunch $id (due $due)"
+            n=$(gh issue list --state all --search "\"$title\" in:title" --json number --jq length)
+            [ "$n" = "0" ] || continue
+            gh issue create --title "$title" --body "Run \`python3 -I hunches/hunch.py open $id hit|miss|void \"note\"\` and commit hunches/opened/$id.md and hunches/results.csv. A hunch that can't be judged is opened as void, not left sealed."
+          done
