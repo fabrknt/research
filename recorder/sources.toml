@@ -42,3 +42,9 @@ name = "xstocks_quotes"
 module = "xstocks_quotes"
 every = 300
 why = "What Solana's tokenized US shares (xStocks) cost to buy and sell at $1k, $10k and $100k on Jupiter, and which venues fill them, next to the Hyperliquid xyz perp book for the same share at the same moment, weekends included: neither side keeps a history of quotes at size, and the gap between them out of market hours shows only while it lasts."
+
+[[source]]
+name = "listing_watch"
+module = "listing_watch"
+every = 300
+why = "The moment a labelled Wintermute wallet first receives a token BitGo added in the last 30 days (Ethereum, Base, Arbitrum, Robinhood Chain): in past Robinhood listings this came hours before the listing, and transfers into a wallet are easy to miss live and dull to rebuild later."

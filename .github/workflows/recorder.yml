@@ -65,6 +65,9 @@ jobs:
         id: record
         if: steps.state.outcome == 'success'
         continue-on-error: true
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          LISTING_WATCH_KEY: ${{ secrets.LISTING_WATCH_KEY }}
         run: python3 -I recorder/record.py "${{ inputs.minutes || '55' }}" "$RUNNER_TEMP/out" "$RUNNER_TEMP/state.json"
       - name: Encrypt
         if: always()
