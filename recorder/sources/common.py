@@ -21,7 +21,11 @@ def fetch(url: str, body=None, tries: int = 4, raw: bool = False):
                 raise
             wait = 2 + 3 * i
             if getattr(e, "code", None) == 429:
-                try:
+                try:  # the Retry-After header (Solana's public RPC), capped so one call can't stall the hour
+                    wait = max(wait, min(60.0, float(e.headers.get("Retry-After") or 0)))
+                except Exception:
+                    pass
+                try:  # or a JSON retry_after_seconds (Hyperliquid)
                     wait = max(wait, float(json.load(e).get("retry_after_seconds", 0)) + 1)
                 except Exception:
                     pass
