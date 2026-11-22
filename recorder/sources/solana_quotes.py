@@ -11,7 +11,9 @@ health check sees it.
 """
 
 import json
+import threading
 import time
+from collections import deque
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,6 +26,22 @@ PROBE = ["HumidiFi", "TesseraV"]  # no route on 2026-11-21
 SIZES = [(SOL, USDC, a * 10**9) for a in (10, 1_000, 10_000)] + \
         [(USDC, SOL, a * 10**6) for a in (1_000, 100_000, 1_000_000)]
 PAUSE = 0.25  # 44 quotes a run, about 15 s; the free limit was 100 per window on 2026-11-21
+# Every HTTP attempt to Jupiter, from any source's thread, takes a slot first: at most 80 in any 60 s, under
+# the free limit of 100 with room for the 429 retries. xstocks_quotes shares this through quote().
+LIMIT, WINDOW = 80, 60.0
+_lock, _sent = threading.Lock(), deque()
+
+
+def _slot() -> None:
+    with _lock:  # waiting while holding the lock queues the other threads behind this one
+        while True:
+            now = time.monotonic()
+            while _sent and _sent[0] <= now - WINDOW:
+                _sent.popleft()
+            if len(_sent) < LIMIT:
+                _sent.append(now)
+                return
+            time.sleep(_sent[0] + WINDOW - now)
 
 
 def quote(params: dict) -> dict:
@@ -33,6 +51,7 @@ def quote(params: dict) -> dict:
         for attempt in range(2):
             req = urllib.request.Request(f"{host}/swap/v1/quote?{urllib.parse.urlencode(params)}",
                                          headers={"user-agent": "fabrknt-research"})
+            _slot()
             try:
                 with urllib.request.urlopen(req, timeout=30) as r:
                     return json.load(r)

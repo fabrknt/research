@@ -36,3 +36,9 @@ name = "events"
 module = "events"
 every = 10
 why = "The Hyperliquid and Lighter books every 10-30 s for 72 h after a name moves 1.5% from its last-minute high or low or first lists: what everyone wants later is the book around such moments, and no one sells it across venues at the same instant."
+
+[[source]]
+name = "xstocks_quotes"
+module = "xstocks_quotes"
+every = 300
+why = "What Solana's tokenized US shares (xStocks) cost to buy and sell at $1k, $10k and $100k on Jupiter, and which venues fill them, next to the Hyperliquid xyz perp book for the same share at the same moment, weekends included: neither side keeps a history of quotes at size, and the gap between them out of market hours shows only while it lasts."
