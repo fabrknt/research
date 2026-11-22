@@ -28,8 +28,9 @@ while the lid is closed).
 - CoinGecko's derivatives list carries Binance's `ANTUSDT` (11 to 13 minutes old when read), so
   `collect.py` also stores its Anthropic rows every 5 rounds (from 2026-11-19): a coarse backup for
   minutes the laptop recorder misses, not a substitute for it around the first trade.
-- `fetch_actions.sh`: downloads and decrypts the hourly artifacts (the quotes are third-party API
-  data and are not published).
+- `fetch_actions.sh`: downloads and decrypts the hourly quotes from the release
+  `anthropic-listing-data-202611` (copied there from the 90-day workflow artifacts on 2026-11-22; the quotes
+  are third-party API data, encrypted and not published in the clear).
 
 Results (2026-11-20): ["What happened" in the hl-price-guard case](https://github.com/fabrknt/hl-price-guard/tree/main/cases/anthropic-ipo-2026#what-happened-replayed-2026-11-20).
 In short: nothing moved toward the $83 offering price, the perps were 0.3% under the $111.50
