@@ -115,6 +115,35 @@ jobs:
           if [ "${{ steps.state.outputs.from }}" = "state.next.json" ]; then order="state.json state.next.json"
           else order="state.next.json state.json"; fi
           for f in $order; do gh release upload recorder-state "$RUNNER_TEMP/$f" -R "$R" --clobber || exit 1; done
+      # For the xStocks loop (2026-11-22-xstocks-depth/loop/): this hour's medians only (no quote, route or
+      # book). The history is kept as two assets, summary.a.jsonl and summary.b.jsonl: each hour reads the
+      # longer one, appends, and replaces only the other, so a failed upload (gh deletes before it uploads)
+      # loses at most that copy. Neither copy found is an error, never a fresh start. Jobs run one at a time,
+      # so nothing else writes them. Seeded once by hand (2026-11-22); 3 minutes at most, and a failure never
+      # stops the recorder.
+      - name: Summarize the hour for the xStocks loop
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          [ -f "$RUNNER_TEMP/out/xstocks_quotes.jsonl.gz" ] || { echo "no xstocks_quotes this hour"; exit 0; }
+          python3 -I 2026-11-22-xstocks-depth/analyze.py --hour "$RUNNER_TEMP/out/xstocks_quotes.jsonl.gz" > "$RUNNER_TEMP/xs.json"
+          d=$RUNNER_TEMP/xsl; mkdir -p "$d"
+          # Which copies exist is read first: a copy that exists but can't be downloaded stops the step, so a
+          # newer copy that was not read is never overwritten from an older one. Only a listed copy that
+          # downloads but isn't all JSON is set aside (it is the one replaced).
+          names=$(timeout 60 gh release view xstocks-loop -R "$R" --json assets -q '.assets[].name')
+          for c in a b; do
+            if printf '%s\n' "$names" | grep -qx "summary.$c.jsonl"; then
+              timeout 60 gh release download xstocks-loop -R "$R" -p "summary.$c.jsonl" -O "$d/$c"
+              if ! python3 -I -c 'import json,sys; [json.loads(l) for l in open(sys.argv[1])]' "$d/$c"; then rm -f "$d/$c"; fi
+            fi
+          done
+          la=$( [ -f "$d/a" ] && wc -l < "$d/a" || echo -1 ); lb=$( [ -f "$d/b" ] && wc -l < "$d/b" || echo -1 )
+          if [ "$la" -lt 0 ] && [ "$lb" -lt 0 ]; then echo "no summary copy found; not starting one empty"; exit 1; fi
+          if [ "$la" -ge "$lb" ]; then from=a to=b; else from=b to=a; fi
+          cat "$d/$from" "$RUNNER_TEMP/xs.json" > "$d/summary.$to.jsonl"
+          timeout 60 gh release upload xstocks-loop "$d/summary.$to.jsonl" -R "$R" --clobber
       - name: Back off after a failed hour
         if: always() && (steps.record.outcome == 'failure' || steps.state.outcome == 'failure')
         run: sleep 300
