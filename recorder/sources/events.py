@@ -2,13 +2,16 @@
 
 Every run (10 s) reads allMids for the main dex's perps and every HIP-3 dex. A name becomes "hot" for HOT_S
 (72 h) when its mid is MOVE (1.5%) or more from the highest or lowest mid of the last minute and its 24h
-volume is at least MIN_VLM, or when it appears for the first time (a new listing). For each hot name (at
+volume is at least MIN_VLM, or when it appears for the first time (a new listing). A HIP-3 name is registered
+halted (isDelisted) before it trades; every PENDING_EVERY runs the dexes holding such names are re-read, so
+the run that sees one open marks it "new" within about a minute instead of at the next 10-minute refresh, and a
+name that appears halted and was never seen trading gets a "registered" trigger row. For each hot name (at
 most MAX_HOT, newest kept) a run saves the Hyperliquid l2Book, and every third run the Lighter book if
 Lighter lists the same symbol. Book failures are counted in the public status, and a run where half or
 more of the wanted books failed, or with hot names but no Lighter market list, is incomplete, so the health
 check sees it.
 
-Rows: {"kind": "trigger", "name", "why": "move" | "new", "move"} and {"kind": "book", "name", "hl", "lighter"}.
+Rows: {"kind": "trigger", "name", "why": "move" | "new" | "registered", "move"} and {"kind": "book", "name", "hl", "lighter"}.
 The state is published unencrypted, so it holds names only as hashes (they come from the venues' APIs):
 state["known"] the names seen so far, state["hot"] hash -> expiry.
 """
@@ -26,11 +29,12 @@ MIN_VLM = 2_000_000
 HOT_S = 72 * 3600
 MAX_HOT = 8
 REFRESH_S = 600  # names, volumes and Lighter's markets
+PENDING_EVERY = 6  # runs: re-read the dexes holding never-traded halted names (about a minute; 20-weight calls)
 
 LIGHTER_EVERY = 3  # runs: about 18 Lighter calls a minute at most, beside one_quote's 40 every 5 minutes
 START_DELAY = 20   # s: the first run waits, so this cold start doesn't stack on the other sources'
 
-_cache = {"at": 0.0, "vlm": {}, "dexes": [], "lighter": {}, "lighter_ok": True, "runs": 0}
+_cache = {"at": 0.0, "vlm": {}, "dexes": [], "halted": {}, "lighter": {}, "lighter_ok": True, "runs": 0}
 _mids: deque = deque()  # (t, {name: mid}) over the last WINDOW_S + a little
 
 
@@ -38,15 +42,38 @@ def key(name: str) -> str:
     return hashlib.sha256(name.encode()).hexdigest()[:16]
 
 
+def read_dex(dex: str, vlm: dict, halted: dict) -> None:
+    meta, ctxs = hl({"type": "metaAndAssetCtxs", **({"dex": dex} if dex else {})})
+    for u, c in zip(meta["universe"], ctxs):
+        if u.get("isDelisted"):
+            halted[u["name"]] = dex
+        else:
+            vlm[u["name"]] = float(c.get("dayNtlVlm") or 0)
+
+
 def refresh() -> None:
-    vlm, dexes = {}, hl_dexes()
+    vlm, halted, dexes = {}, {}, hl_dexes()
     for dex in dexes:
-        meta, ctxs = hl({"type": "metaAndAssetCtxs", **({"dex": dex} if dex else {})})
-        for u, c in zip(meta["universe"], ctxs):
-            if not u.get("isDelisted"):
-                vlm[u["name"]] = float(c.get("dayNtlVlm") or 0)
-    _cache.update(at=time.time(), vlm=vlm, dexes=dexes)
+        read_dex(dex, vlm, halted)
+    _cache.update(at=time.time(), vlm=vlm, halted=halted, dexes=dexes)
     lighter_markets()
+
+
+def check_pending(known: set) -> None:
+    """Re-read only the HIP-3 dexes holding halted names that never traded, so an opening is seen within
+    PENDING_EVERY runs. Names delisted after trading are left to the 10-minute refresh."""
+    for dex in sorted({d for n, d in _cache["halted"].items() if d and key(n) not in known}):
+        vlm, halted = {}, {}
+        try:
+            read_dex(dex, vlm, halted)
+        except Exception:
+            continue  # the next check or refresh tries again
+        for name in [n for n, d in _cache["halted"].items() if d == dex and n not in halted]:
+            del _cache["halted"][name]
+        for name in halted:
+            _cache["halted"].setdefault(name, dex)
+            _cache["vlm"].pop(name, None)  # halted now: no move triggers or books until it trades again
+        _cache["vlm"].update(vlm)
 
 
 def lighter_markets() -> None:
@@ -70,6 +97,8 @@ def run(state: dict) -> list[dict]:
         lighter_markets()
         now = time.time()
     _cache["runs"] += 1
+    if _cache["runs"] % PENDING_EVERY == 0:
+        check_pending(set(state.get("known", [])))
     mids = {}
     for dex in _cache["dexes"]:
         for name, px in hl({"type": "allMids", **({"dex": dex} if dex else {})}).items():
@@ -78,16 +107,24 @@ def run(state: dict) -> list[dict]:
     _mids.append((now, mids))
     while _mids and _mids[0][0] < now - WINDOW_S:
         _mids.popleft()
+    rows = []
     lo, hi = {}, {}  # lowest and highest mid of the last minute, this run included
     for _, m in _mids:
         for n, px in m.items():
             if px > 0:
                 lo[n], hi[n] = min(lo.get(n, px), px), max(hi.get(n, px), px)
 
-    rows = []
     known = set(state.get("known", []))
     hot = {k: e for k, e in state.get("hot", {}).items() if e > now}
     first = not known
+    first_reg = "registered" not in state  # names already halted when this check started are not news
+    registered = set(state.get("registered", []))
+    for name in _cache["halted"]:  # registered but not trading: a name that never traded is a coming listing
+        k = key(name)
+        if k not in known and k not in registered:
+            registered.add(k)
+            if not (first or first_reg):
+                rows.append({"t": now, "kind": "trigger", "name": name, "why": "registered", "move": None})
     for name, px in mids.items():
         k = key(name)
         why, move = None, None
@@ -135,7 +172,7 @@ def run(state: dict) -> list[dict]:
                 failed += 1
         rows.append(row)
 
-    state["known"], state["hot"] = sorted(known), hot
+    state["known"], state["hot"], state["registered"] = sorted(known), hot, sorted(registered)
     state["status"] = {"hot": len(hot), "books_wanted": wanted, "books_failed": failed,
                        "lighter_markets_ok": _cache["lighter_ok"],
                        "incomplete": (wanted > 0 and failed * 2 >= wanted) or (bool(hot) and not _cache["lighter_ok"])}
