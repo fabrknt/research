@@ -127,7 +127,9 @@ Both run in the [recorder](../recorder/), write encrypted rows, and push to a pr
 - `listing_watch` (from 11-22): Wintermute receiving a token BitGo added in the last 30 days, on Ethereum,
   Base, Arbitrum and Robinhood Chain, checked every 5 min. It also pushes each new Robinhood Chain token
   BitGo adds.
-- `events` (pushes from 11-24): Hyperliquid HIP-3 names, checked about once a minute.
+- `events` (pushes from 11-24): Hyperliquid HIP-3 names. A new registration is seen within about
+  10 minutes, when the name list is refreshed. Prep and open are seen within about a minute, because dexes
+  with halted names are re-read that often.
   - **Registered:** a name appears halted.
   - **Opening prep:** while it is still halted, the deployer changes its open-interest cap or funding
     settings (`perpDexs`).
@@ -136,8 +138,8 @@ Both run in the [recorder](../recorder/), write encrypted rows, and push to a pr
   The books every 10 s around each opening are already kept, to measure how far the first 30 minutes trade
   from the oracle and how fast that closes.
 
-Between 11-22 and 11-24, xyz registered 8 more names, all still halted: ACN, SNAP, NU, CATL, INNOLIGHT,
-AMEC, IBIDEN and SOXS.
+In `metaAndAssetCtxs` for xyz on 11-24, eight more names were halted with volume 0 than in the 11-22 list
+above: ACN, SNAP, NU, CATL, INNOLIGHT, AMEC, IBIDEN and SOXS.
 
-Following the wallets that found Hyperliquid early was checked too, and failed: see
+Following the wallets that found Hyperliquid early was checked too, and showed no lift: see
 [2026-11-23-early-finders](../2026-11-23-early-finders/).

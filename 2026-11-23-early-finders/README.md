@@ -8,8 +8,9 @@ strong protocol, so their wallets could be followed. Checked in two steps.
 3. Ask the question that decides whether the idea is usable: when the cohort piles into a new protocol, does
    that protocol succeed more often than others?
 
-**Answer: no.** The cohort is early everywhere, so it is also early at the winners. It does not pick
-winners: protocols it piled into succeeded about as often as the base rate.
+**Answer: no lift was shown.** The cohort is early at many new protocols, so it is also early at the
+winners. But protocols it piled into succeeded about as often as the base rate. The difference is not
+significant, and the interval is wide (9–39%), so a small edge is not ruled out; a usable one was not found.
 
 ## Cohort
 
@@ -18,7 +19,9 @@ winners: protocols it piled into succeeded about as often as the base rate.
 - Deposits went to the first bridge `0xc67e9efd…73a4` (USDC.e, Feb 2023 to Jan 2024).
   Bridge2 `0x2Df1c51E…3dF7` went live on 2023-12-02.
 - The $100 floor removed 7,478 wallets (54%).
-- The wallet lists are not committed; the scripts rebuild them from public logs.
+- The wallet lists are not committed; the scripts rebuild them from public logs. Numbers not in the
+  printed outputs (the dust filter, the samples, the base rate, unidentified contracts) are in
+  [`results/notes.md`](results/notes.md), the full working notes.
 
 ## Step 1: early at Lighter and Variational
 
@@ -51,11 +54,13 @@ in Nov 2026.
 
 How it was measured:
 
-- Every outgoing USDC, USDC.e, USDT0 and WETH transfer from 1,500 sampled cohort wallets on Arbitrum
-  (2023-11 to 2025-02), read from public RPC logs.
+- Every outgoing USDC, USDC.e, USDT0 and WETH transfer from 1,500 wallets sampled from the cohort after
+  dropping flagged farmers (6,064 left), on Arbitrum (2023-11 to 2025-02), read from public RPC logs.
 - Recipients kept: contracts other than routers, pools, bridges, tokens and exchange deposit addresses.
-- A protocol counts as "piled into" when 5 or more sampled wallets arrived within 60 days of its first
-  inflow. New protocols are limited to 2023-11 to 2024-12, so outcomes had time to show.
+- A protocol counts as "piled into" when 5 or more sampled wallets arrived within 60 days of a contract's
+  start (its deployment, or its first own log when the deployment was not found). For a protocol with
+  several contracts, the contract with the most early wallets counts; wallets are not summed across them.
+  New protocols are limited to 2023-11 to 2024-12, so outcomes had time to show.
 
 | Group | Succeeded | 95% interval |
 |---|---|---|
@@ -64,17 +69,21 @@ How it was measured:
 | All DefiLlama Arbitrum protocols listed 2023-11 to 2024-12 | 30 / 215 = 14% | |
 
 - Against the base rate: p = 0.38. Against the cohort's other new protocols: p = 0.11.
-- **A higher cohort share did not mean success.** Among a protocol's first 500 depositors, the median
+The next two points use all 31 pile-ins, including new contracts of older protocols (Compound V3,
+Radiant and others): 6 succeeded, 25 failed.
+
+- **A higher cohort share did not mean success.** Among the first 500 token senders to the contract
+  within its first 60 days (fewer where fewer came), the median
   cohort share was 0.5% for successes and 1.0% for failures. Cega (3.6%) and nftperp (3.0%) had the highest
   shares, and both failed.
 - **Most pile-ins failed.** The two largest, Reya (156 early wallets) and Aevo (105), succeeded. The next
   four failed: Pike 42 (exploited), Blackwing 33, Cega 20 and nftperp 20. Perp venues: 2 of 7 succeeded.
-- On a "launched a token" rule it is 32% vs 22%, also not significant.
+- On a "launched a token" rule, among new protocols only: 32% (8/25) vs 22% (11/50), also not significant.
 
-Reading: early Hyperliquid wallets are points farmers in the broad sense. They arrive early wherever
-points might be paid, which is why they were early at Lighter and Variational, but they do not choose the
-ones that last. Following them is not a signal. The only thing left is very large pile-ins at new perp
-venues, and that rests on 2 wins out of 7.
+Reading: early Hyperliquid wallets arrive early at many new protocols, which is consistent with chasing
+points or airdrops, though the data does not show why they go. That is why they were early at Lighter and
+Variational, but by this test they did not pick the ones that lasted. Following them did not show a
+signal. The only thing left is very large pile-ins at new perp venues, and that rests on 2 wins out of 7.
 
 ## Limits
 
@@ -93,4 +102,5 @@ venues, and that rests on 2 wins out of 7.
 - `scripts/ft/`: step 2 (`scan_out*`, `step1_parse.py` to `step5.py`, `labels.py`, `llama_hist.py`).
   Run them from this folder; they cache to `cache/` and `ft/`, which are not committed. They were written
   for a one-off run and are kept as they ran.
-- `results/`: printed outputs, `report_output.txt` (step 1) and `step5_output.txt` (step 2).
+- `results/`: printed outputs, `report_output.txt` (step 1) and `step5_output.txt` (step 2), and
+  `notes.md`, the full working notes, with sources for the contracts and every number above.
