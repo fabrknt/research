@@ -2,7 +2,8 @@
 share, at the same moment, every 5 minutes, weekends included.
 
 Per name, first the xyz l2Book (when xyz lists it), then Jupiter's best route to buy $1k, $10k and $100k of
-the token with USDC and to sell back the amount each buy would get, then Hadron alone ($1k each way). The
+the token with USDC and to sell back the amount each buy would get, then Hadron alone ($1k each way); the
+names added on 2026-11-24 (QUOTED_FROM_10K) are asked at $10k and $100k only. The
 route keeps each leg's label, pool account and share, so which venues fill (Hadron, Scorch, GoonFi V2 and the
 curve pools on 2026-11-22) can be read later.
 
