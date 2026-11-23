@@ -6,7 +6,7 @@ same question for Coinbase, Binance, Upbit and Hyperliquid: what was publicly vi
 listing, how long before, can it be checked from a primary source today, and does anyone already
 broadcast it.
 
-**Status: desk study, nothing recorded yet.** V = primary source seen (a GitHub PR or commit, a
+**Status: desk study, with two live watchers since 2026-11-22/24 (see the end).** V = primary source seen (a GitHub PR or commit, a
 Hyperliquid API or explorer response). R = reported only (press or an analyst's post).
 
 ## Summary
@@ -119,3 +119,25 @@ activity there only). Base effectively not covered (keyless quota), Solana and B
 - Hypothesis, not a result: if the trace pays at all, it is within hours, so it needs watching live
   (BitGo adds a token, then Wintermute's wallets for it). Two or three past cases cannot show it pays;
   `recorder/sources/listing_watch.py` now collects new cases.
+
+## Live watchers (2026-11-22 and 11-24)
+
+Both run in the [recorder](../recorder/), write encrypted rows, and push to a private ntfy topic.
+
+- `listing_watch` (from 11-22): Wintermute receiving a token BitGo added in the last 30 days, on Ethereum,
+  Base, Arbitrum and Robinhood Chain, checked every 5 min. It also pushes each new Robinhood Chain token
+  BitGo adds.
+- `events` (pushes from 11-24): Hyperliquid HIP-3 names, checked about once a minute.
+  - **Registered:** a name appears halted.
+  - **Opening prep:** while it is still halted, the deployer changes its open-interest cap or funding
+    settings (`perpDexs`).
+  - **Open:** trading starts.
+
+  The books every 10 s around each opening are already kept, to measure how far the first 30 minutes trade
+  from the oracle and how fast that closes.
+
+Between 11-22 and 11-24, xyz registered 8 more names, all still halted: ACN, SNAP, NU, CATL, INNOLIGHT,
+AMEC, IBIDEN and SOXS.
+
+Following the wallets that found Hyperliquid early was checked too, and failed: see
+[2026-11-23-early-finders](../2026-11-23-early-finders/).

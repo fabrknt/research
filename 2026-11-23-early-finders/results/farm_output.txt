@@ -1,0 +1,7 @@
+A all looked-up: n=2000 Lighter-early 224 11.2% [9.9%,12.7%]  Var-early 162 8.1% [7.0%,9.4%]
+A flagged tiny-repeat or burst (full-cohort signals): n=104 Lighter-early 26 25.0% [17.7%,34.1%]  Var-early 17 16.3% [10.5%,24.6%]
+A minus tiny/burst: n=1896 Lighter-early 198 10.4% [9.1%,11.9%]  Var-early 145 7.6% [6.5%,8.9%]
+A farmer-sample (looked-up part): n=274 Lighter-early 39 14.2% [10.6%,18.9%]  Var-early 25 9.1% [6.3%,13.1%]
+  sample flagged any (tiny/burst/shared-EOA-funder/nonce>=3000): n=29 Lighter-early 11 37.9% [22.7%,56.0%]  Var-early 5 17.2% [7.6%,34.5%]
+  sample unflagged: n=245 Lighter-early 28 11.4% [8.0%,16.0%]  Var-early 20 8.2% [5.3%,12.3%]
+flag counts in sample: {'tiny': 16, 'burst': 5, 'shared': 4, 'nonce3000': 7}

@@ -1,0 +1,57 @@
+B Elysium, every fill offset on HyperCore's HYPE perp at the next minute's open; E for the fee and quotes = this minute's open x median (price / its minute's open) of the trades in the previous 30 min (no hindsight); funding applied for 76 hours starting inside the tape (78 fetched), mean +0.095 bp/h
+HyperCore perp (next-minute open): 69.852 -> 56.602
+
+  bp variant            cost   P&L/day  volume/day   bp/vol  ely leg/d perp leg/d   costs/d   fund/d    max DD if basis closes
+  10 as posted           4.5      -212      205267    -10.3      -5291       5159       -93       13      5259           -145
+  10 as posted          14.5      -418      205267    -20.3      -5291       5159      -298       13      5267           -350
+  10 directional fee     4.5       -54      134392     -4.0      -3019       3019       -61        7      3683             -7
+  10 directional fee    14.5      -189      134392    -14.1      -3019       3019      -195        7      3688           -142
+  10 quote around E      4.5     -2079     1012012    -20.5      -2745       1119      -456        3      7792          -2035
+  10 quote around E     14.5     -3094     1012012    -30.6      -2745       1119     -1471        3     11010          -3049
+  20 as posted           4.5       -34       57434     -5.9       -355        347       -26        1       875            -22
+  20 as posted          14.5       -91       57434    -15.9       -355        347       -83        1       880            -80
+  20 directional fee     4.5        28       36680      7.8       -385        430       -17        1      1002             41
+  20 directional fee    14.5        -8       36680     -2.3       -385        430       -53        1      1005              4
+  20 quote around E      4.5      -840      426919    -19.7        449      -1094      -193       -2      3332           -834
+  20 quote around E     14.5     -1268      426919    -29.7        449      -1094      -621       -2      4233          -1262
+  30 as posted           4.5        -4       26043     -1.4       -227        235       -12        1       538              4
+  30 as posted          14.5       -30       26043    -11.4       -227        235       -38        1       542            -22
+  30 directional fee     4.5        31       16518     18.6       -189        226        -7        0       492             37
+  30 directional fee    14.5        14       16518      8.6       -189        226       -24        0       494             21
+  30 quote around E      4.5      -318      172278    -18.4        812      -1050       -78       -2      2019           -320
+  30 quote around E     14.5      -490      172278    -28.5        812      -1050      -251       -2      2304           -493
+  50 as posted           4.5        11        7622     14.3        -49         63        -3        0       165             13
+  50 as posted          14.5         3        7622      4.2        -49         63       -11        0       166              5
+  50 directional fee     4.5        25        5296     47.5        -56         84        -2        0       197             28
+  50 directional fee    14.5        20        5296     37.5        -56         84        -8        0       197             23
+  50 quote around E      4.5       -24       39283     -6.1        454       -460       -18       -1       694            -26
+  50 quote around E     14.5       -64       39283    -16.2        454       -460       -57       -1       714            -65
+
+hedged settings with P&L above zero: 7 of 24
+cost = bp of perp notional per trade: 4.5 = HyperCore taker fee only, 14.5 = plus 10 bp slippage
+largest change from marking the inventory at HyperCore's last price instead: $67 a day
+Elysium tape volume: $3596871 a day
+
+the same with the hindsight E (minute interpolated to its close), cost 4.5 bp:
+  10 directional fee   P&L/day     21
+  10 quote around E    P&L/day   -105
+  20 directional fee   P&L/day     40
+  20 quote around E    P&L/day     83
+  30 directional fee   P&L/day     38
+  30 quote around E    P&L/day     59
+  50 directional fee   P&L/day     26
+  50 quote around E    P&L/day     42
+
+larger quotes, cost 14.5 bp:
+  30 as posted         quote $500    P&L/day    -30  volume/day    26043  bp/vol  -11.4  max DD    542
+  30 as posted         quote $2000   P&L/day    -41  volume/day    37897  bp/vol  -10.9  max DD    847
+  30 as posted         quote $5000   P&L/day    -38  volume/day    43934  bp/vol   -8.7  max DD   1077
+  30 directional fee   quote $500    P&L/day     14  volume/day    16518  bp/vol    8.6  max DD    494
+  30 directional fee   quote $2000   P&L/day     27  volume/day    24652  bp/vol   10.9  max DD    821
+  30 directional fee   quote $5000   P&L/day     31  volume/day    29100  bp/vol   10.7  max DD    981
+  50 as posted         quote $500    P&L/day      3  volume/day     7622  bp/vol    4.2  max DD    166
+  50 as posted         quote $2000   P&L/day     -1  volume/day    11376  bp/vol   -1.3  max DD    241
+  50 as posted         quote $5000   P&L/day      4  volume/day    12622  bp/vol    2.9  max DD    327
+  50 directional fee   quote $500    P&L/day     20  volume/day     5296  bp/vol   37.5  max DD    197
+  50 directional fee   quote $2000   P&L/day     33  volume/day     8397  bp/vol   39.3  max DD    339
+  50 directional fee   quote $5000   P&L/day     38  volume/day     9644  bp/vol   39.5  max DD    425

@@ -9,7 +9,8 @@ same exchange, the same quote size and the same rules: a simulated market of ran
 flow next to Hyperliquid.
 
 ```
-cargo run --release      # about a minute to build, a second to run; writes results/
+python3 -I fetch_funding.py   # HYPE hourly funding from HyperCore's public API -> data/ (for the hedge)
+cargo run --release           # about a minute to build, a second to run; writes results/
 ```
 
 ## Answer
@@ -47,7 +48,41 @@ Where Elysium's loss comes from, quoting 10 bp from the last trade (where it fil
   noise. It wins at 30 bp and above. The variants that see the hidden price (the fee by direction, quoting
   around it) win at 10 bp: +$2,499 and +$2,989 a day.
 - **The two variants that use E are given hindsight** (below), and still lose on Elysium in every setting.
-- Every setting is in `results/summary.txt`; hourly equity at 30 bp in `results/equity_hourly.csv`.
+- Every setting is in `results/summary.txt`; hourly equity at 30 bp in `results/equity_hourly.csv`;
+  the hedged runs in `results/hedged.txt`.
+
+## Hedged on HyperCore (added 2026-11-24)
+
+**Hedged, a few settings end above zero, and the best earns tens of dollars a day.** If every fill
+is offset on HyperCore's HYPE perp, most of the inventory loss is offset: quoting 10 bp from the last trade, −$5,291 a day becomes
+−$212 (perp at the taker fee, 4.5 bp) or −$418 (plus 10 bp slippage). With the perp costs, 7 of the 24
+hedged settings end above zero and 17 still lose; the best is +$31 a day. Perp margin and liquidation
+are not modelled. Bigger quotes hardly help: $5,000 a side
+instead of $500 makes at most +$38 a day.
+
+| hedged, $500 a side, P&L a day | perp cost 4.5 bp | 14.5 bp |
+|---|---|---|
+| 30 bp, as posted | −$4 | −$30 |
+| 30 bp, fee by direction | +$31 | +$14 |
+| 50 bp, as posted | +$11 | +$3 |
+| 50 bp, fee by direction | +$25 | +$20 |
+| 30 bp, quote around E | −$318 | −$490 |
+
+- **The hindsight in E was worth all of the "quote around E" result.** With E rebuilt from what is known
+  at the trade (this minute's open times the median basis of earlier trades), quoting around it loses in
+  every hedged setting (30 bp: −$318 a day at the 4.5 bp cost). With the hindsight E, the same runs
+  made up to +$83 a day (30 bp: +$59). The fee by direction still holds with the causal E: at 30 bp,
+  +$31 a day against +$38 with the hindsight one.
+- The hedge trades at the open of the minute after each fill (0 to 60 s later, known only after it);
+  until then it is not on the perp, and the equity path (max DD) marks the perp at the latest open
+  already known. Funding is HYPE's hourly rate on HyperCore for the 76 hours that start inside the tape
+  (78 fetched), mean +0.095 bp an hour, which a short collects; it adds −$2 to +$13 a day.
+- "If basis closes" in `results/hedged.txt` marks the inventory at HyperCore's last price instead of
+  Elysium's: it changes any row by at most $67 a day.
+- Not counted: margin for the perp, the bridge to settle the inventory (the canonical withdrawal is
+  about 5.5 days, a figure from [2026-11-21-elysium-direction](../2026-11-21-elysium-direction/), not
+  from this replay), and the perp's own liquidation risk. The hedged settings that end above zero trade
+  $5K to $37K a day, against $3.6M a day on the tape.
 
 ## Method
 

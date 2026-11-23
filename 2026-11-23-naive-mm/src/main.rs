@@ -16,7 +16,13 @@
 //! Fee = max(30 bp, distance from our quote to E), at most 300 bp, as Shadowbook's DirectionalFee
 //! hook sets it. A taker pays it only if the all-in price is still no worse than what it got.
 //!
-//! usage: cargo run --release   (writes results/summary.txt and results/equity_hourly.csv)
+//! Hedge (results/hedged.txt, B only): every fill is offset on HyperCore's HYPE perp at the open of
+//! the minute after it (column h of the tape: known only after the fill, so no hindsight), paying a
+//! stated cost per dollar of perp traded, and the perp pays or earns HYPE's hourly funding
+//! (data/funding_hype.csv from fetch_funding.py). The perp position is always minus the inventory.
+//!
+//! usage: python3 -I fetch_funding.py; cargo run --release
+//!        (writes results/summary.txt, results/equity_hourly.csv and results/hedged.txt)
 
 mod strategy;
 
@@ -30,7 +36,9 @@ struct Trade {
     buy: bool, // the taker buys HYPE
     px: f64,
     usd: f64,
-    e: f64, // reference price
+    e: f64,  // reference price
+    h: f64,  // HyperCore HYPE perp, open of the minute after the trade (the hedge price)
+    ec: f64, // E from what is known at the trade: this minute's open x median basis of earlier trades
 }
 
 fn load_tape(path: &str) -> Vec<Trade> {
@@ -45,6 +53,8 @@ fn load_tape(path: &str) -> Vec<Trade> {
                 px: f[2].parse().unwrap(),
                 usd: f[3].parse().unwrap(),
                 e: f[4].parse().unwrap(),
+                h: f[5].parse().unwrap(),
+                ec: f[6].parse().unwrap(),
             }
         })
         .collect()
@@ -90,6 +100,8 @@ fn random_bot_market(tape: &[Trade]) -> Vec<Trade> {
                 px,
                 usd: r.usd,
                 e: fair,
+                h: fair,
+                ec: fair,
             }
         })
         .collect()
@@ -108,6 +120,32 @@ struct Run {
     markout5: f64,
     markout5_volume: f64, // fills with a full five minutes of tape after them
     hourly: Vec<(u64, f64)>,
+    // with a hedge: the Elysium leg (cash + inventory at Elysium's last price), the perp leg before
+    // costs, what the perp trades cost, funding, and the inventory's value at HyperCore's last price
+    elysium_leg: f64,
+    perp_leg: f64,
+    hedge_costs: f64,
+    funding: f64,
+    inv_at_hl_last: f64,
+    funding_hours: u32,
+    funding_rate_sum: f64,
+}
+
+struct Hedge<'a> {
+    cost_bp: f64,
+    funding: &'a [(u64, f64)], // (hour start, rate): the perp pays rate x position value each hour
+}
+
+fn load_funding(path: &str) -> Vec<(u64, f64)> {
+    let text = std::fs::read_to_string(path)
+        .unwrap_or_else(|e| panic!("{path}: {e} (run python3 -I fetch_funding.py first)"));
+    text.lines()
+        .skip(1)
+        .map(|l| {
+            let (t, r) = l.split_once(',').unwrap();
+            (t.parse().unwrap(), r.parse().unwrap())
+        })
+        .collect()
 }
 
 fn directional_fee(our_px: f64, e: f64, taker_buys: bool) -> f64 {
@@ -124,10 +162,27 @@ fn run(
     cap: Option<f64>,
     rule: bool,
     around_ref: bool,
+    hedge: Option<&Hedge>,
+    quote_usd: f64,
 ) -> Run {
+    // perp hedges wait until the minute after their fill opens; until then they are not on the perp
+    let (mut perp, mut perp_cash, mut next_funding) = (0.0f64, 0.0f64, 0usize);
+    let mut pending: std::collections::VecDeque<(u64, f64, f64)> = Default::default(); // (when, dq, price)
+    let mut known_h = market[0].h; // latest HyperCore open known at the current time
+    let mut k = 0usize; // trades whose next-minute open is known
+    let execute = |until: u64,
+                   perp: &mut f64,
+                   perp_cash: &mut f64,
+                   pending: &mut std::collections::VecDeque<(u64, f64, f64)>| {
+        while pending.front().is_some_and(|p| p.0 <= until) {
+            let (_, dq, price) = pending.pop_front().unwrap();
+            *perp += dq;
+            *perp_cash -= dq * price;
+        }
+    };
     let fair = |r: &Trade| if around_ref { r.e } else { r.px };
     let mut book = Book::new();
-    let mut mm = NaiveMm::new(half_spread_bp, 500.0, cap);
+    let mut mm = NaiveMm::new(half_spread_bp, quote_usd, cap);
     let (mut inv, mut cash) = (0.0f64, 0.0f64);
     let mut out = Run::default();
     let mut peak = 0.0f64;
@@ -147,6 +202,24 @@ fn run(
         .collect();
     mm.on_trade(&mut book, fair(&market[0]), inv);
     for (i, r) in market.iter().enumerate().skip(1) {
+        if let Some(hd) = hedge {
+            while k < i && (market[k].t / 60 + 1) * 60 <= r.t {
+                known_h = market[k].h;
+                k += 1;
+            }
+            // funding for each hour that started before this trade, on the perp position held then
+            while next_funding < hd.funding.len() && hd.funding[next_funding].0 <= r.t {
+                let ft = hd.funding[next_funding].0;
+                execute(ft, &mut perp, &mut perp_cash, &mut pending);
+                if ft >= market[0].t {
+                    out.funding -= perp * known_h * hd.funding[next_funding].1; // a long pays a positive rate
+                    out.funding_hours += 1;
+                    out.funding_rate_sum += hd.funding[next_funding].1;
+                }
+                next_funding += 1;
+            }
+            execute(r.t, &mut perp, &mut perp_cash, &mut pending);
+        }
         let ours = if r.buy {
             book.best_ask()
         } else {
@@ -202,12 +275,19 @@ fn run(
                 }
                 cash += fee;
                 out.fees += fee;
+                if let Some(hd) = hedge {
+                    // offset the fill on the perp at the next minute's open
+                    let dq = if fill.maker_side == Side::Buy { -q } else { q };
+                    pending.push_back(((r.t / 60 + 1) * 60, dq, r.h));
+                    out.hedge_costs += dq.abs() * r.h * hd.cost_bp / 1e4;
+                }
                 out.volume += q * px;
                 out.fills += 1;
             }
         }
         mm.on_trade(&mut book, fair(r), inv);
-        let equity = cash + inv * r.px;
+        // costs are booked when the hedge is decided; pending hedges are not yet on the perp
+        let equity = cash + inv * r.px + perp_cash + perp * known_h - out.hedge_costs + out.funding;
         peak = peak.max(equity);
         out.max_dd = out.max_dd.max(peak - equity);
         out.max_long = out.max_long.max(inv * r.px);
@@ -219,7 +299,12 @@ fn run(
         }
     }
     let last = market.last().unwrap().px;
-    out.pnl = cash + inv * last;
+    let last_h = market.last().unwrap().h; // the open of the minute after the last trade
+    execute(u64::MAX, &mut perp, &mut perp_cash, &mut pending);
+    out.elysium_leg = cash + inv * last;
+    out.perp_leg = perp_cash + perp * last_h;
+    out.inv_at_hl_last = inv * last_h;
+    out.pnl = out.elysium_leg + out.perp_leg - out.hedge_costs + out.funding;
     out.end_inventory_usd = inv * last;
     out
 }
@@ -298,7 +383,7 @@ fn main() {
                 ("directional fee", None, true, false),
                 ("quote around E", None, false, true),
             ] {
-                let r = run(market, d, cap, rule, around_ref);
+                let r = run(market, d, cap, rule, around_ref, None, 500.0);
                 if name.starts_with('B') {
                     b_total += 1;
                     b_losing += usize::from(r.pnl < 0.0);
@@ -343,4 +428,141 @@ fn main() {
         csv.push('\n');
     }
     std::fs::write("results/equity_hourly.csv", csv).unwrap();
+    hedged(&tape, days);
+}
+
+/// B with every fill offset on HyperCore's perp. P&L marks the inventory at Elysium's last price and
+/// the perp at HyperCore's; "if basis closes" marks the inventory at HyperCore's last price instead
+/// (what it would be worth after the canonical withdrawal, if the gap were gone by then).
+fn hedged(tape: &[Trade], days: f64) {
+    let funding = load_funding("data/funding_hype.csv");
+    // the fee by direction and quoting around E decide on the E known at the trade (no hindsight)
+    let hindsight = tape;
+    let causal: Vec<Trade> = tape.iter().map(|r| Trade { e: r.ec, ..*r }).collect();
+    let tape = &causal[..];
+    let mut s = String::new();
+    // the hours applied: those starting from the first trade up to the last one
+    let (t0, t1) = (tape[0].t, tape.last().unwrap().t);
+    let rates: Vec<f64> = funding
+        .iter()
+        .filter(|x| x.0 >= t0 && x.0 <= t1)
+        .map(|x| x.1)
+        .collect();
+    writeln!(
+        s,
+        "B Elysium, every fill offset on HyperCore's HYPE perp at the next minute's open; E for the fee and quotes = this minute's open x median (price / its minute's open) of the trades in the previous 30 min (no hindsight); funding applied for {} hours starting inside the tape ({} fetched), mean {:+.3} bp/h",
+        rates.len(),
+        funding.len(),
+        rates.iter().sum::<f64>() / rates.len() as f64 * 1e4
+    )
+    .unwrap();
+    writeln!(
+        s,
+        "HyperCore perp (next-minute open): {:.3} -> {:.3}\n",
+        tape[0].h,
+        tape.last().unwrap().h
+    )
+    .unwrap();
+    writeln!(
+        s,
+        "{:>4} {:<17} {:>5} {:>9} {:>11} {:>8} {:>10} {:>10} {:>9} {:>8} {:>9} {:>14}",
+        "bp",
+        "variant",
+        "cost",
+        "P&L/day",
+        "volume/day",
+        "bp/vol",
+        "ely leg/d",
+        "perp leg/d",
+        "costs/d",
+        "fund/d",
+        "max DD",
+        "if basis closes"
+    )
+    .unwrap();
+    let mut positive = 0;
+    let mut total = 0;
+    let mut basis_gap = 0.0f64;
+    for d in [10.0, 20.0, 30.0, 50.0] {
+        for (variant, rule, around_ref) in [
+            ("as posted", false, false),
+            ("directional fee", true, false),
+            ("quote around E", false, true),
+        ] {
+            for cost_bp in [4.5, 14.5] {
+                let hd = Hedge {
+                    cost_bp,
+                    funding: &funding,
+                };
+                let r = run(tape, d, None, rule, around_ref, Some(&hd), 500.0);
+                let closes = r.pnl - r.end_inventory_usd + r.inv_at_hl_last;
+                total += 1;
+                positive += usize::from(r.pnl > 0.0);
+                basis_gap = basis_gap.max((closes - r.pnl).abs() / days);
+                writeln!(
+                    s,
+                    "{:>4} {:<17} {:>5} {:>9.0} {:>11.0} {:>8.1} {:>10.0} {:>10.0} {:>9.0} {:>8.0} {:>9.0} {:>14.0}",
+                    d, variant, cost_bp, r.pnl / days, r.volume / days, bp(r.pnl, r.volume),
+                    r.elysium_leg / days, r.perp_leg / days, -r.hedge_costs / days, r.funding / days,
+                    r.max_dd, closes / days
+                )
+                .unwrap();
+            }
+        }
+    }
+    writeln!(
+        s,
+        "\nhedged settings with P&L above zero: {positive} of {total}"
+    )
+    .unwrap();
+    writeln!(s, "cost = bp of perp notional per trade: 4.5 = HyperCore taker fee only, 14.5 = plus 10 bp slippage").unwrap();
+    writeln!(
+        s,
+        "largest change from marking the inventory at HyperCore's last price instead: ${basis_gap:.0} a day"
+    )
+    .unwrap();
+    writeln!(
+        s,
+        "Elysium tape volume: ${:.0} a day",
+        tape.iter().map(|r| r.usd).sum::<f64>() / days
+    )
+    .unwrap();
+    writeln!(
+        s,
+        "\nthe same with the hindsight E (minute interpolated to its close), cost 4.5 bp:"
+    )
+    .unwrap();
+    for d in [10.0, 20.0, 30.0, 50.0] {
+        for (variant, rule, around_ref) in [
+            ("directional fee", true, false),
+            ("quote around E", false, true),
+        ] {
+            let hd = Hedge {
+                cost_bp: 4.5,
+                funding: &funding,
+            };
+            let r = run(hindsight, d, None, rule, around_ref, Some(&hd), 500.0);
+            writeln!(s, "{:>4} {:<17} P&L/day {:>6.0}", d, variant, r.pnl / days).unwrap();
+        }
+    }
+    writeln!(s, "\nlarger quotes, cost 14.5 bp:").unwrap();
+    for d in [30.0, 50.0] {
+        for (variant, rule) in [("as posted", false), ("directional fee", true)] {
+            for q in [500.0, 2_000.0, 5_000.0] {
+                let hd = Hedge {
+                    cost_bp: 14.5,
+                    funding: &funding,
+                };
+                let r = run(tape, d, None, rule, false, Some(&hd), q);
+                writeln!(
+                    s,
+                    "{:>4} {:<17} quote ${:<6} P&L/day {:>6.0}  volume/day {:>8.0}  bp/vol {:>6.1}  max DD {:>6.0}",
+                    d, variant, q, r.pnl / days, r.volume / days, bp(r.pnl, r.volume), r.max_dd
+                )
+                .unwrap();
+            }
+        }
+    }
+    print!("{s}");
+    std::fs::write("results/hedged.txt", &s).unwrap();
 }

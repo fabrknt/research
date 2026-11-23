@@ -1,0 +1,51 @@
+== ALL units: units 92; crossers 31; non-crossers 61
+  primary success: crossers 6/31 = 19% [9%-36%] | non-crossers 8/61 = 13% [7%-24%] | all 14/92 = 15% [9%-24%]
+  token launched : crossers 13/31 = 42% [26%-59%] | non-crossers 21/61 = 34% [24%-47%] | all 34/92 = 37% [28%-47%]
+  early>=10: 4/18 = 22% [9%-45%] token 8/18 = 44% [25%-66%]
+  early>=20: 2/6 = 33% [10%-70%] token 3/6 = 50% [19%-81%]
+  crossers identified only: primary 6/25 = 24% [11%-43%] token 13/25 = 52% [33%-70%]
+== truly-new protocols only: units 75; crossers 25; non-crossers 50
+  primary success: crossers 5/25 = 20% [9%-39%] | non-crossers 3/50 = 6% [2%-16%] | all 8/75 = 11% [6%-20%]
+  token launched : crossers 8/25 = 32% [17%-52%] | non-crossers 11/50 = 22% [13%-35%] | all 19/75 = 25% [17%-36%]
+  early>=10: 3/14 = 21% [8%-48%] token 5/14 = 36% [16%-61%]
+  early>=20: 2/6 = 33% [10%-70%] token 3/6 = 50% [19%-81%]
+  crossers identified only: primary 5/19 = 26% [12%-49%] token 8/19 = 42% [23%-64%]
+
+Reya                         perp-chain         est=F early=156 prim=T tok=T peak=$81M last=$13.3M | A 10/500 (2.0%), late 0/500, rel.rep infx
+Aevo                         perp               est=F early=105 prim=T tok=T peak=$100M last=$14.4M | A 5/500 (1.0%), late 0/500, rel.rep infx
+Pike Finance                 lending            est=F early= 42 prim=F tok=T peak=$3M last=$0.0M | A 3/500 (0.6%), late 1/500, rel.rep 1.2x
+Blackwing                    perp               est=F early= 33 prim=F tok=F peak=$73M last=$0.7M | A 4/500 (0.8%), late 0/500, rel.rep infx
+Cega                         options            est=F early= 20 prim=F tok=F peak=$40M last=$0.4M | A 18/500 (3.6%), late 0/500, rel.rep infx
+nftperp                      perp               est=F early= 20 prim=F tok=F peak=$8M last=$0.0M | A 15/500 (3.0%), late 0/500, rel.rep infx
+Compound V3                  lending            est=T early= 18 prim=T tok=T peak=$12,314M last=$1,118.3M | A 0/500 (0.0%), late 0/500, rel.rep infx
+AirdropBroker (unidentified) other              est=F early= 18 prim=F tok=F peak=$0M last=$0.0M | A 6/500 (1.2%), late 0/500, rel.rep infx
+unid:0x34d9ecda              unknown            est=F early= 15 prim=F tok=F peak=$0M last=$0.0M | A 3/500 (0.6%), late 1/500, rel.rep 1.2x
+unid:0xc7d3ab41              unknown            est=F early= 14 prim=F tok=F peak=$0M last=$0.0M | A 2/500 (0.4%), late 0/500, rel.rep infx
+Polynomial                   perp-chain         est=T early= 11 prim=F tok=F peak=$14M last=$0.0M | A 8/500 (1.6%), late 0/500, rel.rep infx
+Stryke (Dopex V2)            options            est=T early= 11 prim=F tok=T peak=$162M last=$0.1M | A 7/500 (1.4%), late 0/500, rel.rep infx
+Harmonix                     vault              est=F early= 10 prim=F tok=T peak=$18M last=$4.2M | A 6/500 (1.2%), late 0/500, rel.rep infx
+ZeroBase ZKFi                vault              est=F early= 10 prim=T tok=T peak=$559M last=$59.8M | A 2/500 (0.4%), late 0/500, rel.rep infx
+LBA sale (unidentified)      token-sale         est=F early= 10 prim=F tok=F peak=$0M last=$0.0M | A 8/500 (1.6%), late 0/500, rel.rep infx
+Thetanuts                    options            est=T early= 10 prim=F tok=T peak=$52M last=$0.2M | A 4/500 (0.8%), late 0/500, rel.rep infx
+Synonym Finance              lending            est=F early= 10 prim=F tok=F peak=$0M last=$0.0M | A 9/500 (1.8%), late 0/500, rel.rep infx
+Skate                        vault              est=F early= 10 prim=F tok=F peak=$32M last=$0.1M | A 0/500 (0.0%), late 0/500, rel.rep infx
+Impossible Finance (IDO sale token-sale         est=T early=  9 prim=F tok=T peak=$26M last=$0.1M | A 5/500 (1.0%), late 0/500, rel.rep infx
+Fluid                        lending            est=F early=  7 prim=T tok=T peak=$2,684M last=$769.8M | A 3/500 (0.6%), late 0/500, rel.rep infx
+Launchpad (unidentified)     token-sale         est=F early=  7 prim=F tok=F peak=$0M last=$0.0M | A 6/500 (1.2%), late 0/500, rel.rep infx
+Manta CeDeFi                 points-campaign    est=F early=  7 prim=T tok=F peak=$142M last=$26.4M | A 1/500 (0.2%), late 0/500, rel.rep infx
+Aethir node sale             node-sale          est=F early=  7 prim=F tok=T peak=$0M last=$0.0M | A 1/500 (0.2%), late 1/500, rel.rep 0.4x
+unid:0xa304a057              unknown            est=F early=  7 prim=F tok=F peak=$0M last=$0.0M | A 0/500 (0.0%), late 1/500, rel.rep 0.0x
+LogX                         perp               est=F early=  6 prim=F tok=T peak=$16M last=$0.0M | A 5/500 (1.0%), late 0/500, rel.rep infx
+Radiant                      lending            est=T early=  6 prim=F tok=T peak=$387M last=$0.6M | A 6/500 (1.2%), late 0/500, rel.rep infx
+unid:0x43e5c369              unknown            est=F early=  5 prim=F tok=F peak=$0M last=$0.0M | A 5/479 (1.0%), late 1/479, rel.rep 2.0x
+Nautilus vaults (unidentifie vault              est=F early=  5 prim=F tok=F peak=$0M last=$0.0M | A 5/232 (2.2%), late 0/232, rel.rep infx
+unid:0x32d3bbb0              unknown            est=F early=  5 prim=F tok=F peak=$0M last=$0.0M | A 4/500 (0.8%), late 0/500, rel.rep infx
+JOJO                         perp               est=F early=  5 prim=F tok=F peak=$5M last=$0.0M | A 0/500 (0.0%), late 0/500, rel.rep infx
+unid:0x732c5e9d              unknown            est=F early=  5 prim=F tok=F peak=$0M last=$0.0M | A 5/191 (2.6%), late 1/191, rel.rep 2.0x
+
+cohort share in first 500: success median 0.005 n 6 | failure median 0.010438413361169102 n 25
+early count: success median 14.0 failure median 10
+crosser types [('unknown', 6), ('perp', 5), ('lending', 5), ('vault', 4), ('options', 3), ('token-sale', 3), ('perp-chain', 2), ('other', 1), ('points-campaign', 1), ('node-sale', 1)] successes by type [('lending', 2), ('perp-chain', 1), ('perp', 1), ('vault', 1), ('points-campaign', 1)]
+perp-like crossers 2/7 = 29% [8%-64%] token 3/7 = 43% [16%-75%] | non-perp crossers 4/24 = 17% [7%-36%] token 10/24 = 42% [24%-61%]
+
+[exited with code 0]

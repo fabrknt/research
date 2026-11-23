@@ -1,0 +1,17 @@
+Written 2026-11-23T03:02:35Z, before any candidate or outcome was looked at (the outflow scan was still running).
+
+Unit of analysis: a protocol. Contracts are grouped into a protocol by DefiLlama adapter label or by contract name().
+
+Candidate: a contract (eth_getCode not empty) that received USDC, USDC.e, USDT0 or WETH from cohort wallets on Arbitrum between 2023-11-01 and 2025-06-30. Excluded: HL Bridge2 and the legacy HL bridge, DEX routers and aggregators, AMM pools and pair contracts, bridges and cross-chain messaging, token contracts, CEX and payment infrastructure, multisigs and smart-wallet contracts.
+
+New protocol: the contract's first-ever inflow of these tokens falls on or after 2023-08-01.
+
+Early cohort arrival: a cohort wallet's first transfer to the contract lands within 60 days of the contract's first-ever inflow.
+
+Threshold (signal fires): at least 5 distinct early-HL cohort wallets arrive early.
+
+SUCCESS, primary: the protocol's DefiLlama TVL peaked at M or more at any time, AND its TVL is M or more in the latest DefiLlama data (Nov 2026), meaning it is still alive.
+
+SUCCESS, secondary: the protocol launched a token or an airdrop. Source: DefiLlama gecko_id or the CoinGecko listing.
+
+Protocols with no DefiLlama listing count as FAILURE for the primary rule. They are also reported separately as 'unlabeled'.
