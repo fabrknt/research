@@ -1,0 +1,41 @@
+settings: bots cross 20 bp + |N(0, 3 bp)|, hidden price moves 1.82 bp a trade and gives back 1% a trade; directional fee toward E = max(30 bp, distance) up to 300 bp
+57393 trades over 3.21 days, quote $500 a side; P&L marked to each market's last price
+Elysium tape: takers bought $5456406, sold $6080558; E moves 1.82 bp per trade (sd of log change)
+HYPE on Elysium: 69.70 -> 56.50 (-18.9%), tape 1794960068 to 1795237196 (unix s)
+
+market       bp variant              P&L/day  volume/day   bp/vol  5min bp  fees/day     max DD   max |inv|    end inv
+A bots       10 as posted              -1872     1514090    -12.4    -12.4         0       6109       30321      20929
+A bots       10 inventory cap 5K       -1878     1505736    -12.5    -12.4         0       6031        5494      -4400
+A bots       10 directional fee         2499     1437465     17.4     17.4      4307        235       24825      13834
+A bots       10 quote around E          2989     3047625      9.8      9.9         0        273       36971     -20879
+A bots       20 as posted               -363     1512439     -2.4     -2.4         0       1316       31284      22024
+A bots       20 inventory cap 5K        -380     1503436     -2.5     -2.4         0       1231        5474      -4266
+A bots       20 directional fee          241      351536      6.9      6.8       267        251       27483      26112
+A bots       20 quote around E          4949     2523081     19.6     19.7         0        169       22881     -20019
+A bots       30 as posted               1150     1512451      7.6      7.6         0        345       32361      23170
+A bots       30 inventory cap 5K        1123     1503297      7.5      7.6         0         42        5476      -4194
+A bots       30 directional fee         1149     1505833      7.6      7.6         0        371       34484      24045
+A bots       30 quote around E            52       15307     33.7     28.9         0        129       11134      10127
+A bots       50 as posted                194       88905     21.8     23.6         0        258       24378     -23073
+A bots       50 inventory cap 5K         194       82934     23.4     23.4         0         51        5491      -3923
+A bots       50 directional fee          194       88905     21.8     23.6         0        258       24378     -23073
+A bots       50 quote around E             0           0      0.0      0.0         0          0           0          0
+
+B Elysium    10 as posted              -5291      205267   -257.8     -6.4         0      21410      125837     121909
+B Elysium    10 inventory cap 5K        -294      162744    -18.1     -6.1         0       1050        5506       1541
+B Elysium    10 directional fee        -2088      103014   -202.7      6.7        12       9088       74022      71861
+B Elysium    10 quote around E         -1997      341447    -58.5      2.1         0       9085      105138     100828
+B Elysium    20 as posted               -355       57434    -61.9      0.3         0       1758       22353      20708
+B Elysium    20 inventory cap 5K        -155       51816    -30.0     -1.2         0        631        5426       3328
+B Elysium    20 directional fee         -250       32007    -78.2     18.9         5       1730       26304      25240
+B Elysium    20 quote around E         -1054       87820   -120.0     15.8         0       5316       73294      70885
+B Elysium    30 as posted               -227       26043    -87.1      3.0         0       1050       14264      13417
+B Elysium    30 inventory cap 5K        -156       23038    -67.7      1.7         0        627        5498       4005
+B Elysium    30 directional fee         -303       14913   -203.5     26.6         1       1409       15882      15246
+B Elysium    30 quote around E          -616       30879   -199.4     25.1         0       3132       46643      45224
+B Elysium    50 as posted                -49        7622    -64.1     21.5         0        317        4148       4016
+B Elysium    50 inventory cap 5K         -49        7622    -64.1     21.5         0        317        4148       4016
+B Elysium    50 directional fee          -83        5644   -147.6     52.3         0        471        6164       6120
+B Elysium    50 quote around E          -222        9929   -223.6     39.3         0       1198       20008      19334
+
+B Elysium settings with P&L below zero: 16 of 16

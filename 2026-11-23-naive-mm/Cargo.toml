@@ -1,0 +1,12 @@
+[package]
+name    = "naive-mm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license = "Apache-2.0"
+
+[dependencies]
+# the exchange: rdk-clob's matching engine, from the public repo at a fixed rev
+rdk-clob = { git = "https://github.com/psyto/rdk", rev = "653b8d4e1216d03ad1fa246d32d2a7bc9243be5f" }
+
+[workspace]

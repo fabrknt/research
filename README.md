@@ -6,6 +6,7 @@ this repo holds what produced it. Newest first.
 
 | date | study | write-up | answer |
 |---|---|---|---|
+| 2026-11-23 | [Naive market maker](2026-11-23-naive-mm/) | (write-up to come) | A market maker quoting around the last trade, replayed on rdk-clob: +$1,150/day on a random-bot market, negative in all 16 settings on Elysium's HYPE/USDC flow (11-18..21). As posted, fills 20 bp or more out were at or above water 5 min later; it ended long while the tape sold on net and HYPE fell 19%. A fee by direction improved the fill, not the inventory |
 | 2026-11-22 | [Sealed hunches](hunches/) | (as they come due) | Hunches about markets and needs, written before they can be judged: only the hash is published, stamped on Bitcoin, and each is opened when due, hit or miss |
 | 2026-11-21 | [Recorder](recorder/) | (infrastructure) | Recording, free APIs only, in one job chain: Hyperliquid asset ctxs for every dex each minute, Variational quotes with the Lighter and HL books every 5 min, every Lighter blob, Solana prop AMM quotes each minute, books every 10–30 s for 72 h around big moves and new listings, each venue's rules and docs daily |
 | 2026-11-21 | [Stock pools by session](2026-11-21-stock-pool-sessions/) | [Where do LPs leak on new markets: in the hours, or in the direction of the trade?](https://fabrknt.com/research/lp-leak-four-markets) | $671M on Robinhood Chain over 25 days: LPs −2.6 bp at 1 h, half of it at the open. Swaps closing the gap to xyz cost LPs −11.5 bp; a fee on that distance beats a flat fee, a session schedule doesn't |
