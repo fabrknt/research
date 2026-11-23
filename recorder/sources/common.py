@@ -1,6 +1,7 @@
 """HTTP helpers shared by the sources: JSON GET/POST and plain text, with retries."""
 
 import json
+import os
 import time
 import urllib.request
 
@@ -39,3 +40,18 @@ def hl(body):
 def hl_dexes() -> list[str]:
     """"" for the main dex, then every HIP-3 dex by name."""
     return [""] + [d["name"] for d in hl({"type": "perpDexs"}) if d]
+
+
+def notify(title: str, body: str) -> bool:
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic:
+        return True
+    for i in range(3):
+        try:
+            req = urllib.request.Request(f"https://ntfy.sh/{topic}", data=body.encode(),
+                                         headers={"Title": title, "Priority": "high", "user-agent": "fabrknt-research"})
+            urllib.request.urlopen(req, timeout=15).read()
+            return True
+        except Exception:
+            time.sleep(2 + 3 * i)
+    return False  # the row is still the record

@@ -39,11 +39,24 @@ NAMES = {
     "GMEx": ("Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc", "xyz:GME"),
     "SPYx": ("XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W", None),
     "QQQx": ("Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ", None),
+    # from 2026-11-24, the rest of the xStocks with an xyz perp and some Jupiter volume (24h on 2026-11-23:
+    # ANTx $17M, SPCXx 2.6M, AMZNx 0.95M, AVGOx 0.70M, INTCx 0.28M, STRCx 0.24M, HOODx 0.22M, PLTRx 0.09M).
+    # In US hours on 2026-11-23 the big names' $10k routes were prop AMMs; whether the smaller ones are
+    # too is the question, so these are asked at $10k and $100k only (QUOTED_FROM_10K)
+    "ANTx": ("XsYzw7XHj8K2WHeoeNQVyevMmzjzXfcJ8tQ4FmdN1DL", "xyz:ANT"),
+    "SPCXx": ("Xs3oZwbHvqis4NYcf4YKWmEia2eC84wSiVrcYcTqpH8", "xyz:SPCX"),
+    "AMZNx": ("Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg", "xyz:AMZN"),
+    "AVGOx": ("XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo", "xyz:AVGO"),
+    "INTCx": ("XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM", "xyz:INTC"),
+    "STRCx": ("Xs78JED6PFZxWc2wCEPspZW9kL3Se5J7L5TChKgsidH", "xyz:STRC"),
+    "HOODx": ("XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg", "xyz:HOOD"),
+    "PLTRx": ("XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4", "xyz:PLTR"),
 }
+QUOTED_FROM_10K = {"ANTx", "SPCXx", "AMZNx", "AVGOx", "INTCx", "STRCx", "HOODx", "PLTRx"}
 SIZES = (1_000, 10_000, 100_000)  # USD of USDC in
 ALONE = "Hadron"
 SOLANA_RPC = "https://api.mainnet-beta.solana.com"
-PAUSE = 1.0  # 96 quotes a run, about 2 minutes; solana_quotes.quote also holds both sources to 80 a minute
+PAUSE = 1.0  # 128 quotes a run, about 3 minutes with solana_quotes' 44 a minute inside the shared 80 a minute
 
 
 def _ask(row: dict, params: dict) -> tuple[dict, int]:
@@ -85,7 +98,8 @@ def run(state: dict) -> list[dict]:
             except Exception as e:
                 rows.append({"t": time.time(), "kind": "hl_book", "sym": sym, "coin": perp, "err": type(e).__name__})
                 books_failed += 1
-        jobs = [("any", usd) for usd in SIZES] + [(ALONE, SIZES[0])]
+        jobs = [("any", usd) for usd in SIZES[1:]] if sym in QUOTED_FROM_10K else \
+            [("any", usd) for usd in SIZES] + [(ALONE, SIZES[0])]
         for venue, usd in jobs:
             only = {"dexes": venue, "onlyDirectRoutes": "true"} if venue != "any" else {}
             buy, f = _ask({"t": time.time(), "kind": "quote", "sym": sym, "venue": venue, "side": "buy",

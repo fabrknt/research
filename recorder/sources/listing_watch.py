@@ -34,9 +34,8 @@ import hmac
 import os
 import re
 import time
-import urllib.request
 
-from common import fetch
+from common import fetch, notify
 
 BITGO = "https://raw.githubusercontent.com/BitGo/BitGoJS/master/modules/statics/src/"
 FILES_API = "https://api.github.com/repos/BitGo/BitGoJS/contents/modules/statics/src/coins"
@@ -102,21 +101,6 @@ def read_bitgo() -> dict:
     if len(tokens) < 500:  # a partial or changed layout: don't let it reset the baseline
         raise RuntimeError(f"only {len(tokens)} BitGo tokens parsed")
     return tokens
-
-
-def notify(title: str, body: str) -> bool:
-    topic = os.environ.get("NTFY_TOPIC")
-    if not topic:
-        return True
-    for i in range(3):
-        try:
-            req = urllib.request.Request(f"https://ntfy.sh/{topic}", data=body.encode(),
-                                         headers={"Title": title, "Priority": "high", "user-agent": "fabrknt-research"})
-            urllib.request.urlopen(req, timeout=15).read()
-            return True
-        except Exception:
-            time.sleep(2 + 3 * i)
-    return False  # the row is still the record
 
 
 def get_logs(chain: str, addrs: list, a: int, b: int) -> list:

@@ -11,16 +11,24 @@ Lighter lists the same symbol. Book failures are counted in the public status, a
 more of the wanted books failed, or with hot names but no Lighter market list, is incomplete, so the health
 check sees it.
 
-Rows: {"kind": "trigger", "name", "why": "move" | "new" | "registered", "move"} and {"kind": "book", "name", "hl", "lighter"}.
+A registered name's deployer settings (perpDexs: open-interest cap, funding multiplier, interest rate, clamp)
+are read with the pending check; a change while it is still halted is the deployer preparing the opening and
+gives a "prep" trigger row. If NTFY_TOPIC is set, "registered", "prep" and "new" rows are also pushed to
+https://ntfy.sh/<topic> (a secret; the only place names leave the encrypted rows); failed pushes are counted
+in status push_failed.
+
+Rows: {"kind": "trigger", "name", "why": "move" | "new" | "registered" | "prep", "move", "oracle"?, "prep"?}
+and {"kind": "book", "name", "hl", "lighter"}.
 The state is published unencrypted, so it holds names only as hashes (they come from the venues' APIs):
-state["known"] the names seen so far, state["hot"] hash -> expiry.
+state["known"] the names seen so far, state["hot"] hash -> expiry, state["registered"] halted names seen,
+state["prep"] hash -> hash of its deployer settings.
 """
 
 import hashlib
 import time
 from collections import deque
 
-from common import fetch, hl, hl_dexes
+from common import fetch, hl, hl_dexes, notify
 
 LIGHTER = "https://mainnet.zklighter.elliot.ai/api/v1"
 MOVE = 0.015
@@ -34,7 +42,10 @@ PENDING_EVERY = 6  # runs: re-read the dexes holding never-traded halted names (
 LIGHTER_EVERY = 3  # runs: about 18 Lighter calls a minute at most, beside one_quote's 40 every 5 minutes
 START_DELAY = 20   # s: the first run waits, so this cold start doesn't stack on the other sources'
 
-_cache = {"at": 0.0, "vlm": {}, "dexes": [], "halted": {}, "lighter": {}, "lighter_ok": True, "runs": 0}
+_cache = {"at": 0.0, "vlm": {}, "dexes": [], "halted": {}, "oracle": {}, "prep": {}, "lighter": {}, "lighter_ok": True,
+          "runs": 0}
+PREP_FIELDS = {"assetToStreamingOiCap": "oi_cap", "assetToFundingMultiplier": "funding_mult",
+               "assetToFundingInterestRate": "funding_rate", "assetToFundingClamp": "funding_clamp"}
 _mids: deque = deque()  # (t, {name: mid}) over the last WINDOW_S + a little
 
 
@@ -47,6 +58,7 @@ def read_dex(dex: str, vlm: dict, halted: dict) -> None:
     for u, c in zip(meta["universe"], ctxs):
         if u.get("isDelisted"):
             halted[u["name"]] = dex
+            _cache["oracle"][u["name"]] = c.get("oraclePx")
         else:
             vlm[u["name"]] = float(c.get("dayNtlVlm") or 0)
 
@@ -76,6 +88,20 @@ def check_pending(known: set) -> None:
         _cache["vlm"].update(vlm)
 
 
+def read_prep() -> None:
+    """Each HIP-3 name's deployer settings, from one perpDexs call (kept as they were if it fails)."""
+    try:
+        prep = {}
+        for d in hl({"type": "perpDexs"}):
+            for field, short in PREP_FIELDS.items():
+                for item in (d or {}).get(field) or []:
+                    if isinstance(item, list) and len(item) == 2 and isinstance(item[0], str):
+                        prep.setdefault(item[0], {})[short] = item[1]
+        _cache["prep"], _cache["prep_read"] = prep, True
+    except Exception:
+        pass
+
+
 def lighter_markets() -> None:
     _cache["lighter_try"] = time.time()
     try:
@@ -99,6 +125,8 @@ def run(state: dict) -> list[dict]:
     _cache["runs"] += 1
     if _cache["runs"] % PENDING_EVERY == 0:
         check_pending(set(state.get("known", [])))
+        if any(d for d in _cache["halted"].values()):
+            read_prep()
     mids = {}
     for dex in _cache["dexes"]:
         for name, px in hl({"type": "allMids", **({"dex": dex} if dex else {})}).items():
@@ -119,12 +147,24 @@ def run(state: dict) -> list[dict]:
     first = not known
     first_reg = "registered" not in state  # names already halted when this check started are not news
     registered = set(state.get("registered", []))
+    preps = dict(state.get("prep", {}))
     for name in _cache["halted"]:  # registered but not trading: a name that never traded is a coming listing
         k = key(name)
-        if k not in known and k not in registered:
+        if k in known:
+            continue
+        p = _cache["prep"].get(name, {})
+        ph = key(name + repr(sorted(p.items())))
+        if k not in registered:
             registered.add(k)
             if not (first or first_reg):
-                rows.append({"t": now, "kind": "trigger", "name": name, "why": "registered", "move": None})
+                rows.append({"t": now, "kind": "trigger", "name": name, "why": "registered", "move": None,
+                             "oracle": _cache["oracle"].get(name), "prep": p})
+        elif _cache.get("prep_read") and k in preps and preps[k] != ph:
+            rows.append({"t": now, "kind": "trigger", "name": name, "why": "prep", "move": None,
+                         "oracle": _cache["oracle"].get(name), "prep": p})
+        if _cache.get("prep_read"):  # compare and store only once settings have been read in this process
+            preps[k] = ph
+    preps = {k: v for k, v in preps.items() if k in registered and k not in known}
     for name, px in mids.items():
         k = key(name)
         why, move = None, None
@@ -172,8 +212,21 @@ def run(state: dict) -> list[dict]:
                 failed += 1
         rows.append(row)
 
+    push_failed = 0
+    for r in rows:
+        if r["kind"] != "trigger" or r["why"] == "move":
+            continue
+        p = ", ".join(f"{a} {b}" for a, b in sorted((r.get("prep") or {}).items()))
+        title, body = {
+            "registered": ("HL registered " + r["name"], f"halted, oracle {r.get('oracle')}\n{p}"),
+            "prep": ("HL opening prep " + r["name"], f"still halted, oracle {r.get('oracle')}\n{p}"),
+            "new": ("HL trading open " + r["name"], f"mid {mids.get(r['name'])}"),
+        }[r["why"]]
+        push_failed += not notify(title, body)
+
     state["known"], state["hot"], state["registered"] = sorted(known), hot, sorted(registered)
+    state["prep"] = preps
     state["status"] = {"hot": len(hot), "books_wanted": wanted, "books_failed": failed,
-                       "lighter_markets_ok": _cache["lighter_ok"],
+                       "lighter_markets_ok": _cache["lighter_ok"], "push_failed": push_failed,
                        "incomplete": (wanted > 0 and failed * 2 >= wanted) or (bool(hot) and not _cache["lighter_ok"])}
     return rows
