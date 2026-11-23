@@ -14,8 +14,14 @@ check sees it.
 A registered name's deployer settings (perpDexs: open-interest cap, funding multiplier, interest rate, clamp)
 are read with the pending check; a change while it is still halted is the deployer preparing the opening and
 gives a "prep" trigger row. If NTFY_TOPIC is set, "registered", "prep" and "new" rows are also pushed to
-https://ntfy.sh/<topic> (a secret; the only place names leave the encrypted rows); failed pushes are counted
-in status push_failed.
+https://ntfy.sh/<topic> (a secret; the only place names leave the encrypted rows). Pushes go through an
+in-memory queue sent by a background thread, so a slow ntfy never stalls the 10 s sampling; a push is retried
+for up to PUSH_TRY_S, then dropped and counted (status push_failed, push_queued). The row is the durable record:
+a push still queued when the process ends is lost, and the next process does not resend it.
+A name's settings are compared only against a baseline from a settings read made after this process first
+saw the name halted, so settings that were already there at registration are not announced as a change. The
+baseline is kept in state across processes on purpose: settings that changed between two processes, while the
+name stayed halted, are a real change and are announced at the first read of the new process.
 
 Rows: {"kind": "trigger", "name", "why": "move" | "new" | "registered" | "prep", "move", "oracle"?, "prep"?}
 and {"kind": "book", "name", "hl", "lighter"}.
@@ -25,6 +31,8 @@ state["prep"] hash -> hash of its deployer settings.
 """
 
 import hashlib
+import queue
+import threading
 import time
 from collections import deque
 
@@ -43,7 +51,29 @@ LIGHTER_EVERY = 3  # runs: about 18 Lighter calls a minute at most, beside one_q
 START_DELAY = 20   # s: the first run waits, so this cold start doesn't stack on the other sources'
 
 _cache = {"at": 0.0, "vlm": {}, "dexes": [], "halted": {}, "oracle": {}, "prep": {}, "lighter": {}, "lighter_ok": True,
-          "runs": 0}
+          "runs": 0, "prep_t": 0.0, "seen_halted": {}, "push_failed": 0}
+PUSH_TRY_S = 600
+_outbox: queue.Queue = queue.Queue()
+
+
+def _sender() -> None:
+    while True:
+        title, body, t0 = _outbox.get()
+        while not notify(title, body):
+            if time.time() - t0 > PUSH_TRY_S:
+                _cache["push_failed"] += 1
+                break
+            time.sleep(20)
+        _outbox.task_done()
+
+
+def push(title: str, body: str) -> None:
+    if not _cache.get("sender"):
+        _cache["sender"] = threading.Thread(target=_sender, daemon=True)
+        _cache["sender"].start()
+    _outbox.put((title, body, time.time()))
+
+
 PREP_FIELDS = {"assetToStreamingOiCap": "oi_cap", "assetToFundingMultiplier": "funding_mult",
                "assetToFundingInterestRate": "funding_rate", "assetToFundingClamp": "funding_clamp"}
 _mids: deque = deque()  # (t, {name: mid}) over the last WINDOW_S + a little
@@ -90,6 +120,7 @@ def check_pending(known: set) -> None:
 
 def read_prep() -> None:
     """Each HIP-3 name's deployer settings, from one perpDexs call (kept as they were if it fails)."""
+    t0 = time.time()
     try:
         prep = {}
         for d in hl({"type": "perpDexs"}):
@@ -97,7 +128,7 @@ def read_prep() -> None:
                 for item in (d or {}).get(field) or []:
                     if isinstance(item, list) and len(item) == 2 and isinstance(item[0], str):
                         prep.setdefault(item[0], {})[short] = item[1]
-        _cache["prep"], _cache["prep_read"] = prep, True
+        _cache["prep"], _cache["prep_read"], _cache["prep_t"] = prep, True, t0
     except Exception:
         pass
 
@@ -153,18 +184,21 @@ def run(state: dict) -> list[dict]:
         if k in known:
             continue
         p = _cache["prep"].get(name, {})
+        seen = _cache["seen_halted"].setdefault(name, now)
+        fresh = _cache.get("prep_read") and _cache["prep_t"] > seen  # settings read after the name was seen
         ph = key(name + repr(sorted(p.items())))
         if k not in registered:
             registered.add(k)
             if not (first or first_reg):
                 rows.append({"t": now, "kind": "trigger", "name": name, "why": "registered", "move": None,
                              "oracle": _cache["oracle"].get(name), "prep": p})
-        elif _cache.get("prep_read") and k in preps and preps[k] != ph:
+        elif fresh and k in preps and preps[k] != ph:
             rows.append({"t": now, "kind": "trigger", "name": name, "why": "prep", "move": None,
                          "oracle": _cache["oracle"].get(name), "prep": p})
-        if _cache.get("prep_read"):  # compare and store only once settings have been read in this process
+        if fresh:
             preps[k] = ph
-    preps = {k: v for k, v in preps.items() if k in registered and k not in known}
+    pending = {key(n) for n in _cache["halted"]}  # the last successful read of each dex
+    preps = {k: v for k, v in preps.items() if k in pending and k not in known}
     for name, px in mids.items():
         k = key(name)
         why, move = None, None
@@ -212,7 +246,6 @@ def run(state: dict) -> list[dict]:
                 failed += 1
         rows.append(row)
 
-    push_failed = 0
     for r in rows:
         if r["kind"] != "trigger" or r["why"] == "move":
             continue
@@ -222,11 +255,12 @@ def run(state: dict) -> list[dict]:
             "prep": ("HL opening prep " + r["name"], f"still halted, oracle {r.get('oracle')}\n{p}"),
             "new": ("HL trading open " + r["name"], f"mid {mids.get(r['name'])}"),
         }[r["why"]]
-        push_failed += not notify(title, body)
+        push(title, body)
 
     state["known"], state["hot"], state["registered"] = sorted(known), hot, sorted(registered)
     state["prep"] = preps
     state["status"] = {"hot": len(hot), "books_wanted": wanted, "books_failed": failed,
-                       "lighter_markets_ok": _cache["lighter_ok"], "push_failed": push_failed,
+                       "lighter_markets_ok": _cache["lighter_ok"], "push_failed": _cache["push_failed"],
+                       "push_queued": _outbox.unfinished_tasks,  # waiting or being retried
                        "incomplete": (wanted > 0 and failed * 2 >= wanted) or (bool(hot) and not _cache["lighter_ok"])}
     return rows
