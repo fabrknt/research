@@ -48,3 +48,9 @@ name = "listing_watch"
 module = "listing_watch"
 every = 300
 why = "The moment a labelled Wintermute wallet first receives a token BitGo added in the last 30 days (Ethereum, Base, Arbitrum, Robinhood Chain): in past Robinhood listings this came hours before the listing, and transfers into a wallet are easy to miss live and dull to rebuild later."
+
+[[source]]
+name = "evm_stock_quotes"
+module = "evm_stock_quotes"
+every = 1800
+why = "What the same tokenized US shares cost to round-trip at $10k and $100k on BNB Chain, Ethereum, Arbitrum and Robinhood Chain, per issuer (xStocks, bStocks, Ondo, Robinhood), through KyberSwap's routes, in and out of US hours: which chain and issuer has size is what decides where a stock prop AMM should quote, and aggregator quotes keep no history."

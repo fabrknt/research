@@ -9,11 +9,12 @@ HL = "https://api.hyperliquid.xyz/info"
 UA = "fabrknt-research"
 
 
-def fetch(url: str, body=None, tries: int = 4, raw: bool = False):
+def fetch(url: str, body=None, tries: int = 4, raw: bool = False, headers: dict | None = None):
     for i in range(tries):
         try:
             req = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None,
-                                         headers={"content-type": "application/json", "user-agent": UA})
+                                         headers={"content-type": "application/json", "user-agent": UA}
+                                         | (headers or {}))
             with urllib.request.urlopen(req, timeout=30) as r:
                 data = r.read()
             return data.decode("utf-8", "replace") if raw else json.loads(data)
