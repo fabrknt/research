@@ -84,6 +84,42 @@ instead of $500 makes at most +$38 a day.
   from this replay), and the perp's own liquidation risk. The hedged settings that end above zero trade
   $5K to $37K a day, against $3.6M a day on the tape.
 
+## A rising window (added 2026-11-24)
+
+**The price direction changes the size of the loss, not the answer.** We reran everything on Elysium's
+HYPE/USDC flow from 2026-11-21 06:00 to 11-24 00:00 UTC (2.75 days, 32,346 swaps), while HYPE rose 13.3%
+($56.30 to $63.81). Results in `results/w2-1121/`.
+
+| 10 bp, $500 a side | falling window (11-18..21) | rising window (11-21..24) |
+|---|---|---|
+| as posted, P&L a day | −$5,291 | −$616 |
+| as posted, 5 min after each fill | −6.4 bp | −7.3 bp |
+| unhedged settings below zero | 16 of 16 | 10 of 16 |
+| hedged settings above zero (causal E) | 7 of 24 | 6 of 24 |
+| best hedged at $500 a side (causal E), P&L a day | +$31 | +$42 |
+
+- Unhedged, the loss is far smaller when the price rises, but quoting 10 to 30 bp from the last trade
+  still loses as posted (−$616, −$110, −$36 a day). At the narrowest quotes the average fill is
+  below water five minutes later in both windows: −6.4 and −7.3 bp.
+- The unhedged rows that use E (the fee by direction, quoting around E) use the E with up to a minute of
+  hindsight, as in the first window, and here several of them end above zero. The hedged runs use E
+  rebuilt without hindsight; there the best at $500 a side is +$42 a day (50 bp, fee by direction, 4.5 bp
+  perp cost), and $5,000 a side makes +$54 at the 14.5 bp cost. The best unhedged row, +$387 a day
+  (50 bp, quoting around the hindsight E), is not one we could have run live.
+- Hedged with the causal E, the best tested settings earn tens of dollars a day in both windows.
+- The random-bot rows in `results/w2-1121/summary.txt` reuse the first window's bot settings with this
+  window's times and sizes; they are not a second test of the random-bot market.
+- To build this window's tape: copy only the `*.py` files of
+  [2026-11-21-elysium-direction](../2026-11-21-elysium-direction/) into an empty directory COPY (so no
+  earlier `data/logs` is read), and from COPY run
+  `hl_candles.py HYPE @107 @334`, `backfill.py 2026-11-21T05:00:00Z 2026-11-24T00:00:00Z data/logs`,
+  `trades.py 600` and `analyze.py HYPE` (the candles must be fetched within about 3.5 days of the
+  window). Then, back in `2026-11-23-naive-mm/`: `python3 -I build_tape.py COPY 1795240800 tape/elysium_hype_usdc_1121.csv`,
+  `python3 -I fetch_funding.py tape/elysium_hype_usdc_1121.csv data/funding_hype_1121.csv` and
+  `cargo run --release -- tape/elysium_hype_usdc_1121.csv data/funding_hype_1121.csv results/w2-1121`.
+  The trades before 06:00 only seed the 30-minute basis. `build_tape.py` rebuilds the first window's
+  tape byte for byte from that study's data.
+
 ## Method
 
 - **Exchange**: [rdk-clob](https://github.com/psyto/rdk/tree/main/crates/clob), from the public repo at a
@@ -120,8 +156,10 @@ instead of $500 makes at most +$38 a day.
 
 ## Limits
 
-- One window of 3.21 days, and in it HYPE fell from $69.70 to $56.50 on Elysium. A window with a rising or
-  flat price would show the inventory differently; the 5-minute numbers depend less on it.
+- Which trades are in a tape is decided with the hindsight E: that study keeps trades it can price
+  against HyperCore and within 5% of E, and `build_tape.py` drops trades more than 5% from E. Only `ec`
+  and `h` are free of it as prices; the population is not.
+- Two windows only: 3.21 days falling (HYPE $69.70 to $56.50) and 2.75 days rising ($56.30 to $63.81).
 - Fills are an upper bound (first in line, the flow does not react). Elysium's trades were swaps against
   pools, not orders on a book; we replay them as if they could have come to us.
 - The random-bot market is our construction, and its parameters set how well the strategy does there. We

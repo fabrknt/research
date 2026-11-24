@@ -22,6 +22,7 @@
 //! (data/funding_hype.csv from fetch_funding.py). The perp position is always minus the inventory.
 //!
 //! usage: python3 -I fetch_funding.py; cargo run --release
+//!        or, for another window: cargo run --release -- TAPE.csv FUNDING.csv RESULTS_DIR
 //!        (writes results/summary.txt, results/equity_hourly.csv and results/hedged.txt)
 
 mod strategy;
@@ -314,7 +315,14 @@ fn bp(x: f64, volume: f64) -> f64 {
 }
 
 fn main() {
-    let tape = load_tape("tape/elysium_hype_usdc.csv");
+    let args: Vec<String> = std::env::args().collect();
+    let arg = |i: usize, default: &str| args.get(i).cloned().unwrap_or_else(|| default.to_string());
+    let (tape_path, funding_path, out) = (
+        arg(1, "tape/elysium_hype_usdc.csv"),
+        arg(2, "data/funding_hype.csv"),
+        arg(3, "results"),
+    );
+    let tape = load_tape(&tape_path);
     let bots = random_bot_market(&tape);
     let days = (tape.last().unwrap().t - tape[0].t) as f64 / 86400.0;
     let mut s = String::new();
@@ -404,8 +412,8 @@ fn main() {
     )
     .unwrap();
     print!("{s}");
-    std::fs::create_dir_all("results").unwrap();
-    std::fs::write("results/summary.txt", &s).unwrap();
+    std::fs::create_dir_all(&out).unwrap();
+    std::fs::write(format!("{out}/summary.txt"), &s).unwrap();
     let mut csv = String::from("hour");
     for (n, _) in &curves {
         write!(csv, ",{n}").unwrap();
@@ -427,15 +435,15 @@ fn main() {
         }
         csv.push('\n');
     }
-    std::fs::write("results/equity_hourly.csv", csv).unwrap();
-    hedged(&tape, days);
+    std::fs::write(format!("{out}/equity_hourly.csv"), csv).unwrap();
+    hedged(&tape, days, &funding_path, &out);
 }
 
 /// B with every fill offset on HyperCore's perp. P&L marks the inventory at Elysium's last price and
 /// the perp at HyperCore's; "if basis closes" marks the inventory at HyperCore's last price instead
 /// (what it would be worth after the canonical withdrawal, if the gap were gone by then).
-fn hedged(tape: &[Trade], days: f64) {
-    let funding = load_funding("data/funding_hype.csv");
+fn hedged(tape: &[Trade], days: f64, funding_path: &str, out: &str) {
+    let funding = load_funding(funding_path);
     // the fee by direction and quoting around E decide on the E known at the trade (no hindsight)
     let hindsight = tape;
     let causal: Vec<Trade> = tape.iter().map(|r| Trade { e: r.ec, ..*r }).collect();
@@ -564,5 +572,5 @@ fn hedged(tape: &[Trade], days: f64) {
         }
     }
     print!("{s}");
-    std::fs::write("results/hedged.txt", &s).unwrap();
+    std::fs::write(format!("{out}/hedged.txt"), &s).unwrap();
 }
