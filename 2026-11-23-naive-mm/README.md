@@ -86,7 +86,8 @@ instead of $500 makes at most +$38 a day.
 
 ## A rising window (added 2026-11-24)
 
-**The price direction changes the size of the loss, not the answer.** We reran everything on Elysium's
+**At 10 bp it still lost while the price rose, and hedged, the best tested settings earned tens of
+dollars a day in both windows.** We reran everything on Elysium's
 HYPE/USDC flow from 2026-11-21 06:00 to 11-24 00:00 UTC (2.75 days, 32,346 swaps), while HYPE rose 13.3%
 ($56.30 to $63.81). Results in `results/w2-1121/`.
 
