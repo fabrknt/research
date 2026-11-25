@@ -53,4 +53,4 @@ why = "The moment a labelled Wintermute wallet first receives a token BitGo adde
 name = "evm_stock_quotes"
 module = "evm_stock_quotes"
 every = 1800
-why = "What the same tokenized US shares cost to round-trip at $10k and $100k on BNB Chain, Ethereum, Arbitrum and Robinhood Chain, per issuer (xStocks, bStocks, Ondo, Robinhood), through KyberSwap's routes, in and out of US hours: which chain and issuer has size is what decides where a stock prop AMM should quote, and aggregator quotes keep no history."
+why = "What the same tokenized US shares cost to round-trip at $10k and $100k on BNB Chain, Ethereum, Arbitrum, Robinhood Chain and Monad, per issuer (xStocks, bStocks, Ondo, Robinhood), through KyberSwap's routes, in and out of US hours: which chain and issuer has size is what decides where a stock prop AMM should quote, and aggregator quotes keep no history."

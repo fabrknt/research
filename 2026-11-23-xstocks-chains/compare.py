@@ -1,5 +1,5 @@
 """Round-trip cost of tokenized US shares by chain and issuer, from rows of the recorder's evm_stock_quotes
-(KyberSwap: BNB Chain, Ethereum, Arbitrum, Robinhood Chain) and xstocks_quotes (Jupiter: Solana).
+(KyberSwap: BNB Chain, Ethereum, Arbitrum, Robinhood Chain, Monad) and xstocks_quotes (Jupiter: Solana).
 
     python3 -I compare.py SNAPSHOT.json            # {"evm": [rows], "sol": [rows]}, e.g. one local run
     python3 -I compare.py --read FROM TO           # the recorder's hours in [FROM, TO) via recorder/read.py
@@ -12,7 +12,7 @@ Printed per share: the cheapest chain/issuer at $10k and $100k, and every venue 
 import collections, json, statistics, subprocess, sys
 from pathlib import Path
 
-DEC = {"bsc": 18, "ethereum": 6, "arbitrum": 6, "robinhood": 6, "solana": 6}
+DEC = {"bsc": 18, "ethereum": 6, "arbitrum": 6, "robinhood": 6, "monad": 6, "solana": 6}
 
 
 def pairs(rows, chain_of, key_of, venue_of):

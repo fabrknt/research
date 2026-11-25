@@ -1,6 +1,6 @@
 """Tokenized US shares on EVM chains, quoted through KyberSwap's free aggregator: the same round trip as
 xstocks_quotes (buy $10k and $100k with the chain's dollar token, sell back what the buy would get), for every
-issuer that has the share on BNB Chain, Ethereum, Arbitrum and Robinhood Chain.
+issuer that has the share on BNB Chain, Ethereum, Arbitrum, Robinhood Chain and Monad.
 
 Issuers: Backed's xStocks (one address on every EVM chain), Binance's bStocks (BNB Chain only), Ondo Global
 Markets and Robinhood's own tokens (Robinhood Chain). Addresses are CoinGecko's platform lists (2026-11-23); on
@@ -9,7 +9,9 @@ one candidate that routed $10k of USDG on 2026-11-23 (2026-11-23-xstocks-chains/
 
 On 2026-11-23 (Monday, before the US open) $25k of USDT bought 4.4 NVDAx on BNB Chain, so xStocks there have
 next to no liquidity, while $10k on Robinhood Chain routed through Metric, TideFi and Fermi prop AMMs, Bebop and
-a PMM besides Uniswap and Aerodrome: who quotes size, on which chain, in and out of US hours, is the question.
+a PMM besides Uniswap and Aerodrome. On Monad (added 2026-11-25) the xStocks are the same addresses (checked by
+symbol() over Monad's RPC); at 11:07 UTC that Wednesday only NVDA, QQQ, SPY and TSLA routed $10k of USDC, through
+Kuru's and Hanji's order books (via ERC-4626 wrappers), Uniswap v4: who quotes size, on which chain, in and out of US hours, is the question.
 
 A round trip is answered by Kyber's route only (its sources, its routing); the route keeps each leg's exchange,
 pool and amount so the venues can be read later. Calls are paced well under Kyber's free limit, and a share
@@ -29,6 +31,7 @@ DOLLAR = {
     "ethereum": ("0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", 6),    # USDC
     "arbitrum": ("0xaf88d065e77c8cC2239327C5EDb3A432268e5831", 6),    # USDC
     "robinhood": ("0x5fc5360d0400a0fd4f2af552add042d716f1d168", 6),   # USDG (Global Dollar)
+    "monad": ("0x754704bc059f8c67012fed69bc8a327a5aafb603", 6),       # USDC
 }
 SIZES = (10_000, 100_000)
 PAUSE = 0.5
@@ -113,6 +116,19 @@ TOKENS: dict[tuple[str, str, str], str] = {
     ("ethereum", "xstocks", "QQQ"): "0xa753a7395cae905cd615da0b82a53e0560f250af",
     ("ethereum", "xstocks", "SPY"): "0x90a2a4c76b5d8c0bc892a69ea28aa775a8f2dd48",
     ("ethereum", "xstocks", "TSLA"): "0x8ad3c73f833d3f9a523ab01476625f269aeb7cf0",
+    ("monad", "xstocks", "AAPL"): "0x9d275685dc284c8eb1c79f6aba7a63dc75ec890a",
+    ("monad", "xstocks", "AMZN"): "0x3557ba345b01efa20a1bddc61f573bfd87195081",
+    ("monad", "xstocks", "COIN"): "0x364f210f430ec2448fc68a49203040f6124096f0",
+    ("monad", "xstocks", "CRCL"): "0xfebded1b0986a8ee107f5ab1a1c5a813491deceb",
+    ("monad", "xstocks", "GOOGL"): "0xe92f673ca36c5e2efd2de7628f815f84807e803f",
+    ("monad", "xstocks", "HOOD"): "0xe1385fdd5ffb10081cd52c56584f25efa9084015",
+    ("monad", "xstocks", "META"): "0x96702be57cd9777f835117a809c7124fe4ec989a",
+    ("monad", "xstocks", "MSFT"): "0x5621737f42dae558b81269fcb9e9e70c19aa6b35",
+    ("monad", "xstocks", "MSTR"): "0xae2f842ef90c0d5213259ab82639d5bbf649b08e",
+    ("monad", "xstocks", "NVDA"): "0xc845b2894dbddd03858fd2d643b4ef725fe0849d",
+    ("monad", "xstocks", "QQQ"): "0xa753a7395cae905cd615da0b82a53e0560f250af",
+    ("monad", "xstocks", "SPY"): "0x90a2a4c76b5d8c0bc892a69ea28aa775a8f2dd48",
+    ("monad", "xstocks", "TSLA"): "0x8ad3c73f833d3f9a523ab01476625f269aeb7cf0",
     ("robinhood", "ondo", "AAPL"): "0x9bf86418caf2b7a939603d6c24219a77bf7f9b33",
     ("robinhood", "ondo", "CRCL"): "0x369c4748e98c153e9b7adebc3e71e9e2a5f60dc0",
     ("robinhood", "ondo", "GOOGL"): "0xe10cc5f0cd0c90322ebeb33e7757b2c9090146dc",
