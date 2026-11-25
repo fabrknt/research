@@ -28,8 +28,9 @@ keeps its data and starts the next).
 ## Results (2026-11-16 08:45 – 11-25 10:15 UTC, weekend included)
 
 2,207 rounds, 95,428 market-rounds (`results/results-20261125.txt`). Median cost of a market order in
-bp of mid, taker fee included, over the rounds where all three venues filled the size; the last column
-is how often each venue was cheapest. US open = 9:30–16:00 New York, weekend = Saturday and Sunday in
+bp of mid, taker fee included (n = market-rounds per venue). A round counts only when every venue that
+lists the market filled the size; a venue that doesn't list it, or sits more than 1% from the others, is
+left out of that round, so n differs by venue. The last column is how often each venue was cheapest. US open = 9:30–16:00 New York, weekend = Saturday and Sunday in
 New York.
 
 | group | session | size | Variational | Lighter | Hyperliquid | cheapest |
@@ -47,23 +48,25 @@ New York.
 | idx/cmdty perp | US open | $1M | 8.27 | 13.92 | **6.02** | Hyperliquid 61% |
 | idx/cmdty perp | weekend | $1M | **11.19** | 15.35 | 11.49 | Variational 68% (n=480) |
 
-Indices and commodities are split by Variational's contract type: its swaps (hedged into TradFi markets,
-closed at weekends) and its perps on the same underlyings (around the clock). Every size and session is
+Indices and commodities are split by Variational's contract type: its swaps (closed at weekends) and its
+perps on the same underlyings (around the clock). Every size and session is
 in the file.
 
-- **Where the one dealer wins, it wins on swaps.** Variational's swaps (US100, US500, gold, silver,
+- **The one dealer is clearly cheapest only on its swaps.** Variational's swaps (US100, US500, gold, silver,
   WTI, Brent) were the cheapest at every size and session, $1k included: about 1.3 bp at $1M on weekdays against
   2.9–3.1 on Hyperliquid's HIP-3 books and 4.7–5.0 on Lighter. A swap is hedged straight into
-  TradFi markets, so its price is the outside market's, not a book that has to be built on-chain.
+  TradFi markets (Variational's description), so our reading is that its price is the outside
+market's, not a book that has to be built on-chain.
 - **The same dealer's perps on the same underlyings are not cheapest.** In US hours at $1M,
-  Hyperliquid was cheaper on 61% of rounds. So the edge comes from the hedge (the swap), not from
-  having one dealer.
+  Hyperliquid was cheaper on 61% of rounds. Our reading: the edge comes from where the dealer can hedge
+  (the swap), not from having one dealer. The data shows the gap, not its cause.
 - **Crypto: Lighter** (no taker fee) is cheapest at every size and session, weekends included.
-- **Single stocks: Hyperliquid's HIP-3 books** are cheapest from $100k up in US hours, and at $1M in
-  every session (99–100% of rounds); one dealer's quote is the dearest or close to it at $1M.
+- **Single stocks: Hyperliquid's HIP-3 books** are cheapest at $100k in US hours (outside them Lighter is),
+  and at $1M in every session (99–100% of rounds); one dealer's quote is the dearest or close to it at $1M.
 - **Weekends**: swaps close on Friday and reopen on Sunday evening (New York); the index/commodity perps
-  carry the weekend. Every venue is dearer then, and at $1M Variational's perps were cheapest more
-  often than not (68%, n=480), at about the same cost as Hyperliquid (11.2 against 11.5 bp).
+  carry the weekend. At $1M every venue is dearer then. That is the one place outside the swaps where
+  Variational was cheapest most often (68%, n=480), but at about Hyperliquid's cost (11.19 against
+  11.49 bp), not well below it.
 
 Gaps in the record: 2026-11-16 14:00–22:50 UTC and 11-17 08:35–14:15 UTC (see above); after
 2026-11-18 the longest gap is 25 minutes (11-22 12:55–13:20 UTC).
@@ -107,7 +110,8 @@ orders with `Book::quote_market` (pinned by git rev; rdk is not on crates.io yet
   `((buy − ref) + (ref − sell)) / 2 / ref + fee`. `ref` is the median of the venues' mids in that
   round; a venue more than 1% away is a different instrument (Variational's `US500-PERP` is
   ETF-sized, not the index) and is dropped for that round.
-- Medians are over the rounds where every venue compared quoted or filled the size.
+- Medians are over the rounds where every venue that lists the market quoted or filled the size; a venue
+  missing from a round (not listed, or more than 1% away) leaves it in for the others, so n differs by venue.
 - Variational quotes older than 120 s are dropped (its docs say quotes may be cached up to 600 s).
 - When Hyperliquid's 20 levels cannot fill a size, the 4-significant-figure book is walked instead.
 - Taker fees (checked 2026-11-16): Variational 0 ([docs](https://docs.variational.io/omni/trading/fees));
