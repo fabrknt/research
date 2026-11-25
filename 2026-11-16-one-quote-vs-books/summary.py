@@ -35,7 +35,9 @@ def fee(venue, coin):
 def group(ticker):
     base = ticker.rsplit("-", 1)[0]
     if ticker.endswith("-SWAP") or base in ("XAU", "XAG", "CL", "US500", "QQQ", "SOXL", "EWY"):
-        return "index/commodity"
+        # Variational's swaps are hedged into TradFi markets and close at weekends; its perps on the same
+        # underlyings trade around the clock. Same underlyings, different products: kept apart.
+        return "idx/cmdty swap" if ticker.endswith("-SWAP") else "idx/cmdty perp"
     if base in ("NVDA", "GOOGL", "MU", "SKHY", "SPCX", "TSLA", "SNDK", "AAPL", "AMZN", "MSTR",
                 "CRCL", "AMD", "NBIS", "MSFT"):
         return "stock"
@@ -134,7 +136,7 @@ def main():
           f"{stale[0]}/{stale[1]} (dropped)")
     print("\nmedian cost of a market order, bp of mid, fee included (n = market-rounds)")
     print(f"{'group':16} {'session':10} {'size':>6}  {'Variational':>12} {'Lighter':>10} {'Hyperliquid':>12}  cheapest: var/lighter/hl")
-    for g in ("crypto", "stock", "index/commodity"):
+    for g in ("crypto", "stock", "idx/cmdty swap", "idx/cmdty perp"):
         for s in ("US open", "US closed", "weekend"):
             for usd in SIZES:
                 cells = []

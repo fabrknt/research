@@ -41,15 +41,15 @@ New York.
 | stock | US open | $1M | 18.59 | 18.08 | **4.56** | Hyperliquid 100% (n=384) |
 | stock | US closed | $1M | 22.79 | 20.66 | **7.19** | Hyperliquid 99% (n=1,181) |
 | stock | weekend | $1M | 31.65 | 36.65 | **17.87** | Hyperliquid 99% (n=194) |
-| index/commodity **swaps** | US open | $1k | **0.18** | 0.65 | 1.09 | Variational 96% |
-| index/commodity **swaps** | US open | $1M | **1.26** | 4.96 | 3.08 | Variational 76% |
-| index/commodity **swaps** | US closed | $1M | **1.36** | 4.65 | 2.87 | Variational 72% |
-| index/commodity perps | US open | $1M | 8.27 | 13.92 | **6.02** | Hyperliquid 61% |
-| index/commodity perps | weekend | $1M | **11.19** | 15.35 | 11.49 | Variational 68% (n=480) |
+| idx/cmdty **swap** | US open | $1k | **0.18** | 0.65 | 1.09 | Variational 96% |
+| idx/cmdty **swap** | US open | $1M | **1.26** | 4.96 | 3.08 | Variational 76% |
+| idx/cmdty **swap** | US closed | $1M | **1.36** | 4.65 | 2.87 | Variational 72% |
+| idx/cmdty perp | US open | $1M | 8.27 | 13.92 | **6.02** | Hyperliquid 61% |
+| idx/cmdty perp | weekend | $1M | **11.19** | 15.35 | 11.49 | Variational 68% (n=480) |
 
-The swap and perp rows split the index/commodity group by Variational's contract type
-(`results/swaps-only-20261125.txt`, `results/index-perps-only-20261125.txt`); every size and session
-is in the three files.
+Indices and commodities are split by Variational's contract type: its swaps (hedged into TradFi markets,
+closed at weekends) and its perps on the same underlyings (around the clock). Every size and session is
+in the file.
 
 - **Where the one dealer wins, it wins on swaps.** Variational's swaps (US100, US500, gold, silver,
   WTI, Brent) were the cheapest at every size and session, $1k included: about 1.3 bp at $1M on weekdays against
@@ -70,7 +70,8 @@ Gaps in the record: 2026-11-16 14:00–22:50 UTC and 11-17 08:35–14:15 UTC (se
 
 ### Earlier: weekdays only (2026-11-16 – 11-18, 356 rounds)
 
-`results/interim-20261118.txt`. The reading has not changed; the swap/perp split and the weekend are new.
+`results/interim-20261118.txt`. The reading has not changed; the swap/perp split and the weekend are new. (That file's index/commodity
+group has swaps and perps together.)
 
 ## What is read (public APIs, no keys)
 

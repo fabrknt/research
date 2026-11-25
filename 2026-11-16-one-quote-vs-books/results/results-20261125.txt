@@ -20,15 +20,24 @@ stock            US closed     $1M   22.79 (1181)  20.66 (1181)   7.19 (1181)  0
 stock            weekend       $1k    2.72 (5186)   0.73 (5181)   1.45 (4743)  0%/89%/11%
 stock            weekend     $100k    9.52 (5179)   2.77 (5174)   6.03 (4736)  1%/79%/20%
 stock            weekend       $1M   31.65 (194)  36.65 (194)  17.87 (194)  0%/1%/99%
-index/commodity  US open       $1k    0.57 (4746)   0.70 (3531)   1.14 (4341)  50%/30%/20%
-index/commodity  US open     $100k    2.20 (4746)   1.76 (3531)   1.88 (4341)  42%/31%/27%
-index/commodity  US open       $1M    3.13 (2586)   5.28 (2537)   3.34 (2434)  60%/5%/35%
-index/commodity  US closed     $1k    1.55 (13689)   0.61 (10383)   1.09 (12449)  45%/33%/23%
-index/commodity  US closed   $100k    2.41 (13689)   1.63 (10383)   1.90 (12449)  39%/36%/26%
-index/commodity  US closed     $1M    3.40 (7381)   5.06 (7147)   3.26 (6976)  60%/4%/36%
-index/commodity  weekend       $1k    2.35 (2770)   0.56 (2286)   1.20 (2286)  8%/59%/33%
-index/commodity  weekend     $100k    4.04 (2770)   2.15 (2286)   3.53 (2286)  21%/61%/18%
-index/commodity  weekend       $1M    8.39 (617)  15.01 (617)  10.36 (400)  75%/17%/9%
+idx/cmdty swap   US open       $1k    0.18 (2430)   0.65 (1620)   1.09 (2430)  96%/4%/0%
+idx/cmdty swap   US open     $100k    0.80 (2430)   1.59 (1620)   1.75 (2430)  70%/17%/13%
+idx/cmdty swap   US open       $1M    1.26 (1669)   4.96 (1620)   3.08 (1669)  76%/4%/20%
+idx/cmdty swap   US closed     $1k    0.29 (6493)   0.58 (4427)   1.08 (6493)  93%/6%/1%
+idx/cmdty swap   US closed   $100k    0.90 (6493)   1.43 (4427)   1.68 (6493)  68%/20%/13%
+idx/cmdty swap   US closed     $1M    1.36 (4649)   4.65 (4415)   2.87 (4649)  72%/5%/23%
+idx/cmdty swap   weekend       $1k    0.30 (224)   0.66 (224)   1.04 (224)  93%/7%/0%
+idx/cmdty swap   weekend     $100k    0.64 (224)   1.87 (224)   1.53 (224)  67%/25%/7%
+idx/cmdty swap   weekend       $1M    1.14 (137)  14.47 (137)   2.47 (137)  100%/0%/0%
+idx/cmdty perp   US open       $1k    2.38 (2316)   0.76 (1911)   1.25 (1911)  2%/56%/42%
+idx/cmdty perp   US open     $100k    3.10 (2316)   2.14 (1911)   2.10 (1911)  12%/46%/42%
+idx/cmdty perp   US open       $1M    8.27 (917)  13.92 (917)   6.02 (765)  32%/7%/61%
+idx/cmdty perp   US closed     $1k    2.38 (7196)   0.66 (5956)   1.21 (5956)  1%/57%/42%
+idx/cmdty perp   US closed   $100k    3.17 (7196)   2.09 (5956)   2.19 (5956)  13%/50%/37%
+idx/cmdty perp   US closed     $1M    8.71 (2732)  13.92 (2732)   9.41 (2327)  39%/3%/58%
+idx/cmdty perp   weekend       $1k    2.35 (2546)   0.55 (2062)   1.24 (2062)  1%/64%/36%
+idx/cmdty perp   weekend     $100k    4.11 (2546)   2.26 (2062)   3.66 (2062)  17%/64%/19%
+idx/cmdty perp   weekend       $1M   11.19 (480)  15.35 (480)  11.49 (263)  68%/21%/11%
 
 book too thin in the saved levels to fill the size (Lighter 250 orders a side, HL 20 levels):
   hl       $    1,000: 0/73792
