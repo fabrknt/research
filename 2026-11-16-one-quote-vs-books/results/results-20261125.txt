@@ -1,0 +1,39 @@
+2207 rounds, 95428 market-rounds; Variational quotes older than 120s: 0/93267 (dropped)
+
+median cost of a market order, bp of mid, fee included (n = market-rounds)
+group            session      size   Variational    Lighter  Hyperliquid  cheapest: var/lighter/hl
+crypto           US open       $1k    3.41 (6256)   1.14 (6010)   5.18 (6256)  13%/87%/1%
+crypto           US open     $100k    7.70 (6192)   5.07 (5953)   8.03 (6192)  22%/64%/15%
+crypto           US open       $1M   13.49 (2586)  10.32 (2586)  10.59 (2586)  10%/63%/27%
+crypto           US closed     $1k    3.39 (19077)   0.99 (18373)   5.06 (19077)  11%/89%/1%
+crypto           US closed   $100k    7.40 (18023)   4.02 (17414)   7.96 (18023)  18%/72%/9%
+crypto           US closed     $1M   13.43 (7630)   8.97 (7630)  10.29 (7630)  7%/72%/21%
+crypto           weekend       $1k    4.02 (9324)   1.17 (8903)   5.21 (9322)  8%/90%/1%
+crypto           weekend     $100k    8.69 (8473)   5.90 (8454)   8.76 (8472)  26%/69%/6%
+crypto           weekend       $1M    9.95 (2748)   7.89 (2748)   9.92 (2747)  4%/78%/17%
+stock            US open       $1k    2.71 (4208)   0.99 (4128)   1.47 (3803)  1%/77%/22%
+stock            US open     $100k    7.93 (4201)   4.37 (4121)   2.84 (3796)  7%/24%/69%
+stock            US open       $1M   18.59 (384)  18.08 (384)   4.56 (384)  0%/0%/100%
+stock            US closed     $1k    2.69 (12755)   0.78 (12469)   1.44 (11515)  0%/87%/12%
+stock            US closed   $100k    8.03 (12742)   2.78 (12456)   3.83 (11502)  3%/71%/26%
+stock            US closed     $1M   22.79 (1181)  20.66 (1181)   7.19 (1181)  0%/1%/99%
+stock            weekend       $1k    2.72 (5186)   0.73 (5181)   1.45 (4743)  0%/89%/11%
+stock            weekend     $100k    9.52 (5179)   2.77 (5174)   6.03 (4736)  1%/79%/20%
+stock            weekend       $1M   31.65 (194)  36.65 (194)  17.87 (194)  0%/1%/99%
+index/commodity  US open       $1k    0.57 (4746)   0.70 (3531)   1.14 (4341)  50%/30%/20%
+index/commodity  US open     $100k    2.20 (4746)   1.76 (3531)   1.88 (4341)  42%/31%/27%
+index/commodity  US open       $1M    3.13 (2586)   5.28 (2537)   3.34 (2434)  60%/5%/35%
+index/commodity  US closed     $1k    1.55 (13689)   0.61 (10383)   1.09 (12449)  45%/33%/23%
+index/commodity  US closed   $100k    2.41 (13689)   1.63 (10383)   1.90 (12449)  39%/36%/26%
+index/commodity  US closed     $1M    3.40 (7381)   5.06 (7147)   3.26 (6976)  60%/4%/36%
+index/commodity  weekend       $1k    2.35 (2770)   0.56 (2286)   1.20 (2286)  8%/59%/33%
+index/commodity  weekend     $100k    4.04 (2770)   2.15 (2286)   3.53 (2286)  21%/61%/18%
+index/commodity  weekend       $1M    8.39 (617)  15.01 (617)  10.36 (400)  75%/17%/9%
+
+book too thin in the saved levels to fill the size (Lighter 250 orders a side, HL 20 levels):
+  hl       $    1,000: 0/73792
+  hl       $  100,000: 1992/73792
+  hl       $1,000,000: 16836/73792
+  lighter  $    1,000: 0/71264
+  lighter  $  100,000: 32/71264
+  lighter  $1,000,000: 12414/71264

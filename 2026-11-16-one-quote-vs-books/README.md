@@ -1,20 +1,19 @@
-# Is one dealer's quote dearer than an order book? (2026-11-16, collecting)
+# Is one dealer's quote dearer than an order book? (2026-11-16, first answer 2026-11-25)
 
 Variational's Omni has one market maker (OLP) quoting every trade, with no fee: the spread is the price.
 Lighter and Hyperliquid are order books. This study asks what a market order of $1k, $100k and $1M
 costs on each, for the same markets, in US market hours, outside them and at weekends.
 
-**Status: collecting since 2026-11-16 08:48 UTC (every 5 minutes, with no end date since 2026-11-21). Weekday results
-so far below; no weekend yet.** From 2026-11-16 13:00 UTC the collection runs on GitHub Actions
-(`.github/workflows/one-quote-collect.yml`), so a laptop going to sleep doesn't stop it: each job
-collects for an hour and then starts the next one itself (GitHub's hourly schedule fired once in the
-first ten hours, so it is only the backup). The snapshots are third-party API data, so each hour's are
-encrypted to `.github/one-quote-data.pub.pem` before they are kept, as a workflow artifact (90 days)
-and in a release per month (`one-quote-data-YYYYMM`, kept); `fetch_actions.sh` downloads and decrypts
-them with the private key, which is kept off GitHub. Variational keeps no public history of its quotes,
-so the record only exists if it keeps running; set the repo variable `ONE_QUOTE_STOP=1` to stop it.
-The first answer goes here and on [fabrknt.com/research](https://fabrknt.com/research) once the data
-covers a weekend.
+**Status: first answer below, from nine days that include a weekend (2026-11-16 08:45 – 11-25 10:15 UTC).
+Collection goes on (every 5 minutes, with no end date since 2026-11-21).** From 2026-11-16 13:00 UTC
+the collection runs on GitHub Actions (`.github/workflows/one-quote-collect.yml`), so a laptop going to
+sleep doesn't stop it: each job collects for an hour and then starts the next one itself (GitHub's
+hourly schedule fired once in the first ten hours, so it is only the backup). The snapshots are
+third-party API data, so each hour's are encrypted to `.github/one-quote-data.pub.pem` before they are
+kept, as a workflow artifact (90 days) and in a release per month (`one-quote-data-YYYYMM`, kept);
+`fetch_actions.sh` downloads and decrypts them with the private key, which is kept off GitHub.
+Variational keeps no public history of its quotes, so the record only exists if it keeps running; set
+the repo variable `ONE_QUOTE_STOP=1` to stop it.
 
 From 2026-11-21 the same round (`collect.py`, now keeping each Variational listing row whole: funding,
 open interest, volume) also runs inside the [recorder](../recorder/) as its `one_quote` source, read
@@ -26,29 +25,52 @@ Gaps: 2026-11-16 14:02–22:50 UTC (the schedule did not fire) and 2026-11-17 08
 from Variational at start-up failed a job and the next was never started; fixed so a failed hour still
 keeps its data and starts the next).
 
-## Results so far (weekdays, 2026-11-16 08:47 – 11-18 07:58 UTC)
+## Results (2026-11-16 08:45 – 11-25 10:15 UTC, weekend included)
 
-356 rounds, 15,529 market-rounds (`results/interim-20261118.txt`). Median cost of a market order in bp
-of mid, taker fee included, over the rounds where all three venues filled the size; the last column is
-how often each venue was cheapest.
+2,207 rounds, 95,428 market-rounds (`results/results-20261125.txt`). Median cost of a market order in
+bp of mid, taker fee included, over the rounds where all three venues filled the size; the last column
+is how often each venue was cheapest. US open = 9:30–16:00 New York, weekend = Saturday and Sunday in
+New York.
 
 | group | session | size | Variational | Lighter | Hyperliquid | cheapest |
 |---|---|---|---|---|---|---|
-| crypto | US open | $1k | 3.89 | **1.47** | 5.22 | Lighter 88% |
-| crypto | US open | $1M | 9.89 | **7.96** | 9.65 | Lighter 67% |
-| crypto | US closed | $1M | 9.76 | **7.57** | 9.53 | Lighter 80% |
-| stock | US open | $100k | 6.71 | 3.61 | **2.45** | Hyperliquid 67% |
-| stock | US open | $1M | 16.89 | 18.09 | **4.28** | Hyperliquid 100% (n=44) |
-| stock | US closed | $100k | 7.12 | **2.80** | 3.52 | Lighter 67% |
-| stock | US closed | $1M | 21.65 | 22.35 | **7.18** | Hyperliquid 97% (n=196) |
-| index/commodity | US open | $1M | **1.50** | 4.36 | 3.17 | Variational 59% |
-| index/commodity | US closed | $1M | **2.44** | 4.26 | 3.20 | Variational 62% |
+| crypto | US open | $1k | 3.41 | **1.14** | 5.18 | Lighter 87% |
+| crypto | US open | $1M | 13.49 | **10.32** | 10.59 | Lighter 63% |
+| crypto | weekend | $1M | 9.95 | **7.89** | 9.92 | Lighter 78% |
+| stock | US open | $100k | 7.93 | 4.37 | **2.84** | Hyperliquid 69% |
+| stock | US open | $1M | 18.59 | 18.08 | **4.56** | Hyperliquid 100% (n=384) |
+| stock | US closed | $1M | 22.79 | 20.66 | **7.19** | Hyperliquid 99% (n=1,181) |
+| stock | weekend | $1M | 31.65 | 36.65 | **17.87** | Hyperliquid 99% (n=194) |
+| index/commodity **swaps** | US open | $1k | **0.18** | 0.65 | 1.09 | Variational 96% |
+| index/commodity **swaps** | US open | $1M | **1.26** | 4.96 | 3.08 | Variational 76% |
+| index/commodity **swaps** | US closed | $1M | **1.36** | 4.65 | 2.87 | Variational 72% |
+| index/commodity perps | US open | $1M | 8.27 | 13.92 | **6.02** | Hyperliquid 61% |
+| index/commodity perps | weekend | $1M | **11.19** | 15.35 | 11.49 | Variational 68% (n=480) |
 
-- Crypto: Lighter (no taker fee) is cheapest at every size and session.
-- Stocks: from $100k up in US hours, Hyperliquid's HIP-3 books are cheapest; one dealer's quote is
-  the dearest or close to it at $1M.
-- One dealer's quote wins only at $1M on indices and commodities (gold, oil, S&P), where it can hedge
-  on deep outside markets. The weekend, when those markets close, tests that reading.
+The swap and perp rows split the index/commodity group by Variational's contract type
+(`results/swaps-only-20261125.txt`, `results/index-perps-only-20261125.txt`); every size and session
+is in the three files.
+
+- **Where the one dealer wins, it wins on swaps.** Variational's swaps (US100, US500, gold, silver,
+  WTI, Brent) were the cheapest at every size and session, $1k included: about 1.3 bp at $1M on weekdays against
+  2.9–3.1 on Hyperliquid's HIP-3 books and 4.7–5.0 on Lighter. A swap is hedged straight into
+  TradFi markets, so its price is the outside market's, not a book that has to be built on-chain.
+- **The same dealer's perps on the same underlyings are not cheapest.** In US hours at $1M,
+  Hyperliquid was cheaper on 61% of rounds. So the edge comes from the hedge (the swap), not from
+  having one dealer.
+- **Crypto: Lighter** (no taker fee) is cheapest at every size and session, weekends included.
+- **Single stocks: Hyperliquid's HIP-3 books** are cheapest from $100k up in US hours, and at $1M in
+  every session (99–100% of rounds); one dealer's quote is the dearest or close to it at $1M.
+- **Weekends**: swaps close on Friday and reopen on Sunday evening (New York); the index/commodity perps
+  carry the weekend. Every venue is dearer then, and at $1M Variational's perps were cheapest more
+  often than not (68%, n=480), at about the same cost as Hyperliquid (11.2 against 11.5 bp).
+
+Gaps in the record: 2026-11-16 14:00–22:50 UTC and 11-17 08:35–14:15 UTC (see above); after
+2026-11-18 the longest gap is 25 minutes (11-22 12:55–13:20 UTC).
+
+### Earlier: weekdays only (2026-11-16 – 11-18, 356 rounds)
+
+`results/interim-20261118.txt`. The reading has not changed; the swap/perp split and the weekend are new.
 
 ## What is read (public APIs, no keys)
 

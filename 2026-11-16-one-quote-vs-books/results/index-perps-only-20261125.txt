@@ -1,0 +1,21 @@
+2207 rounds, 95428 market-rounds; Variational quotes older than 120s: 0/93267 (dropped)
+
+median cost of a market order, bp of mid, fee included (n = market-rounds)
+group            session      size   Variational    Lighter  Hyperliquid  cheapest: var/lighter/hl
+index/commodity  US open       $1k    2.38 (2316)   0.76 (1911)   1.25 (1911)  2%/56%/42%
+index/commodity  US open     $100k    3.10 (2316)   2.14 (1911)   2.10 (1911)  12%/46%/42%
+index/commodity  US open       $1M    8.27 (917)  13.92 (917)   6.02 (765)  32%/7%/61%
+index/commodity  US closed     $1k    2.38 (7196)   0.66 (5956)   1.21 (5956)  1%/57%/42%
+index/commodity  US closed   $100k    3.17 (7196)   2.09 (5956)   2.19 (5956)  13%/50%/37%
+index/commodity  US closed     $1M    8.71 (2732)  13.92 (2732)   9.41 (2327)  39%/3%/58%
+index/commodity  weekend       $1k    2.35 (2546)   0.55 (2062)   1.24 (2062)  1%/64%/36%
+index/commodity  weekend     $100k    4.11 (2546)   2.26 (2062)   3.66 (2062)  17%/64%/19%
+index/commodity  weekend       $1M   11.19 (480)  15.35 (480)  11.49 (263)  68%/21%/11%
+
+book too thin in the saved levels to fill the size (Lighter 250 orders a side, HL 20 levels):
+  hl       $    1,000: 0/73792
+  hl       $  100,000: 1992/73792
+  hl       $1,000,000: 16836/73792
+  lighter  $    1,000: 0/71264
+  lighter  $  100,000: 32/71264
+  lighter  $1,000,000: 12414/71264
