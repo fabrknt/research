@@ -29,7 +29,7 @@ promise the README makes and checking it, not the model's size.**
 | Rules the spec never stated | 1 | 1 (the same as bug 2) |
 | Known weaknesses re-found | 1 (the poker picks the block, already in the spec) | 0 |
 | Mistakes in my own properties | 0 | 3 |
-| Seeded bugs caught | 3 of 5 (1 after adding a property, 1 equivalent mutant) | not run |
+| Seeded bugs caught | 3 of 5 (1 after adding a property, 1 equivalent mutant) | 2 of 8, then 7 of 8 after 3 properties and a 20x config |
 
 fivemin, the rule: a round's close and the next round's open are the same moment, but each was
 recorded by its own `poke`, so they could take different prices (close 101, next open 99). Not a
@@ -69,7 +69,12 @@ dayone:
   enough slack that the round trip never queued. The model gave the shape (up, close, down, close);
   a Foundry test at real sizes gave the $581.50. Use both.
 - **Check the model has teeth.** On fivemin, a seeded bug (a missed checkpoint voids late) passed
-  the first model; it needed one more property. A green run is not evidence until a mutant fails it.
+  the first model; it needed one more property. On dayone the model that had just passed 7.4M
+  states caught 2 of 8 seeded bugs. A green run is not evidence until a mutant fails it.
+- **Pick the bounds from where the bugs live.** dayone's redemption holes need leverage above
+  1 / stress (10x at 10%); the model stopped at 5x, so the bugs Codex found were out of its reach.
+  A 20x config with 400K states caught them in seconds. Small is fine; small in the wrong place
+  is not.
 - **A property you exclude is a hole you chose.** The third dayone bug sat exactly in the case the
   property skipped (redemptions), and after the first fix, in the case I had narrowed. Write down
   every exclusion; never change a property in the same step as the fix it checks; ask a reviewer
@@ -82,7 +87,9 @@ dayone:
 3. Properties: the README's promises, word for word, plus "every exit works" (`CanExit`,
    `LiquidationWorks`); skip what the Foundry invariants already check.
 4. Run TLC; turn every counterexample into a Foundry test on the real contract before believing it.
-5. Seed a few bugs into the model; a property that catches none is not checking anything.
+5. Seed a few bugs into the model (the bugs you fear, and the ones a reviewer already found); a
+   property that catches none is not checking anything, and a bound that cannot reach a known bug
+   is the wrong bound.
 6. Fix, then have someone else attack the fix and the properties you excluded.
 
 Time: about 2 h for fivemin and 3 h for dayone, most of it TLC running (6–12 min a run) and fixing
