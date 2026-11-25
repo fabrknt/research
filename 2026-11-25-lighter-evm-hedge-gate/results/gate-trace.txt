@@ -1,0 +1,16 @@
+# Dealer A closes its 0.01 ETH-PERP long (reduce-only IOC sent from Lighter EVM).
+# The close transaction landed in EVM block 156865; Core matched it in Core block 160366.
+# HedgeGate.check(100, long) re-run with eth_call at each EVM block (--block N).
+# columns: EVM block, parent Core block (from extraData), EVM timestamp, check result (hedged, position)
+evm 156863 parentCore/ts 160363 1795605847 check(100,long)= true 100
+evm 156864 parentCore/ts 160364 1795605848 check(100,long)= true 100
+evm 156865 parentCore/ts 160365 1795605849 check(100,long)= true 100
+evm 156866 parentCore/ts 160366 1795605850 check(100,long)= false 0
+evm 156867 parentCore/ts 160367 1795605851 check(100,long)= false 0
+evm 156868 parentCore/ts 160368 1795605852 check(100,long)= false 0
+evm 156869 parentCore/ts 160369 1795605853 check(100,long)= false 0
+evm 156870 parentCore/ts 160370 1795605854 check(100,long)= false 0
+evm 156871 parentCore/ts 160371 1795605855 check(100,long)= false 0
+evm 156872 parentCore/ts 160372 1795605856 check(100,long)= false 0
+evm 156873 parentCore/ts 160373 1795605857 check(100,long)= false 0
+# Core API recentTrades: block_height 160366, timestamp 1795605848324, size 0.0100
