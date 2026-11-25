@@ -49,6 +49,23 @@ runtime, and contracts for 53 crates including `anchor-lang` and `pinocchio`, wi
 Harmonic (2026-11-24) and used by Certora's Lusterna. Its README says plainly that it is not yet a proof
 about the compiled program. We are not building that layer ourselves.
 
+### Follow-up (2026-11-26): one account check on Solanalib
+
+We used Solanalib (`8f3f5c6`) instead. The case was a `Signer` that solinv had flagged in one of our
+Anchor programs (private) because nothing tied it to stored state, and its fix
+(`constraint = operator.key() == platform_config.authority`). Two theorems, 107 lines, no `sorry`,
+`propext` only:
+
+- before the fix, in any state and for any stored authority, a signer with another key passes;
+- after it, a successful validation means the account signed and its key is the stored authority.
+
+Solanalib's `Signer` model covered the signing part. What `#[derive(Accounts)]` generates is not
+modeled, so we wrote that part of the expansion by hand: the check order and the error built are our
+reading of the macro. We asked upstream whether they want it modeled
+([solana-foundation/leanprover-solanalib#13](https://github.com/solana-foundation/leanprover-solanalib/issues/13)).
+How it was done, without the private program:
+[psyto/solinv docs/lean-proofs.md](https://github.com/psyto/solinv/blob/main/docs/lean-proofs.md).
+
 ## Reproduce
 
 ```sh
