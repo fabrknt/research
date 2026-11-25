@@ -38,8 +38,8 @@ lag may be our measurement.
 ## What it does not show
 
 - **Only the moment of the quote.** The gate proves a hedge existed in the Core block the quote read.
-  Nothing stops the dealer from closing it one block later. Proving the hedge stays on needs
-  something else, such as locking the collateral or a penalty when it is removed.
+  Nothing stops the dealer from closing it one block later. The next section is our attempt to close
+  that gap.
 - **Master accounts only.** `READ_CORE` resolves an address to its master account; a hedge held in a
   subaccount cannot be read.
 - **An empty devnet.** All five markets had no orders and no trades when we started. Our two accounts
@@ -48,6 +48,61 @@ lag may be our measurement.
 - **The trust is the sequencer's choice of Core block.** The read is of the Core block the sequencer
   pinned for that EVM block, not of anything final on Ethereum. The docs say Core re-orgs carry over
   to the EVM blocks that read them.
+
+## Can the hedge be made to stay? A Core account with no key
+
+A Core account created by a deposit starts with no API key. A key can be added three ways: a signed
+Core transaction (needs the controller's ECDSA signature, which a contract cannot produce), from L1
+(the same address on L1 is a different account), or by the controlling contract calling
+`EvmToCoreEntrypoint.changePubKey` ([accounts](https://docs.lighter.xyz/evm/interop/accounts)). So a
+contract with no path to `changePubKey`, no proxy and no `delegatecall` owns a Core account that can
+never get a key: what it holds there moves only through the contract's own code. You can check that
+by reading the code.
+
+On the devnet, a 5 USDC deposit to the address of [`KeylessDealer`](src/KeylessDealer.sol) created
+Core account 70368744177666, controlled by the contract; the Core API lists 0 API keys for it.
+
+The hedge can still leave through **liquidation** (Core sells it with IOC orders, or the LLP takes it
+over) and **auto-deleveraging**, and through Lighter's own operation (governance, the sequencer).
+Liquidation and ADL show up in `READ_CORE`, so a gate like the one above stops quoting from the next
+block.
+
+### Confirming a trade only for the hedge that filled
+
+Writes to Core are asynchronous and can fail, so [`HedgedRFQ`](src/HedgedRFQ.sol) confirms a trade in
+two steps. `request()` takes the taker's fee and sends an IOC hedge order from the contract's keyless
+Core account. `settle()`, in a later block, reads the write's status and the order's status
+(`READ_CORE` `0x0000` and `0x000A`) and confirms the trade for the filled amount only, refunding the
+rest of the fee ([cases](results/rfq-cases.txt)):
+
+| case | Core | contract | 1 USDC fee |
+|---|---|---|---|
+| resting ask, ask 100 | filled 100 (order status 3) | **confirmed** | kept |
+| empty book, ask 100 | IOC canceled, 0 filled (4) | **refunded** | returned |
+| resting ask of 100, ask 10000 (about 1 ETH, far above the 5 USDC margin) | 100 filled, the rest canceled; not rejected for margin | **confirmed for 100** | 99% returned |
+| price 0 | the entrypoint reverts on EVM | nothing written | not taken |
+| `settle()` in the request's own block | no result yet | `StillPending` | |
+
+`settle()` worked from the next EVM block, about a second later. After all cases the contract's Core
+position (200) equals what it owes takers (200). Gas: about 205k to 239k for `request()`, 105k to 111k
+for `settle()`. We could not make Core reject a write outright (status 2): that would have needed more
+resting liquidity than our accounts had margin for. `HedgedRFQ` has no way to reduce the hedge, so
+takers cannot close yet.
+
+## Who needs this
+
+**Not a dealer on Lighter's own RFQ.** Lighter has had RFQ since a beta in 2026-05, open to all
+markets ([docs](https://docs.lighter.xyz/developers/integration-guides/rfq)). It is coordination
+only: market makers add ordinary orders to the public book and the requester trades against the
+book. Nothing is locked and there are no private quotes. The requester's trade clears through
+Lighter's margin, so whether the market maker is hedged does not matter to the requester.
+
+What we built matters only where **a contract on Lighter EVM is itself the counterparty**, for a
+product that is not on Lighter's book and is backed by the contract's Core account. There a keyless
+account says that no operator can move the backing. We have not checked whether anyone wants such a
+product. The one Lighter EVM vault design we found
+([tradingstrategy-ai/trade-executor#1680](https://github.com/tradingstrategy-ai/trade-executor/pull/1680),
+2026-10-26) does the opposite: it hands API keys to an outside operator.
 
 ## Transactions (Lighter EVM devnet, chain 19529)
 
@@ -60,6 +115,12 @@ lag may be our measurement.
 | gate deployed at `0xeEC872fF39c7Cf986a05C1D53decD94A5aB6588C` | `0xbdec36472ed85fb81517e274df066982fa87509fb53a3a8fc24c92bd7cb4be6d` | 156808 |
 | taker rests a bid (to close against) | `0xff0cb44e8f651d2fe3306d0fe34b19fda9088e9fc2a1259fd04b90e97e164813` | 156857 |
 | dealer closes, reduce-only IOC | `0xcc8104c0a03302a563577be18bbed07680e18fe26700782d291cfa7d25f1bcf7` | 156865 |
+
+`KeylessDealer` is at `0x43fBAbC3BAD2391d3FAd54D1e6E2127a519cDAF3` (deployed in block 158594; the
+deposit that created its Core account is `0xcdabfdbd978ccb95f366f35bbcb153972fd67bb3111672a5c5107a306c921a0c`,
+block 158607). `HedgedRFQ` is at `0x9Bc6D6f3b2fD5eDb5AFfDB447F02e1950D4BF4C4`; its transactions are in
+[rfq-cases.txt](results/rfq-cases.txt). `run.sh` reproduces the gate test only; the RFQ cases were
+run by hand with `cast` as listed there.
 
 The devnet resets at each release, so these may stop resolving.
 

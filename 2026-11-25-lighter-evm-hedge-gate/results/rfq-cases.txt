@@ -1,0 +1,19 @@
+# HedgedRFQ 0x9Bc6D6f3b2fD5eDb5AFfDB447F02e1950D4BF4C4 on the Lighter EVM devnet (chain 19529), market 0 (ETH-PERP).
+# Its Core account 70368744177667 was created by a 5 USDC sendToCore to the contract's address; Core API: 0 API keys.
+# Every request escrows a 1 USDC fee. Settled event fields: state (2 confirmed, 3 refunded), filled, Core write
+# status (1 ok, 2 failed), Core error, order status (3 filled, 4 canceled).
+#
+# case                         request tx (EVM block, gas)                                                   settle tx (EVM block, gas)                                                    result
+fill: resting ask 100          0x60489bde32e5b516ee1e33b731e5a5ee2da3d9a23c14c58e5e8c26717e0ac7a1 (158860, 238811)  0xe6bcb5ce284960a31d1d6d7fdffe0c4b6818420c724a68adf7174112c069ca22 (158871, 106589)  confirmed, filled 100, order 3, fee kept
+empty book, 100                0x9430378034e176287d50ccccd2c848a2abd37096da698cc67411c3edb9b4e86d (158878, 204611)  0x65307f024bf40112502a6242edafbb9ea22206aa1d33c64e0b421c84afe29fbf (158890, 104900)  refunded, filled 0, order 4
+empty book, 10000              0x35a7eae5ef4b33d8435e5223175333649b50a3930e7f1539d5358a0acc8cbfb7 (158895, 204623)  0x3759d064d99305426c599d8e3ee43002b54b17f7491f42a45ac2cc206748ae56 (158907, 104900)  refunded, filled 0, order 4 (not a margin rejection)
+resting ask 100, ask 10000     0x85d78ee295ff4b5b1245cf2fd03e76e6b9e2bc56f4273e8eace3b9a73000bc19 (158970, 204623)  0xa55983ef692f70cd037ee889809058b2a539bd337865a9efdd20e6bcad42e089 (158980, 110558)  confirmed for 100 of 10000, order 4, 99% of fee refunded
+early settle, 100              0x0dfe981804a0e51e4b4d71fdc98c1165d058978a7f8d3bb1dfa0831e7f5f85ea (158984, 204611)  0x362d4f4954419a06f5be08395d754df78cf3c8e88db0904c4853d087f82cef39 (158999, 104900)  refunded, filled 0 (book empty again)
+#
+# early settle: eth_call settle() on top of each block
+#   158984 (request block)  StillPending
+#   158985                  would settle
+#   158986                  would settle
+#   158987                  would settle
+# price 0: request() reverts inside EvmToCoreEntrypoint (selector 0x18bd87b1); no write, no fee taken.
+# After all cases: covered() = (true, position 200, owed 200).
