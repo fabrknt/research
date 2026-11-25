@@ -100,9 +100,16 @@ Lighter's margin, so whether the market maker is hedged does not matter to the r
 What we built matters only where **a contract on Lighter EVM is itself the counterparty**, for a
 product that is not on Lighter's book and is backed by the contract's Core account. There a keyless
 account says that no operator can move the backing. We have not checked whether anyone wants such a
-product. The one Lighter EVM vault design we found
+product.
+
+Someone has already built the keyless part. Rigoblock's smart pools have a Lighter EVM adapter
+([RigoBlock/v3-contracts](https://github.com/RigoBlock/v3-contracts/blob/development/docs/lighter/INTEGRATION.md),
+Apache-2.0, work since 2026-10-23). It deliberately leaves out `changePubKey`, so every order goes
+through the EVM entrypoint, and it values the pool on-chain from `READ_CORE`. It also ships a
+`READ_CORE` library (`LighterLib`, with tests). Another Lighter EVM vault design
 ([tradingstrategy-ai/trade-executor#1680](https://github.com/tradingstrategy-ai/trade-executor/pull/1680),
-2026-10-26) does the opposite: it hands API keys to an outside operator.
+2026-10-26) goes the other way and hands API keys to an outside operator. We found Rigoblock after
+first publishing this study, and corrected this paragraph.
 
 ## Transactions (Lighter EVM devnet, chain 19529)
 
