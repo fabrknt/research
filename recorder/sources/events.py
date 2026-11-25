@@ -6,7 +6,8 @@ volume is at least MIN_VLM, or when it appears for the first time (a new listing
 halted (isDelisted) before it trades; every PENDING_EVERY runs the dexes holding such names are re-read, so
 the run that sees one open marks it "new" within about a minute instead of at the next 10-minute refresh, and a
 name that appears halted and was never seen trading gets a "registered" trigger row. For each hot name (at
-most MAX_HOT, newest kept) a run saves the Hyperliquid l2Book, and every third run the Lighter book if
+most MAX_HOT moves and MAX_NEW listings, newest kept in each, so a burst of moves never pushes a listing's
+first 72 h out) a run saves the Hyperliquid l2Book, and every third run the Lighter book if
 Lighter lists the same symbol. Book failures are counted in the public status, and a run where half or
 more of the wanted books failed, or with hot names but no Lighter market list, is incomplete, so the health
 check sees it.
@@ -26,7 +27,8 @@ name stayed halted, are a real change and are announced at the first read of the
 Rows: {"kind": "trigger", "name", "why": "move" | "new" | "registered" | "prep", "move", "oracle"?, "prep"?}
 and {"kind": "book", "name", "hl", "lighter"}.
 The state is published unencrypted, so it holds names only as hashes (they come from the venues' APIs):
-state["known"] the names seen so far, state["hot"] hash -> expiry, state["registered"] halted names seen,
+state["known"] the names seen so far, state["hot"] hash -> expiry for moves, state["new"] the same for
+listings, state["registered"] halted names seen,
 state["prep"] hash -> hash of its deployer settings.
 """
 
@@ -43,7 +45,8 @@ MOVE = 0.015
 WINDOW_S = 60
 MIN_VLM = 2_000_000
 HOT_S = 72 * 3600
-MAX_HOT = 8
+MAX_HOT = 8   # names hot from a move
+MAX_NEW = 6   # names hot from a listing, kept apart: 11-24 a listing's books were cut at 30 min by moves
 REFRESH_S = 600  # names, volumes and Lighter's markets
 PENDING_EVERY = 6  # runs: re-read the dexes holding never-traded halted names (about a minute; 20-weight calls)
 
@@ -175,6 +178,11 @@ def run(state: dict) -> list[dict]:
 
     known = set(state.get("known", []))
     hot = {k: e for k, e in state.get("hot", {}).items() if e > now}
+    new = {k: e for k, e in state.get("new", {}).items() if e > now}
+    if "new" not in state:  # state from before the split: a hot name once seen halted was hot from its listing
+        was_halted = set(state.get("registered", []))
+        new = {k: e for k, e in hot.items() if k in was_halted}
+        hot = {k: e for k, e in hot.items() if k not in was_halted}
     first = not known
     first_reg = "registered" not in state  # names already halted when this check started are not news
     registered = set(state.get("registered", []))
@@ -210,17 +218,23 @@ def run(state: dict) -> list[dict]:
             move = up if up >= -down else down
             if abs(move) >= MOVE:
                 why = "move"
-        if why:  # a name already hot only has its 72 h extended; the trigger row marks the start
-            if k not in hot:
+        if why == "new":
+            rows.append({"t": now, "kind": "trigger", "name": name, "why": why, "move": move})
+            new[k] = now + HOT_S
+            hot.pop(k, None)
+        elif why and k not in new:  # a listing's own moves stay inside its listing window
+            if k not in hot:  # a name already hot only has its 72 h extended; the trigger row marks the start
                 rows.append({"t": now, "kind": "trigger", "name": name, "why": why, "move": move})
             hot[k] = now + HOT_S
     if len(hot) > MAX_HOT:  # keep the most recently triggered
         hot = dict(sorted(hot.items(), key=lambda x: -x[1])[:MAX_HOT])
+    if len(new) > MAX_NEW:
+        new = dict(sorted(new.items(), key=lambda x: -x[1])[:MAX_NEW])
 
     names = {key(n): n for n in mids}
     with_lighter = _cache["runs"] % LIGHTER_EVERY == 0
     wanted = failed = 0
-    for k in hot:
+    for k in [*new, *hot]:
         name = names.get(k)
         if not name:
             continue
@@ -257,10 +271,10 @@ def run(state: dict) -> list[dict]:
         }[r["why"]]
         push(title, body)
 
-    state["known"], state["hot"], state["registered"] = sorted(known), hot, sorted(registered)
+    state["known"], state["hot"], state["new"], state["registered"] = sorted(known), hot, new, sorted(registered)
     state["prep"] = preps
-    state["status"] = {"hot": len(hot), "books_wanted": wanted, "books_failed": failed,
+    state["status"] = {"hot": len(hot), "listing_hot": len(new), "books_wanted": wanted, "books_failed": failed,
                        "lighter_markets_ok": _cache["lighter_ok"], "push_failed": _cache["push_failed"],
                        "push_queued": _outbox.unfinished_tasks,  # waiting or being retried
-                       "incomplete": (wanted > 0 and failed * 2 >= wanted) or (bool(hot) and not _cache["lighter_ok"])}
+                       "incomplete": (wanted > 0 and failed * 2 >= wanted) or (bool(hot or new) and not _cache["lighter_ok"])}
     return rows
